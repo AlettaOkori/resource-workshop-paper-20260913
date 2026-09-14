@@ -1,0 +1,3 @@
+module.exports=[24361,(a,b,c)=>{b.exports=a.x("util",()=>require("util"))},84505,a=>{"use strict";let b=(0,a.i(70106).default)("download",[["path",{d:"M12 15V3",key:"m9g1x1"}],["path",{d:"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4",key:"ih7n3h"}],["path",{d:"m7 10 5 5 5-5",key:"brsn70"}]]);a.s(["Download",0,b],84505)},65896,a=>{"use strict";let b=null;a.s(["attachmentStore",0,{set:a=>{b=a},take:()=>{let a=b;return b=null,a},peek:()=>b}])}];
+
+//# sourceMappingURL=%5Broot-of-the-server%5D__0kh2iyd._.js.map

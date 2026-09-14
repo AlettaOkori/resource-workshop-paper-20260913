@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/fxls/[...path]/route": "app/api/fxls/[...path]/route.js",
+  "/chat/page": "app/chat/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/graph/page": "app/graph/page.js",
+  "/knowledge/page": "app/knowledge/page.js",
+  "/page": "app/page.js",
+  "/plaza/app/page": "app/plaza/app/page.js",
+  "/plaza/resource/page": "app/plaza/resource/page.js",
+  "/share/[id]/page": "app/share/[id]/page.js"
+}

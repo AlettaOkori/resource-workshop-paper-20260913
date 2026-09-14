@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+.env
+.env.*
+!.env.example
+.next/cache/
+verification/
+hosting/dist/
+hosting/functions/runtime.tar.gz
+.netlify/
+*.log

@@ -1,0 +1,14 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/fxls/[...path]/route": "/api/fxls/[...path]",
+  "/chat/page": "/chat",
+  "/dashboard/page": "/dashboard",
+  "/favicon.ico/route": "/favicon.ico",
+  "/graph/page": "/graph",
+  "/knowledge/page": "/knowledge",
+  "/page": "/",
+  "/plaza/app/page": "/plaza/app",
+  "/plaza/resource/page": "/plaza/resource",
+  "/share/[id]/page": "/share/[id]"
+}

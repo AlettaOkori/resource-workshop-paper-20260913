@@ -1,0 +1,20 @@
+body[data-paper-page="plaza-resource"] [data-rw-native-subjects],
+body[data-paper-page="plaza-resource"] [data-rw-filter-hidden],
+body[data-paper-page="plaza-resource"] [data-rw-filter-no-results]{display:none!important}
+.rw-filter-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:0 clamp(28px,3.5vw,64px)}
+.rw-filter-label{font-size:13px;color:var(--muted);margin-right:4px;flex-shrink:0}
+.rw-filter-subjects{margin-top:28px;column-gap:28px;row-gap:12px;border-bottom:1px solid var(--rule);padding-bottom:0}
+body[data-paper-page="plaza-resource"] .rw-filter-subjects button{position:relative;background:transparent!important;border:0;padding:0 0 17px;font-size:16px;color:var(--muted);border-radius:0!important;white-space:nowrap}
+body[data-paper-page="plaza-resource"] .rw-filter-subjects .rw-filter-label{align-self:flex-start;padding-top:2px}
+body[data-paper-page="plaza-resource"] .rw-filter-subjects button[aria-pressed="true"]{color:var(--ink);font-weight:600}
+.rw-filter-subjects button[aria-pressed="true"]::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--red)}
+.rw-filter-editions{margin-top:14px}
+body[data-paper-page="plaza-resource"] .rw-filter-editions button{height:28px;padding:0 12px;border:1px solid var(--rule);background:transparent;color:var(--muted);font-size:13px;white-space:nowrap}
+body[data-paper-page="plaza-resource"] .rw-filter-editions button[aria-pressed="true"]{color:var(--red);border-color:#d8c3bd;background:#fff6f6;font-weight:500}
+.rw-filter-row button:hover{color:var(--red)!important}
+.rw-filter-empty{margin:24px clamp(28px,3.5vw,64px) 180px;min-height:220px;border:1px dashed var(--rule);padding:42px 20px;text-align:center;color:var(--muted);font-size:14px}
+.rw-filter-empty[hidden]{display:none!important}
+.rw-filter-note{font-size:12px;margin:10px 0 18px;line-height:1.8}
+.rw-filter-empty button{color:var(--red);background:transparent;border:0;font-size:13px}
+@media(max-width:800px){.rw-filter-row{padding-inline:22px}.rw-filter-subjects{column-gap:22px;row-gap:14px}.rw-filter-empty{margin-inline:22px}}
+@media(max-width:600px){.rw-filter-subjects{column-gap:20px}.rw-filter-subjects .rw-filter-label{flex-basis:100%}body[data-paper-page="plaza-resource"] .rw-filter-subjects button{font-size:14px;padding-bottom:10px}.rw-filter-editions .rw-filter-label{flex-basis:100%;margin-bottom:4px}.rw-filter-editions{row-gap:9px}}

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Security-Policy" content="img-src 'self' data: blob: https://*.fbcontent.cn https://*.aliyuncs.com https://storage.googleapis.com; media-src 'self' data: blob: https://*.fbcontent.cn https://*.aliyuncs.com https://storage.googleapis.com;">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人生有几万天｜互动课件</title>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      svg: { fontCache: 'global' },
+      startup: { typeset: false }
+    };
+  </script>
+  <script async src="/artifacts/vendor/metis-app.js"></script>
+  <style>
+    :root {
+      --bg: #F6F0E6;
+      --text: #2D2A26;
+      --muted: #70675F;
+      --primary: #8C4A3C;
+      --primary-deep: #63342C;
+      --accent: #D49A3A;
+      --accent-soft: #F0D7A4;
+      --surface: #FFFDF8;
+      --surface-2: #F1E7D7;
+      --line: #DCCCB9;
+      --success: #557A61;
+      --shadow: 0 20px 60px rgba(91, 61, 43, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.5;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .app {
+      min-height: 100vh;
+      padding: 28px 36px 42px;
+      position: relative;
+      overflow: hidden;
+    }
+    .app::before, .app::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: .55;
+    }
+    .app::before {
+      width: 420px; height: 420px; right: -170px; top: -160px;
+      background: radial-gradient(circle, rgba(212,154,58,.22), rgba(212,154,58,0) 68%);
+    }
+    .app::after {
+      width: 360px; height: 360px; left: -190px; bottom: -180px;
+      background: radial-gradient(circle, rgba(140,74,60,.14), rgba(140,74,60,0) 68%);
+    }
+    .shell { max-width: 1280px; margin: 0 auto; position: relative; z-index: 1; }
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; margin-bottom: 26px;
+    }
+    .eyebrow {
+      color: var(--primary); letter-spacing: .18em; font-size: 12px; font-weight: 800;
+      text-transform: uppercase;
+    }
+    .reset-btn {
+      border: 1px solid var(--line); background: rgba(255,253,248,.76); color: var(--primary-deep);
+      border-radius: 999px; padding: 9px 16px; font-weight: 700; transition: .2s ease;
+    }
+    .reset-btn:hover { border-color: var(--primary); transform: translateY(-1px); }
+    .hero {
+      display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 28px; align-items: end;
+      margin-bottom: 28px;
+    }
+    h1 {
+      font-family: Georgia, "Songti SC", "STSong", serif;
+      font-size: clamp(42px, 6vw, 80px); line-height: .98; letter-spacing: -.055em;
+      margin: 8px 0 20px; color: var(--primary-deep); font-weight: 700;
+    }
+    .hero-copy { max-width: 780px; font-size: clamp(17px, 2vw, 23px); color: #574C43; margin: 0; }
+    .hero-note {
+      background: rgba(255,253,248,.74); border: 1px solid rgba(140,74,60,.16); border-radius: var(--radius-md);
+      padding: 18px 20px; box-shadow: 0 10px 30px rgba(91,61,43,.06);
+    }
+    .hero-note strong { display:block; color: var(--primary); font-family: Georgia, "Songti SC", serif; font-size: 22px; margin-bottom: 4px; }
+    .hero-note span { display:block; color: var(--muted); font-size: 14px; }
+
+    .workspace { display: grid; grid-template-columns: minmax(0, 1.33fr) minmax(360px, .67fr); gap: 24px; align-items: start; }
+    .card {
+      background: rgba(255,253,248,.92); border: 1px solid rgba(140,74,60,.13); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow); overflow: hidden;
+    }
+    .visual-card { padding: 26px; }
+    .section-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom: 18px; }
+    .section-head h2 { margin:0; font-family: Georgia, "Songti SC", serif; font-size: 25px; color: var(--primary-deep); }
+    .section-head p { margin:5px 0 0; font-size: 13px; color: var(--muted); }
+    .metric-row { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 22px; }
+    .metric { background: var(--surface-2); border-radius: var(--radius-md); padding: 16px; min-height: 112px; }
+    .metric-label { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .metric-value { color: var(--primary-deep); font-weight: 800; font-size: clamp(20px, 2.5vw, 30px); line-height: 1.1; }
+    .metric-sub { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .formula { min-height: 28px; display: flex; align-items:center; }
+    .timeline-wrap { padding: 22px 4px 8px; }
+    .timeline-top { display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px; }
+    .timeline-title { font-weight: 800; color: var(--primary-deep); }
+    .view-switch { display:flex; background: var(--surface-2); border-radius: 999px; padding: 4px; gap: 3px; }
+    .view-switch button { border:0; background:transparent; color:var(--muted); border-radius:999px; padding:7px 13px; font-weight:700; font-size:12px; }
+    .view-switch button.active { background: var(--primary); color:#fff; box-shadow: 0 4px 10px rgba(140,74,60,.2); }
+    .timeline {
+      height: 136px; position: relative; padding: 48px 14px 0;
+    }
+    .timeline-line { position:absolute; left:14px; right:14px; top:67px; height:9px; background:#E8DCCA; border-radius:999px; overflow:hidden; }
+    .timeline-used { height:100%; width:0; background: linear-gradient(90deg, var(--primary), #A76553); border-radius:999px; transition: width .45s ease; }
+    .timeline-now { position:absolute; top:51px; left:14px; width:22px; height:42px; transform:translateX(-50%); transition:left .45s ease; }
+    .timeline-now::before { content:""; display:block; margin:auto; width:16px; height:16px; border-radius:50%; background:var(--accent); border:4px solid var(--surface); box-shadow:0 0 0 2px var(--accent); }
+    .timeline-now::after { content:""; display:block; width:2px; height:27px; background:var(--accent); margin:2px auto 0; }
+    .timeline-label { position:absolute; top:5px; transform:translateX(-50%); font-size:12px; color:var(--muted); white-space:nowrap; }
+    .timeline-tick { position:absolute; top:62px; width:2px; height:19px; background:#BFAF9C; transform:translateX(-50%); }
+    .timeline-stage { position:absolute; top:101px; transform:translateX(-50%); font-size:12px; color:var(--primary-deep); white-space:nowrap; font-weight:700; }
+    .timeline-caption { color:var(--muted); font-size:13px; margin: 12px 0 0; }
+    .legend { display:flex; gap:16px; margin-top: 13px; font-size:12px; color:var(--muted); }
+    .legend span { display:flex; align-items:center; gap:6px; }
+    .dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+    .dot.used { background: var(--primary); }
+    .dot.left { background: #E8DCCA; border: 1px solid #BFAF9C; }
+
+    .controls-card { padding: 24px; }
+    .control-block { padding: 16px 0 20px; border-bottom:1px solid var(--line); }
+    .control-block:first-of-type { padding-top:0; }
+    .control-block:last-of-type { border-bottom:0; padding-bottom: 4px; }
+    .control-title { display:flex; justify-content:space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+    .control-title strong { color:var(--primary-deep); }
+    .control-title output { color:var(--primary); font-weight:800; font-size:18px; }
+    .range-row { display:grid; grid-template-columns: 1fr auto; align-items:center; gap: 12px; }
+    input[type="range"] { width:100%; accent-color:var(--primary); }
+    .range-hint { font-size:12px; color:var(--muted); white-space:nowrap; }
+    .action-title { margin: 20px 0 10px; color:var(--primary-deep); font-weight:800; }
+    .actions { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    .action {
+      border:1px solid var(--line); background:#FFFDF8; color:var(--text); border-radius:var(--radius-sm); text-align:left;
+      padding:13px 14px; min-height:75px; transition:.2s ease; position:relative;
+    }
+    .action:hover { transform:translateY(-2px); border-color:var(--accent); }
+    .action.selected { border-color:var(--primary); background:#F8EDE6; box-shadow: inset 0 0 0 2px rgba(140,74,60,.08); }
+    .action.selected::after { content:"已选择"; position:absolute; right:10px; top:10px; color:var(--primary); font-size:11px; font-weight:800; }
+    .action strong { display:block; color:var(--primary-deep); font-size:14px; margin-bottom:4px; }
+    .action span { display:block; color:var(--muted); font-size:12px; line-height:1.35; padding-right:22px; }
+    .feedback { min-height: 68px; margin-top: 14px; background:var(--surface-2); border-radius:var(--radius-sm); padding: 13px 14px; color:var(--muted); font-size:13px; }
+    .feedback.ready { border-left:4px solid var(--accent); color:var(--primary-deep); background:#FBF1DD; }
+    .feedback strong { display:block; color:var(--primary); margin-bottom:3px; }
+
+    .bottom-card { margin-top:24px; padding: 24px 26px; display:grid; grid-template-columns: 1.2fr .8fr; gap: 24px; align-items:center; }
+    .prompt { font-family: Georgia, "Songti SC", serif; color:var(--primary-deep); font-size: clamp(24px, 3vw, 38px); line-height:1.15; margin:0 0 10px; }
+    .prompt-sub { margin:0; color:var(--muted); font-size:14px; }
+    .micro-action { background:#F8EDE6; border-radius:var(--radius-md); padding:18px; border:1px solid rgba(140,74,60,.1); }
+    .micro-action .label { color:var(--primary); font-weight:800; font-size:12px; letter-spacing:.08em; }
+    .micro-action .text { margin-top:8px; color:var(--primary-deep); font-weight:800; font-size:18px; }
+
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    @media (max-width: 930px) {
+      .app { padding: 22px 18px 34px; }
+      .hero { grid-template-columns:1fr; gap: 16px; }
+      .workspace { grid-template-columns:1fr; }
+      .bottom-card { grid-template-columns:1fr; }
+    }
+    @media (max-width: 560px) {
+      .metric-row { grid-template-columns:1fr; }
+      .actions { grid-template-columns:1fr; }
+      .visual-card, .controls-card, .bottom-card { padding:18px; }
+      .timeline { padding-left:8px; padding-right:8px; }
+      .timeline-line { left:8px; right:8px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app" id="app">
+    <div class="shell">
+      <div class="topbar">
+        <div class="eyebrow">TIME IS A FINITE RESOURCE</div>
+        <button class="reset-btn" id="resetBtn" type="button">重置探索</button>
+      </div>
+
+      <header class="hero">
+        <div>
+          <div class="eyebrow">一张时间刻度图</div>
+          <h1>人生有几万天</h1>
+          <p class="hero-copy">把“时间很长”换算成看得见的刻度，看看今天在整段人生中占据什么位置。</p>
+        </div>
+        <div class="hero-note">
+          <strong>今天，也是一格</strong>
+          <span>先估算，再选择一个值得从今天开始的小行动。</span>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="人生时间互动区">
+        <article class="card visual-card">
+          <div class="section-head">
+            <div>
+              <h2>把人生放进一条时间轴</h2>
+              <p>拖动右侧参数，观察刻度如何变化。</p>
+            </div>
+          </div>
+
+          <div class="metric-row">
+            <div class="metric">
+              <div class="metric-label">预计总天数</div>
+              <div class="metric-value formula" id="totalFormula" aria-live="polite"></div>
+              <div class="metric-sub" id="totalSub">按 365.25 天/年估算</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">已经走过</div>
+              <div class="metric-value formula" id="usedFormula" aria-live="polite"></div>
+              <div class="metric-sub" id="usedSub">还会继续增长</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">还可以使用</div>
+              <div class="metric-value formula" id="leftFormula" aria-live="polite"></div>
+              <div class="metric-sub" id="leftSub">不是倒计时，是提醒</div>
+            </div>
+          </div>
+
+          <div class="timeline-wrap">
+            <div class="timeline-top">
+              <div class="timeline-title">人生刻度图</div>
+              <div class="view-switch" role="group" aria-label="时间轴视图">
+                <button type="button" class="active" data-view="years" id="yearsBtn">按年看</button>
+                <button type="button" data-view="days" id="daysBtn">按天看</button>
+              </div>
+            </div>
+            <div class="timeline" id="timeline" aria-label="人生时间轴">
+              <div class="timeline-line"><div class="timeline-used" id="timelineUsed"></div></div>
+              <div class="timeline-label" style="left:0%">0岁</div>
+              <div class="timeline-label" style="left:25%">25岁</div>
+              <div class="timeline-label" style="left:50%">50岁</div>
+              <div class="timeline-label" style="left:75%">75岁</div>
+              <div class="timeline-label" style="left:100%">100岁</div>
+              <div class="timeline-tick" style="left:0%"></div>
+              <div class="timeline-tick" style="left:25%"></div>
+              <div class="timeline-tick" style="left:50%"></div>
+              <div class="timeline-tick" style="left:75%"></div>
+              <div class="timeline-tick" style="left:100%"></div>
+              <div class="timeline-stage" style="left:12.5%">童年</div>
+              <div class="timeline-stage" style="left:37.5%">学习与成长</div>
+              <div class="timeline-stage" style="left:62.5%">工作与创造</div>
+              <div class="timeline-stage" style="left:87.5%">经验与传承</div>
+              <div class="timeline-now" id="timelineNow" style="left:15%" aria-label="当前年龄位置"></div>
+            </div>
+            <p class="timeline-caption" id="timelineCaption">你现在大约走过了人生刻度的这一段。</p>
+            <div class="legend" aria-label="图例">
+              <span><i class="dot used"></i>已经走过</span>
+              <span><i class="dot left"></i>还未走到</span>
+              <span><i class="dot" style="background:var(--accent)"></i>今天的位置</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="card controls-card">
+          <div class="section-head">
+            <div>
+              <h2>调整你的刻度</h2>
+              <p>这不是预测，只是一种帮助思考的估算。</p>
+            </div>
+          </div>
+
+          <div class="control-block">
+            <div class="control-title"><strong>你现在大约几岁？</strong><output id="ageOutput">15 岁</output></div>
+            <div class="range-row">
+              <input id="ageRange" type="range" min="10" max="80" step="1" value="15" aria-label="当前年龄">
+              <span class="range-hint">10—80</span>
+            </div>
+          </div>
+
+          <div class="control-block">
+            <div class="control-title"><strong>你想用多少年做估算？</strong><output id="lifeOutput">80 年</output></div>
+            <div class="range-row">
+              <input id="lifeRange" type="range" min="60" max="100" step="1" value="80" aria-label="预期寿命">
+              <span class="range-hint">60—100</span>
+            </div>
+          </div>
+
+          <div class="action-title">今天，你想把时间放在哪里？</div>
+          <div class="actions" id="actions" role="list">
+            <button type="button" class="action" data-action="专注学习 25 分钟" data-detail="完成一件真正重要、而不是最容易的事。" role="listitem"><strong>专注学习</strong><span>给一个目标留出完整的时间。</span></button>
+            <button type="button" class="action" data-action="认真陪伴一个人" data-detail="把注意力交给眼前的人，而不是交给屏幕。" role="listitem"><strong>认真陪伴</strong><span>让一次对话不被匆忙打断。</span></button>
+            <button type="button" class="action" data-action="完成一件拖延的小事" data-detail="用一个小小的完成感，换回行动的节奏。" role="listitem"><strong>结束拖延</strong><span>从最小的一步开始，不等完美时机。</span></button>
+            <button type="button" class="action" data-action="留出一段安静时间" data-detail="观察自己此刻真正关心什么，再决定下一步。" role="listitem"><strong>安静思考</strong><span>给自己一段不被打扰的时间。</span></button>
+          </div>
+          <div class="feedback" id="feedback" aria-live="polite">选择一张行动卡，给今天一个具体的方向。</div>
+        </aside>
+      </section>
+
+      <section class="card bottom-card" aria-live="polite">
+        <div>
+          <p class="prompt">几万天听起来很多，<br>但每一天都只会经过一次。</p>
+          <p class="prompt-sub">真正重要的不是把数字算得多准，而是知道今天愿意把时间交给什么。</p>
+        </div>
+        <div class="micro-action">
+          <div class="label">今日行动</div>
+          <div class="text" id="chosenAction">还没有选择</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const state = { age: 15, life: 80, view: 'years', chosenAction: null };
+      const $ = (id) => document.getElementById(id);
+      const ageRange = $('ageRange');
+      const lifeRange = $('lifeRange');
+      const ageOutput = $('ageOutput');
+      const lifeOutput = $('lifeOutput');
+      const totalFormula = $('totalFormula');
+      const usedFormula = $('usedFormula');
+      const leftFormula = $('leftFormula');
+      const timelineUsed = $('timelineUsed');
+      const timelineNow = $('timelineNow');
+      const timelineCaption = $('timelineCaption');
+      const feedback = $('feedback');
+      const chosenAction = $('chosenAction');
+      const actionButtons = Array.from(document.querySelectorAll('.action'));
+      const viewButtons = Array.from(document.querySelectorAll('[data-view]'));
+
+      function fmt(n) { return Math.round(n).toLocaleString('zh-CN'); }
+      function clampAge() {
+        if (state.age > state.life) {
+          state.age = state.life;
+          ageRange.value = String(state.age);
+        }
+      }
+      async function typeset(root) {
+        if (!root || !root.textContent.trim()) return;
+        let ready = false;
+        for (let i = 0; i < 60; i += 1) {
+          if (window.MathJax && window.MathJax.startup && window.MathJax.startup.promise && typeof window.MathJax.typesetPromise === 'function') {
+            ready = true;
+            break;
+          }
+          await new Promise(resolve => { setTimeout(resolve, 100); });
+        }
+        if (!ready) throw new Error('MathJax 加载超时');
+        await window.MathJax.startup.promise;
+        for (let i = 0; i < 30; i += 1) {
+          if (typeof window.MathJax.typesetClear === 'function') break;
+          await new Promise(resolve => { setTimeout(resolve, 100); });
+        }
+        if (typeof window.MathJax.typesetClear !== 'function') {
+          throw new Error('MathJax 清理接口不可用');
+        }
+        window.MathJax.typesetClear([root]);
+        await window.MathJax.typesetPromise([root]);
+      }
+      async function update() {
+        clampAge();
+        const totalDays = state.life * 365.25;
+        const usedDays = state.age * 365.25;
+        const leftDays = Math.max(0, totalDays - usedDays);
+        ageOutput.textContent = state.age + ' 岁';
+        lifeOutput.textContent = state.life + ' 年';
+        totalFormula.innerHTML = '\\(' + fmt(totalDays) + '\\,\\text{天}\\)';
+        usedFormula.innerHTML = '\\(' + fmt(usedDays) + '\\,\\text{天}\\)';
+        leftFormula.innerHTML = '\\(' + fmt(leftDays) + '\\,\\text{天}\\)';
+
+        const percent = Math.min(100, Math.max(0, state.age / state.life * 100));
+        const visualPercent = state.view === 'years' ? percent : Math.min(100, percent + 0.8);
+        timelineUsed.style.width = visualPercent + '%';
+        timelineNow.style.left = percent + '%';
+        timelineCaption.textContent = state.view === 'years'
+          ? '按年看：你现在大约走过了人生刻度的 ' + percent.toFixed(1) + '%。'
+          : '按天看：每一个小点都代表一天，今天的位置正在向前移动。';
+        $('totalSub').textContent = state.view === 'years' ? '按 ' + state.life + ' 年估算' : '约 ' + fmt(state.life * 365.25 / 1000) + ' 千天';
+        $('usedSub').textContent = state.view === 'years' ? '占预计总量的 ' + percent.toFixed(1) + '%' : '约 ' + fmt(usedDays / 1000) + ' 千天';
+        $('leftSub').textContent = state.view === 'years' ? '约 ' + Math.max(0, state.life - state.age) + ' 年' : '每一天都值得被看见';
+
+        viewButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.view === state.view));
+        await Promise.all([typeset(totalFormula), typeset(usedFormula), typeset(leftFormula)]);
+        window.__interactionState = {
+          age: state.age,
+          life: state.life,
+          view: state.view,
+          chosenAction: state.chosenAction,
+          usedPercent: Number(percent.toFixed(2)),
+          rendered: Boolean(document.querySelector('#totalFormula mjx-container'))
+        };
+      }
+      ageRange.addEventListener('input', () => { state.age = Number(ageRange.value); update(); });
+      lifeRange.addEventListener('input', () => { state.life = Number(lifeRange.value); update(); });
+      viewButtons.forEach(btn => btn.addEventListener('click', () => { state.view = btn.dataset.view; update(); }));
+      actionButtons.forEach(btn => btn.addEventListener('click', () => {
+        actionButtons.forEach(item => item.classList.remove('selected'));
+        btn.classList.add('selected');
+        state.chosenAction = btn.dataset.action;
+        chosenAction.textContent = state.chosenAction;
+        feedback.className = 'feedback ready';
+        feedback.innerHTML = '<strong>给今天的提醒</strong>' + btn.dataset.detail;
+        window.__interactionState = { ...(window.__interactionState || {}), chosenAction: state.chosenAction };
+      }));
+      $('resetBtn').addEventListener('click', () => {
+        state.age = 15; state.life = 80; state.view = 'years'; state.chosenAction = null;
+        ageRange.value = '15'; lifeRange.value = '80';
+        actionButtons.forEach(item => item.classList.remove('selected'));
+        chosenAction.textContent = '还没有选择';
+        feedback.className = 'feedback';
+        feedback.textContent = '选择一张行动卡，给今天一个具体的方向。';
+        update();
+      });
+      window.__resetCourseware = () => $('resetBtn').click();
+      function boot() { update(); }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+    })();
+  </script>
+</body>
+</html>

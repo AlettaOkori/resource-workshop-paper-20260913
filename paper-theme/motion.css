@@ -1,0 +1,53 @@
+/* Orbit labels and controls with the diagram, counter-rotating their content. */
+@keyframes paper-flywheel-turn{to{transform:rotate(360deg)}}
+@keyframes paper-flywheel-orbit{
+ from{transform:rotate(0deg) translate(var(--orbit-x),var(--orbit-y)) rotate(0deg) translate(-50%,-50%)}
+ to{transform:rotate(360deg) translate(var(--orbit-x),var(--orbit-y)) rotate(-360deg) translate(-50%,-50%)}
+}
+body[data-paper-page="dashboard"] [data-paper-flywheel]{
+ transform-box:view-box;transform-origin:50% 50%;
+ animation:paper-flywheel-turn 75s linear infinite;
+}
+body[data-paper-page="dashboard"] [data-paper-orbit]{
+ left:50%!important;top:50%!important;
+ animation:paper-flywheel-orbit 75s linear infinite;
+}
+body[data-paper-page="dashboard"] [data-paper-flywheel-stage]:is(:hover,:focus-within) :is([data-paper-flywheel],[data-paper-orbit]){animation-play-state:paused}
+body[data-paper-page="dashboard"] [data-paper-kpi]{font-variant-numeric:tabular-nums}
+body[data-paper-page="dashboard"] [data-paper-kpi][data-paper-count]{position:relative;color:transparent!important}
+body[data-paper-page="dashboard"] [data-paper-count]::after{
+ content:attr(data-paper-count);content:attr(data-paper-count) / "";
+ position:absolute;inset:0;color:var(--ink);white-space:nowrap;
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-paper-page="dashboard"] [data-paper-flywheel]{animation:none!important}
+ body[data-paper-page="dashboard"] [data-paper-orbit]{
+  animation:none!important;
+  transform:translate(var(--orbit-x),var(--orbit-y)) translate(-50%,-50%)!important;
+ }
+}
+/* Animate newly mounted completion controls, without replaying their message row. */
+@keyframes paper-tool-ready{
+ from{opacity:0;transform:translateY(2px) rotate(-18deg) scale(.82)}
+ to{opacity:1;transform:translateY(0) rotate(0deg) scale(1)}
+}
+@keyframes paper-control-ready{
+ from{opacity:0;transform:translateY(4px)}
+ to{opacity:1;transform:translateY(0)}
+}
+body[data-paper-page="chat"] .msg-in>button:has(>svg.lucide-wrench)>svg.lucide-wrench{
+ width:16px;height:16px;flex:0 0 16px;transform-box:fill-box;transform-origin:center;
+ animation:paper-tool-ready 320ms cubic-bezier(.22,.7,.25,1) both;
+}
+body[data-paper-page="chat"] .msg-in>button:has(>span.animate-spin)>span.animate-spin{
+ width:16px;height:16px;flex:0 0 16px;
+}
+body[data-paper-page="chat"] .msg-in button:has(>svg.lucide-eye),
+body[data-paper-page="chat"] .msg-in a[download]{
+ animation:paper-control-ready 240ms cubic-bezier(.22,.7,.25,1) both;
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-paper-page="chat"] .msg-in>button>svg.lucide-wrench,
+ body[data-paper-page="chat"] .msg-in button:has(>svg.lucide-eye),
+ body[data-paper-page="chat"] .msg-in a[download]{animation:none!important}
+}

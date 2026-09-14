@@ -1,0 +1,1 @@
+{"name":"resource-workshop-netlify","version":"1.0.0","private":true,"scripts":{"build":"node ../scripts/build-netlify.mjs"},"engines":{"node":">=24"}}

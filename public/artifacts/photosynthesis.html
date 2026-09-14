@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-immersive-translate-page-theme="light"><head>
+<meta http-equiv="Content-Security-Policy" content="img-src 'self' data: blob: https://*.fbcontent.cn https://*.aliyuncs.com https://storage.googleapis.com; media-src 'self' data: blob: https://*.fbcontent.cn https://*.aliyuncs.com https://storage.googleapis.com;">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>光合作用｜单页教学动画</title>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      svg: { fontCache: 'global' },
+      startup: { typeset: false }
+    };
+  </script>
+  <script defer="" src="/artifacts/vendor/metis-app.js"></script>
+  <style>
+    :root {
+      --bg: #F4FAF1;
+      --text: #173B2B;
+      --muted: #5E7667;
+      --primary: #2E8B57;
+      --primary-dark: #216845;
+      --accent: #F4B942;
+      --air: #55A9D6;
+      --surface: #FFFFFF;
+      --line: #D7E8D9;
+      --shadow: 0 18px 50px rgba(38, 92, 60, .12);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 4%, rgba(244,185,66,.20), transparent 24%),
+        radial-gradient(circle at 94% 15%, rgba(85,169,214,.12), transparent 23%),
+        var(--bg);
+    }
+    button { font: inherit; }
+    .app { min-height: 100vh; padding: 28px clamp(18px, 4vw, 64px) 34px; }
+    .topbar {
+      max-width: 1480px; margin: 0 auto 18px; display: flex; align-items: center;
+      justify-content: space-between; gap: 18px;
+    }
+    .eyebrow { letter-spacing: .18em; text-transform: uppercase; font-size: 12px; font-weight: 800; color: var(--primary); }
+    h1 { margin: 5px 0 0; font-size: clamp(28px, 4vw, 52px); line-height: 1.08; letter-spacing: -.04em; }
+    .subtitle { margin: 9px 0 0; color: var(--muted); font-size: clamp(14px, 1.6vw, 18px); }
+    .status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.76); color: var(--muted); font-size: 13px; white-space: nowrap; }
+    .status-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(244,185,66,.18); }
+    .layout { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(330px, .82fr); gap: 22px; align-items: start; }
+    .layout > *, .side { min-width: 0; }
+    .panel { background: rgba(255,255,255,.88); border: 1px solid rgba(215,232,217,.9); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .stage-panel { padding: clamp(18px, 3vw, 30px); overflow: hidden; }
+    .stage-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
+    .stage-kicker { color: var(--primary); font-weight: 800; font-size: 14px; }
+    .stage-title { margin: 4px 0 0; font-size: clamp(20px, 2.4vw, 30px); letter-spacing: -.02em; }
+    .stage-caption { color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 620px; }
+    .mode-toggle { display: flex; background: #EDF7EE; padding: 4px; border-radius: 13px; gap: 3px; flex-shrink: 0; }
+    .mode-toggle button, .step-btn, .concept-btn, .control-btn {
+      border: 0; cursor: pointer; transition: .2s ease; color: var(--text);
+    }
+    .mode-toggle button { padding: 9px 12px; border-radius: 10px; background: transparent; font-weight: 800; font-size: 13px; }
+    .mode-toggle button.active { background: var(--surface); color: var(--primary-dark); box-shadow: 0 4px 12px rgba(46,139,87,.14); }
+    .scene-wrap { position: relative; border-radius: 20px; overflow: hidden; background: linear-gradient(180deg, #F8FFF6 0%, #EEF8F0 100%); border: 1px solid var(--line); }
+    .scene-wrap::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255,255,255,.56), transparent 34%); z-index: 1; }
+    svg { display: block; width: 100%; height: auto; min-height: 420px; }
+    .scene-label { font-size: 13px; font-weight: 800; fill: var(--text); }
+    .scene-small { font-size: 11px; font-weight: 700; fill: var(--muted); }
+    .molecule { transition: opacity .25s ease; }
+    .molecule.water { fill: #55A9D6; }
+    .molecule.co2 { fill: #7C6AC8; }
+    .molecule.o2 { fill: #F4B942; }
+    .molecule.sugar { fill: #E77D58; }
+    .molecule text { fill: white; font-size: 11px; font-weight: 900; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+    .flow-path { fill: none; stroke-linecap: round; stroke-width: 3; stroke-dasharray: 8 10; opacity: .85; }
+    .flow-water { stroke: var(--air); }
+    .flow-co2 { stroke: #7C6AC8; }
+    .flow-light { stroke: var(--accent); stroke-width: 5; stroke-dasharray: 0; }
+    .flow-output { stroke: var(--accent); }
+    .flow-muted { opacity: .12; }
+    .light-ray { transform-origin: 720px 86px; animation: rayPulse 2.3s ease-in-out infinite; }
+    .particle { animation: travel 3.2s linear infinite; }
+    .particle.delay-1 { animation-delay: .8s; }
+    .particle.delay-2 { animation-delay: 1.6s; }
+    .particle.delay-3 { animation-delay: 2.4s; }
+    .particle.paused, .light-ray.paused { animation-play-state: paused; }
+    @keyframes travel { 0% { opacity: 0; transform: translateX(0); } 12% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; transform: translateX(48px); } }
+    @keyframes rayPulse { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+    .scene-overlay { position: absolute; left: 18px; right: 18px; bottom: 16px; z-index: 2; display: flex; justify-content: space-between; gap: 14px; align-items: end; pointer-events: none; }
+    .stage-message { max-width: 68%; padding: 12px 15px; border-radius: 14px; background: rgba(255,255,255,.88); border: 1px solid rgba(215,232,217,.95); box-shadow: 0 10px 25px rgba(40,90,55,.10); font-size: 14px; line-height: 1.55; }
+    .stage-count { padding: 9px 12px; border-radius: 999px; background: var(--text); color: #fff; font-size: 12px; font-weight: 800; }
+    .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; align-items: center; }
+    .control-btn { padding: 11px 15px; border-radius: 12px; background: var(--text); color: #fff; font-weight: 800; }
+    .control-btn.primary { background: var(--primary); }
+    .control-btn.secondary { background: #EEF7EF; color: var(--primary-dark); }
+    .control-btn:hover, .step-btn:hover, .concept-btn:hover { transform: translateY(-1px); }
+    .progress { flex: 1; min-width: 140px; height: 10px; border-radius: 999px; background: #E5F0E7; overflow: hidden; }
+    .progress > span { display: block; height: 100%; width: 25%; border-radius: inherit; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width .35s ease; }
+    .side { display: grid; gap: 18px; }
+    .card { padding: 20px; }
+    .card h2 { margin: 0 0 12px; font-size: 18px; }
+    .formula-box { padding: 17px; background: #F8FCF7; border: 1px solid var(--line); border-radius: 16px; overflow-x: auto; }
+    .formula-note { margin-top: 10px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .steps { display: grid; gap: 9px; }
+    .step-btn { text-align: left; display: grid; grid-template-columns: 32px 1fr; gap: 11px; align-items: center; padding: 11px 12px; background: #FAFDF9; border: 1px solid var(--line); border-radius: 14px; }
+    .step-btn.active { border-color: rgba(46,139,87,.65); background: #EFF8EF; box-shadow: inset 4px 0 0 var(--primary); }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #E8F4E9; color: var(--primary-dark); font-weight: 900; font-size: 13px; }
+    .step-btn.active .step-num { background: var(--primary); color: #fff; }
+    .step-name { font-weight: 900; font-size: 14px; }
+    .step-desc { color: var(--muted); font-size: 12px; margin-top: 3px; line-height: 1.4; }
+    .concept-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .concept-btn { position: relative; min-height: 78px; padding: 12px; text-align: left; border-radius: 15px; background: #fff; border: 1px solid var(--line); }
+    .concept-btn strong { display: block; font-size: 14px; }
+    .concept-btn span { display: block; margin-top: 6px; font-size: 12px; color: var(--muted); line-height: 1.35; }
+    .concept-btn::after { content: "查看"; position: absolute; right: 10px; top: 10px; font-size: 10px; color: var(--primary); font-weight: 900; }
+    .concept-detail { margin-top: 12px; padding: 12px 14px; border-radius: 13px; background: #F7FBF7; color: var(--muted); font-size: 13px; line-height: 1.65; min-height: 58px; }
+    .teacher-tip { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 15px; background: linear-gradient(135deg, #FFF8DF, #FFFDF5); border: 1px solid #F4E7BB; }
+    .tip-mark { width: 10px; height: 10px; margin-top: 5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(244,185,66,.18); flex: 0 0 auto; }
+    .teacher-tip strong { font-size: 13px; }
+    .teacher-tip p { margin: 5px 0 0; color: #776438; font-size: 13px; line-height: 1.55; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 13px; color: var(--muted); font-size: 12px; }
+    .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .legend-dot.water { background: var(--air); } .legend-dot.co2 { background: #7C6AC8; } .legend-dot.light { background: var(--accent); } .legend-dot.product { background: #E77D58; }
+    .no-light .light-ray, .no-light .flow-light { opacity: .08; }
+    .no-light .particle { animation-play-state: paused; opacity: .18; }
+    .no-light .molecule.sugar, .no-light .molecule.o2 { opacity: .18; }
+    .footer-note { max-width: 1480px; margin: 16px auto 0; color: var(--muted); font-size: 12px; text-align: right; }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .teacher-card { grid-column: 1 / -1; }
+    }
+    @media (max-width: 620px) {
+      .app { padding: 18px 12px 24px; }
+      .topbar, .stage-head { align-items: flex-start; flex-direction: column; }
+      .status-pill { align-self: flex-start; }
+      .layout { display: block; width: 100%; min-width: 0; }
+      .layout > * { width: 100%; min-width: 0; }
+      .side { margin-top: 18px; }
+      .scene-overlay { left: 10px; right: 10px; bottom: 10px; }
+      .stage-message { max-width: 100%; font-size: 12px; }
+      .stage-count { display: none; }
+    }
+  </style>
+<style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  border-collapse: collapse;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-mn {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-mi {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-msub {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mo {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-stretchy-h {
+  display: inline-table;
+  width: 100%;
+}
+
+mjx-stretchy-h > * {
+  display: table-cell;
+  width: 0;
+}
+
+mjx-stretchy-h > * > mjx-c {
+  display: inline-block;
+  transform: scalex(1.0000001);
+}
+
+mjx-stretchy-h > * > mjx-c::before {
+  display: inline-block;
+  width: initial;
+}
+
+mjx-stretchy-h > mjx-ext {
+  /* IE */ overflow: hidden;
+  /* others */ overflow: clip visible;
+  width: 100%;
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c::before {
+  transform: scalex(500);
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c {
+  width: 0;
+}
+
+mjx-stretchy-h > mjx-beg > mjx-c {
+  margin-right: -.1em;
+}
+
+mjx-stretchy-h > mjx-end > mjx-c {
+  margin-left: -.1em;
+}
+
+mjx-stretchy-v {
+  display: inline-block;
+}
+
+mjx-stretchy-v > * {
+  display: block;
+}
+
+mjx-stretchy-v > mjx-beg {
+  height: 0;
+}
+
+mjx-stretchy-v > mjx-end > mjx-c {
+  display: block;
+}
+
+mjx-stretchy-v > * > mjx-c {
+  transform: scaley(1.0000001);
+  transform-origin: left center;
+  overflow: hidden;
+}
+
+mjx-stretchy-v > mjx-ext {
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+  border: 0px solid transparent;
+  /* IE */ overflow: hidden;
+  /* others */ overflow: visible clip;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c::before {
+  width: initial;
+  box-sizing: border-box;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c {
+  transform: scaleY(500) translateY(.075em);
+  overflow: visible;
+}
+
+mjx-mark {
+  display: inline-block;
+  height: 0px;
+}
+
+mjx-mover {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mover:not([limits="false"]) {
+  padding-top: .1em;
+}
+
+mjx-mover:not([limits="false"]) > * {
+  display: block;
+  text-align: left;
+}
+
+mjx-mpadded {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-rbox {
+  display: inline-block;
+  position: relative;
+}
+
+mjx-mspace {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-TeXAtom {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/v7VrHkCWJVtJtoscIOXmdM.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/g9RhUNJ7TRnD7Lg8YtUg.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/ZPfsBB0kqL0KtwtzoTGaHZ.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/S4uBK5OShoVAtsAac38GZ9.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/P3C5XPFWXhOgHvNg20gwwi.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/q4Jf24B0JI9AqcFHZslyP.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/dIlU4Gavh9CltzZV5DTJz.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/u8Jfk9rpYfOMv4hbEidqqP.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/RvB28ntKi522qeySd8CC.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/kIeP9Ipr9ovBmI444AthKM.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/F3RYH7BBk5OYfEmRBu63.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/mRk8I5m7oKGVMRqB2Hz7H.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/mUiblZzh6eBCYwKYb8obiZ.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/RH6hWrm4j87ctAdcAtV4B.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/6l09ppYqYnf1GtF2O4KALa.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/BmVwQflRyF0sgDXjUhR7LE.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/Lo86WybYigVJ1BOCmtjFD.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/EeZvcJM9gJWTNAWtWgShKH.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/0yHmxMDrUElhIQ9CGo5ymF.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/yB8gh6OiYHbVDHUZeBkY.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/PiPSIjSAoMXDgBIxN4P2.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://metis-online.fbcontent.cn/metis-misc/B2OpX9ngdQOoYTicGElZ.woff") format("woff");
+}
+
+mjx-stretchy-h.mjx-c2192 mjx-ext mjx-c::before {
+  content: "\2212";
+  padding: 0.583em 0 0.082em 0;
+}
+
+mjx-stretchy-h.mjx-c2192 mjx-end mjx-c::before {
+  content: "\2192";
+  padding: 0.583em 0 0.082em 0;
+}
+
+mjx-c.mjx-c36::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "6";
+}
+
+mjx-c.mjx-c1D436.TEX-I::before {
+  padding: 0.705em 0.76em 0.022em 0;
+  content: "C";
+}
+
+mjx-c.mjx-c1D442.TEX-I::before {
+  padding: 0.704em 0.763em 0.022em 0;
+  content: "O";
+}
+
+mjx-c.mjx-c32::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "2";
+}
+
+mjx-c.mjx-c2B::before {
+  padding: 0.583em 0.778em 0.082em 0;
+  content: "+";
+}
+
+mjx-c.mjx-c1D43B.TEX-I::before {
+  padding: 0.683em 0.888em 0 0;
+  content: "H";
+}
+
+mjx-c.mjx-c31::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "1";
+}
+</style><style data-id="immersive-translate-input-injected-css"></style></head>
+<body>
+  <main class="app" id="app">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">Biology · Interactive Animation</div>
+        <h1>光合作用</h1>
+        <p class="subtitle">植物怎样把光能转化成储存在有机物中的化学能？</p>
+      </div>
+      <div class="status-pill"><span class="status-dot" id="statusDot" style="background: var(--accent);"></span><span id="statusText">准备开始：先观察原料如何进入叶片</span></div>
+    </header>
+
+    <section class="layout">
+      <section class="panel stage-panel">
+        <div class="stage-head">
+          <div>
+            <div class="stage-kicker">过程演示 · 输入 → 转化 → 输出</div>
+            <h2 class="stage-title" id="stageTitle">第四步：产物形成并输出</h2>
+            <div class="stage-caption" id="stageCaption">有机物形成并储存能量，氧气作为副产物释放到周围空气中。</div>
+          </div>
+          <div class="mode-toggle" aria-label="光照条件">
+            <button class="active" data-light="on" tabindex="0">有光</button>
+            <button data-light="off" tabindex="0">无光</button>
+          </div>
+        </div>
+
+        <div class="scene-wrap" id="sceneWrap">
+          <svg viewBox="0 0 900 500" role="img" aria-label="光合作用过程示意图">
+            <defs>
+              <linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#A8D98D"></stop><stop offset="1" stop-color="#4F9B62"></stop>
+              </linearGradient>
+              <linearGradient id="soilGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#D9B27B"></stop><stop offset="1" stop-color="#B78152"></stop>
+              </linearGradient>
+              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#326044" flood-opacity=".15"></feDropShadow></filter>
+              <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2E8B57"></path></marker>
+              <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#55A9D6"></path></marker>
+              <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7C6AC8"></path></marker>
+              <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#F4B942"></path></marker>
+            </defs>
+            <rect x="0" y="0" width="900" height="500" fill="#F7FFF4"></rect>
+            <circle cx="760" cy="76" r="42" fill="#FFF3BD" opacity=".8"></circle>
+            <g class="light-ray paused" id="lightRays">
+              <path d="M730 108 L620 236" class="flow-path flow-light" marker-end="url(#arrowGold)"></path>
+              <path d="M760 115 L650 240" class="flow-path flow-light" marker-end="url(#arrowGold)"></path>
+              <path d="M790 108 L680 235" class="flow-path flow-light" marker-end="url(#arrowGold)"></path>
+              <text x="760" y="55" class="scene-label" text-anchor="middle" fill="#A16A00">光能</text>
+            </g>
+            <rect x="0" y="377" width="900" height="123" fill="url(#soilGrad)" opacity=".88"></rect>
+            <path d="M0 377 Q160 356 300 378 T600 376 T900 377" fill="none" stroke="#9D6A45" stroke-width="4" opacity=".7"></path>
+            <g filter="url(#softShadow)">
+              <path d="M360 382 C380 325 385 246 385 183" fill="none" stroke="#3A7A47" stroke-width="18" stroke-linecap="round"></path>
+              <path d="M389 206 C330 160 235 167 203 227 C278 257 347 245 389 206 Z" fill="url(#leafGrad)" stroke="#2E8B57" stroke-width="4"></path>
+              <path d="M394 203 C458 141 560 146 612 210 C550 261 463 254 394 203 Z" fill="url(#leafGrad)" stroke="#2E8B57" stroke-width="4"></path>
+              <path d="M389 206 C330 190 270 205 221 227 M395 205 C462 186 528 191 596 210" fill="none" stroke="#E6F6D9" stroke-width="3" opacity=".9"></path>
+              <path d="M388 204 C395 229 405 258 427 281" fill="none" stroke="#286A3D" stroke-width="4" opacity=".85"></path>
+              <path d="M360 378 C329 421 293 444 246 456 M365 378 C370 425 370 455 357 478 M373 378 C414 423 456 445 504 457" fill="none" stroke="#F3E0C5" stroke-width="7" stroke-linecap="round"></path>
+            </g>
+            <text x="395" y="145" class="scene-label" text-anchor="middle">叶片</text>
+            <text x="380" y="471" class="scene-label" text-anchor="middle" fill="#FFF8E9">根部吸水</text>
+            <g>
+              <rect x="640" y="252" width="190" height="105" rx="18" fill="#FFFFFF" stroke="#BFDDBF" stroke-width="2"></rect>
+              <text x="735" y="275" class="scene-label" text-anchor="middle">叶肉细胞放大</text>
+              <ellipse cx="734" cy="316" rx="64" ry="26" fill="#DDF2D4" stroke="#6BAF72" stroke-width="3"></ellipse>
+              <ellipse cx="700" cy="316" rx="12" ry="7" fill="#2E8B57"></ellipse><ellipse cx="733" cy="310" rx="12" ry="7" fill="#2E8B57"></ellipse><ellipse cx="764" cy="320" rx="12" ry="7" fill="#2E8B57"></ellipse>
+              <text x="735" y="347" class="scene-small" text-anchor="middle">叶绿体：光合作用的场所</text>
+            </g>
+            <path d="M390 370 C400 335 414 292 438 236" class="flow-path flow-water" marker-end="url(#arrowBlue)"></path>
+            <path d="M138 214 C185 220 205 224 244 226" class="flow-path flow-co2" marker-end="url(#arrowPurple)"></path>
+            <path d="M530 228 C585 238 608 257 642 284" class="flow-path flow-output" marker-end="url(#arrowGold)"></path>
+            <path d="M495 205 C545 169 588 139 630 120" class="flow-path flow-output" marker-end="url(#arrowGold)"></path>
+            <g class="molecule water particle paused" id="waterParticles"><circle cx="390" cy="358" r="13" class="water"></circle><text x="390" y="358">水</text></g>
+            <g class="molecule water particle delay-1 paused"><circle cx="397" cy="326" r="13" class="water"></circle><text x="397" y="326">水</text></g>
+            <g class="molecule co2 particle paused" id="co2Particles"><circle cx="150" cy="215" r="16" class="co2"></circle><text x="150" y="215">CO₂</text></g>
+            <g class="molecule co2 particle delay-2 paused"><circle cx="180" cy="220" r="16" class="co2"></circle><text x="180" y="220">CO₂</text></g>
+            <g class="molecule o2 particle paused" id="o2Particles"><circle cx="542" cy="173" r="14" class="o2"></circle><text x="542" y="173">O₂</text></g>
+            <g class="molecule o2 particle delay-1 paused"><circle cx="575" cy="153" r="14" class="o2"></circle><text x="575" y="153">O₂</text></g>
+            <g class="molecule sugar" id="sugarMolecule"><circle cx="548" cy="244" r="17" class="sugar"></circle><text x="548" y="244">有机物</text></g>
+            <text x="82" y="204" class="scene-label" fill="#5F4C9D">空气中的二氧化碳</text>
+            <text x="515" y="277" class="scene-small">有机物形成</text>
+            <text x="630" y="105" class="scene-small">氧气释放到空气</text>
+          </svg>
+          <div class="scene-overlay">
+            <div class="stage-message" id="stageMessage">最终得到有机物，同时释放氧气，完成一次光合作用过程。</div>
+            <div class="stage-count" id="stageCount">4 / 4</div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="control-btn primary" id="playBtn" tabindex="0">播放动画</button>
+          <button class="control-btn secondary" id="pauseBtn" tabindex="0">暂停</button>
+          <button class="control-btn secondary" id="resetBtn" tabindex="0">重置</button>
+          <div class="progress" aria-label="动画进度"><span id="progressBar" style="width: 100%;"></span></div>
+        </div>
+        <div class="legend" aria-label="颜色图例">
+          <span class="legend-item">水</span>
+          <span class="legend-item">二氧化碳</span>
+          <span class="legend-item">光能与氧气</span>
+          <span class="legend-item">有机物</span>
+        </div>
+      </section>
+
+      <aside class="side">
+        <section class="panel card">
+          <h2>光合作用的表达式</h2>
+          <div class="formula-box" id="formulaRoot"><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="0" style="font-size: 122.8%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-mn class="mjx-n"><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D442 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="3"><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43B TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.057em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D442 TEX-I"></mjx-c></mjx-mi><mjx-mover space="4"><mjx-over style="padding-bottom: 0.111em;"><mjx-mpadded size="s"><mjx-block style="width: 5.72em; margin: -0.2em 0px 0px; position: relative;"><mjx-rbox style="left: 0.278em; top: 0.2em; max-width: 5.72em;"><mjx-mtext class="mjx-n"><mjx-utext variant="normal" style="font-size: 81.4%; padding: 0.921em 0px 0.246em; font-family: MJXZERO, serif;">光</mjx-utext><mjx-utext variant="normal" style="font-size: 81.4%; padding: 0.921em 0px 0.246em; font-family: MJXZERO, serif;">能</mjx-utext><mjx-utext variant="normal" style="font-size: 81.4%; padding: 0.921em 0px 0.246em; font-family: MJXZERO, serif;">，</mjx-utext><mjx-utext variant="normal" style="font-size: 81.4%; padding: 0.921em 0px 0.246em; font-family: MJXZERO, serif;">叶</mjx-utext><mjx-utext variant="normal" style="font-size: 81.4%; padding: 0.921em 0px 0.246em; font-family: MJXZERO, serif;">绿</mjx-utext><mjx-utext variant="normal" style="font-size: 81.4%; padding: 0.921em 0px 0.246em; font-family: MJXZERO, serif;">体</mjx-utext></mjx-mtext><mjx-mspace style="height: 0.25em; vertical-align: -0.25em;"></mjx-mspace></mjx-rbox></mjx-block></mjx-mpadded></mjx-over><mjx-base><mjx-mstyle><mjx-mo class="mjx-n"><mjx-stretchy-h class="mjx-c2192" style="width: 4.044em;"><mjx-ext><mjx-c></mjx-c></mjx-ext><mjx-end><mjx-c></mjx-c></mjx-end></mjx-stretchy-h></mjx-mo></mjx-mstyle></mjx-base></mjx-mover><mjx-msub space="4"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D436 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.045em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c36"></mjx-c></mjx-mn></mjx-script></mjx-msub><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43B TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.057em;"><mjx-texatom size="s" texclass="ORD"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-texatom></mjx-script></mjx-msub><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D442 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c36"></mjx-c></mjx-mn></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="3"><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D442 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mn>6</mn><mi>C</mi><msub><mi>O</mi><mn>2</mn></msub><mo>+</mo><mn>6</mn><msub><mi>H</mi><mn>2</mn></msub><mi>O</mi><mover><mstyle scriptlevel="0"><mo data-mjx-texclass="REL">→</mo></mstyle><mpadded width="+0.833em" lspace="0.278em" voffset="-.2em" height="-.2em"><mtext>光能，叶绿体</mtext><mspace depth=".25em"></mspace></mpadded></mover><msub><mi>C</mi><mn>6</mn></msub><msub><mi>H</mi><mrow data-mjx-texclass="ORD"><mn>12</mn></mrow></msub><msub><mi>O</mi><mn>6</mn></msub><mo>+</mo><mn>6</mn><msub><mi>O</mi><mn>2</mn></msub></math></mjx-assistive-mml></mjx-container></div>
+          <div class="formula-note">核心关系：二氧化碳和水在光能作用下，于叶绿体中转化为有机物，并释放氧气。</div>
+        </section>
+
+        <section class="panel card">
+          <h2>四步观察路线</h2>
+          <div class="steps" id="steps">
+            <button class="step-btn" data-step="0"><span class="step-num">1</span><span><span class="step-name">原料进入</span><span class="step-desc">水与二氧化碳到达叶片</span></span></button>
+            <button class="step-btn" data-step="1"><span class="step-num">2</span><span><span class="step-name">光能到达</span><span class="step-desc">光照为过程提供能量</span></span></button>
+            <button class="step-btn" data-step="2"><span class="step-num">3</span><span><span class="step-name">叶绿体转化</span><span class="step-desc">叶绿体是进行场所</span></span></button>
+            <button class="step-btn active" data-step="3"><span class="step-num">4</span><span><span class="step-name">产物输出</span><span class="step-desc">有机物形成，氧气释放</span></span></button>
+          </div>
+        </section>
+
+        <section class="panel card">
+          <h2>点击概念卡片</h2>
+          <div class="concept-grid">
+            <button class="concept-btn" data-concept="input"><strong>原料</strong><span>二氧化碳 + 水</span></button>
+            <button class="concept-btn" data-concept="condition"><strong>条件</strong><span>光能</span></button>
+            <button class="concept-btn" data-concept="place"><strong>场所</strong><span>叶绿体</span></button>
+            <button class="concept-btn" data-concept="output"><strong>产物</strong><span>有机物 + 氧气</span></button>
+          </div>
+          <div class="concept-detail" id="conceptDetail">点击上方卡片，查看对应概念在光合作用中的作用。</div>
+        </section>
+
+        <section class="panel card teacher-card">
+          <div class="teacher-tip"><span class="tip-mark"></span><div><strong>课堂提示</strong><p id="teacherTip">最后请学生用一句话归纳：原料、条件、场所和产物分别是什么？</p></div></div>
+        </section>
+      </aside>
+    </section>
+    <div class="footer-note">初中生物核心概念动画 · 建议投屏使用，边播放边提问</div>
+  </main>
+
+  <script>
+    const state = {
+      step: 0,
+      playing: false,
+      light: true,
+      concept: null
+    };
+    const steps = [
+      { title: '第一步：原料进入植物', caption: '水从根部进入，二氧化碳从叶片气孔进入，植物开始准备制造有机物。', message: '观察水和二氧化碳沿着箭头进入叶片。', tip: '先让学生找出“进入叶片的物质”，再追问：它们在哪里发生转化？' },
+      { title: '第二步：光能到达叶片', caption: '光照为光合作用提供能量。没有光，光合作用就难以正常进行。', message: '光能像“启动能量”，照到叶片后，转化过程开始。', tip: '可以切换“无光”对比：光线变弱，产物形成和释放明显减弱。' },
+      { title: '第三步：叶绿体中发生转化', caption: '叶绿体是绿色植物进行光合作用的主要场所，原料在这里被重新组合。', message: '叶绿体是光合作用的“工作场所”，完成物质与能量的转化。', tip: '引导学生把“叶绿体”与“场所”对应起来，不要把它误认为原料。' },
+      { title: '第四步：产物形成并输出', caption: '有机物形成并储存能量，氧气作为副产物释放到周围空气中。', message: '最终得到有机物，同时释放氧气，完成一次光合作用过程。', tip: '最后请学生用一句话归纳：原料、条件、场所和产物分别是什么？' }
+    ];
+    const conceptText = {
+      input: '<strong>原料：</strong>二氧化碳和水是制造有机物的原材料。二氧化碳主要从叶片气孔进入，水由根吸收后运输到叶片。',
+      condition: '<strong>条件：</strong>光能为光合作用提供能量。动画中的金色光束表示能量输入，不是反应的原料。',
+      place: '<strong>场所：</strong>叶绿体是绿色植物细胞中进行光合作用的主要场所，叶绿素能吸收光能。',
+      output: '<strong>产物：</strong>有机物中储存着能量，氧气则释放到空气中，供生物呼吸使用。'
+    };
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => [...document.querySelectorAll(sel)];
+    function updateMath(root) {
+      const waitForMathJax = () => {
+        if (!window.MathJax || !MathJax.startup || !MathJax.startup.promise) {
+          window.setTimeout(waitForMathJax, 50);
+          return;
+        }
+        MathJax.startup.promise.then(() => {
+          if (root && root.textContent.trim()) {
+            MathJax.typesetClear([root]);
+            return MathJax.typesetPromise([root]);
+          }
+        }).catch(err => console.error('MathJax排版失败', err));
+      };
+      waitForMathJax();
+    }
+    function render() {
+      const item = steps[state.step];
+      $('#stageTitle').textContent = item.title;
+      $('#stageCaption').textContent = item.caption;
+      $('#stageMessage').textContent = item.message;
+      $('#stageCount').textContent = `${state.step + 1} / ${steps.length}`;
+      $('#teacherTip').textContent = item.tip;
+      $('#progressBar').style.width = `${((state.step + 1) / steps.length) * 100}%`;
+      $('#playBtn').textContent = state.playing ? '播放中…' : '播放动画';
+      $('#statusText').textContent = state.playing ? `正在演示：${item.title.replace(/^第[一二三四]步：/, '')}` : (state.light ? '准备开始：先观察原料如何进入叶片' : '当前为无光条件：观察产物变化');
+      $('#statusDot').style.background = state.playing ? 'var(--primary)' : (state.light ? 'var(--accent)' : '#8A9B91');
+      $$('.step-btn').forEach(btn => btn.classList.toggle('active', Number(btn.dataset.step) === state.step));
+      $('.scene-wrap').classList.toggle('no-light', !state.light);
+      $$('.mode-toggle button').forEach(btn => btn.classList.toggle('active', (btn.dataset.light === 'on') === state.light));
+      $$('.particle, .light-ray').forEach(el => el.classList.toggle('paused', !state.playing));
+      window.__interactionState = { ...state, visibleStage: item.title, lightMode: state.light ? 'on' : 'off' };
+    }
+    function setStep(index) {
+      state.step = Math.max(0, Math.min(steps.length - 1, index));
+      state.concept = null;
+      $('#conceptDetail').textContent = '点击上方卡片，查看对应概念在光合作用中的作用。';
+      render();
+    }
+    $$('.step-btn').forEach(btn => btn.addEventListener('click', () => setStep(Number(btn.dataset.step))));
+    $$('.mode-toggle button').forEach(btn => btn.addEventListener('click', () => { state.light = btn.dataset.light === 'on'; render(); }));
+    $$('.concept-btn').forEach(btn => btn.addEventListener('click', () => { state.concept = btn.dataset.concept; $('#conceptDetail').innerHTML = conceptText[state.concept]; window.__interactionState = { ...state, conceptDetail: state.concept }; }));
+    $('#playBtn').addEventListener('click', () => { state.playing = true; render(); });
+    $('#pauseBtn').addEventListener('click', () => { state.playing = false; render(); });
+    $('#resetBtn').addEventListener('click', () => { state.step = 0; state.playing = false; state.light = true; state.concept = null; $('#conceptDetail').textContent = '点击上方卡片，查看对应概念在光合作用中的作用。'; render(); });
+    let timer = null;
+    function autoAdvance() {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        if (!state.playing) return;
+        if (state.step < steps.length - 1) setStep(state.step + 1);
+        else { state.playing = false; render(); clearInterval(timer); }
+      }, 4200);
+    }
+    $('#playBtn').addEventListener('click', autoAdvance);
+    updateMath($('#formulaRoot'));
+    render();
+  </script>
+
+
+</body></html>

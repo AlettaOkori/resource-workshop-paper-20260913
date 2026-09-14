@@ -1,0 +1,19 @@
+[build]
+  base = "hosting"
+  command = "npm run build"
+  publish = "dist"
+  functions = "functions"
+[build.environment]
+  NODE_VERSION = "24"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["functions/runtime.tar.gz"]
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/workshop"
+  status = 200
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

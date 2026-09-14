@@ -1,0 +1,2049 @@
+{
+  "mode": "demo",
+  "note": "资源覆盖为模拟展示；已关联资源可查看原有作品。",
+  "subjects": [
+    {
+      "id": "biology",
+      "name": "生物",
+      "scope": "初中生物",
+      "defaultNode": "photosynthesis",
+      "groups": [
+        {
+          "id": "cell",
+          "name": "细胞与结构",
+          "color": "#4774B9"
+        },
+        {
+          "id": "energy",
+          "name": "物质与能量",
+          "color": "#318674"
+        },
+        {
+          "id": "ecology",
+          "name": "生物与环境",
+          "color": "#B77B2E"
+        },
+        {
+          "id": "inquiry",
+          "name": "实验与探究",
+          "color": "#8A65AE"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "cell-structure",
+          "name": "细胞结构",
+          "group": "cell",
+          "description": "认识细胞的基本结构，理解结构与功能之间的联系。",
+          "resourceIds": [
+            "2D1E52CBB465EE8981405653A46D4C37"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "plant-cell",
+          "name": "植物细胞",
+          "group": "cell",
+          "description": "通过细胞壁、液泡和叶绿体等结构，认识植物细胞的特点。",
+          "resourceIds": [
+            "2D1E52CBB465EE8981405653A46D4C37"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "animal-cell",
+          "name": "动物细胞",
+          "group": "cell",
+          "description": "认识动物细胞的基本结构，并与植物细胞比较。",
+          "resourceIds": [
+            "2D1E52CBB465EE8981405653A46D4C37"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "membrane",
+          "name": "细胞膜",
+          "group": "cell",
+          "description": "细胞膜将细胞内部与外部环境分隔，并控制物质进出。",
+          "resourceIds": [
+            "2D1E52CBB465EE8981405653A46D4C37"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "nucleus",
+          "name": "细胞核",
+          "group": "cell",
+          "description": "细胞核含有遗传物质，与细胞生命活动的控制有关。",
+          "resourceIds": [
+            "2D1E52CBB465EE8981405653A46D4C37"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "photosynthesis",
+          "name": "光合作用",
+          "group": "energy",
+          "description": "绿色植物利用光能，在叶绿体中将二氧化碳和水转化为有机物，并释放氧气。",
+          "resourceIds": [
+            "A45760493DA8ECA44A316EA2BB54A041"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "chloroplast",
+          "name": "叶绿体",
+          "group": "energy",
+          "description": "叶绿体是绿色植物进行光合作用的场所，连接细胞结构与能量转化两个主题。",
+          "resourceIds": [
+            "A45760493DA8ECA44A316EA2BB54A041",
+            "2D1E52CBB465EE8981405653A46D4C37"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "light-energy",
+          "name": "光能转化",
+          "group": "energy",
+          "description": "通过光合作用，光能转化为储存在有机物中的化学能。",
+          "resourceIds": [
+            "A45760493DA8ECA44A316EA2BB54A041"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "organic-matter",
+          "name": "有机物与氧气",
+          "group": "energy",
+          "description": "认识光合作用的产物，以及有机物在储存能量方面的作用。",
+          "resourceIds": [
+            "A45760493DA8ECA44A316EA2BB54A041"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "respiration",
+          "name": "呼吸作用",
+          "group": "energy",
+          "description": "细胞通过分解有机物释放能量，供生命活动使用。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "ecosystem",
+          "name": "生态系统",
+          "group": "ecology",
+          "description": "在一定空间范围内，生物与环境相互作用形成统一整体。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "producer",
+          "name": "生产者",
+          "group": "ecology",
+          "description": "绿色植物等生物能够制造有机物，为生态系统提供物质和能量来源。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "food-chain",
+          "name": "食物链",
+          "group": "ecology",
+          "description": "认识生物之间由于捕食关系而形成的联系。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "carbon-oxygen",
+          "name": "碳氧平衡",
+          "group": "ecology",
+          "description": "联系光合作用与呼吸作用，理解生物圈中的碳氧平衡。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "compare-cells",
+          "name": "动植物细胞比较",
+          "group": "inquiry",
+          "description": "利用交互模型比较动物细胞和植物细胞的共同结构与差异。",
+          "resourceIds": [
+            "2D1E52CBB465EE8981405653A46D4C37"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "microscope",
+          "name": "显微镜观察",
+          "group": "inquiry",
+          "description": "掌握显微镜的基本使用方法，观察细胞结构。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "photo-experiment",
+          "name": "探究光合作用条件",
+          "group": "inquiry",
+          "description": "通过设置对照，探究光等条件与光合作用的关系。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "controlled-variable",
+          "name": "控制变量",
+          "group": "inquiry",
+          "description": "在对照实验中只改变待研究因素，使其他相关条件保持一致。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "cell-wall",
+          "name": "细胞壁",
+          "group": "cell",
+          "description": "支持和保护植物细胞。",
+          "resourceIds": [
+            "2D1E52CBB465EE8981405653A46D4C37"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "cytoplasm",
+          "name": "细胞质",
+          "group": "cell",
+          "description": "细胞膜以内、细胞核以外的部分。",
+          "resourceIds": [
+            "2D1E52CBB465EE8981405653A46D4C37"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "vacuole",
+          "name": "液泡",
+          "group": "cell",
+          "description": "液泡内的细胞液含有多种物质。",
+          "resourceIds": [
+            "2D1E52CBB465EE8981405653A46D4C37"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "mitochondria",
+          "name": "线粒体",
+          "group": "cell",
+          "description": "线粒体与细胞中有机物的氧化分解和能量释放有关。",
+          "resourceIds": [
+            "2D1E52CBB465EE8981405653A46D4C37"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "chromosomes",
+          "name": "染色体",
+          "group": "cell",
+          "description": "染色体主要由 DNA 和蛋白质组成。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "dna",
+          "name": "DNA",
+          "group": "cell",
+          "description": "DNA 是主要的遗传物质。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "gene",
+          "name": "基因",
+          "group": "cell",
+          "description": "基因是有遗传效应的 DNA 片段。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "tissue",
+          "name": "组织",
+          "group": "cell",
+          "description": "形态相似、结构和功能相同的细胞联合形成组织。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "organ",
+          "name": "器官",
+          "group": "cell",
+          "description": "不同组织按照一定次序结合，形成具有一定功能的器官。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "organism",
+          "name": "生物体",
+          "group": "cell",
+          "description": "生物体具有一定的结构层次，各部分共同完成生命活动。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "cell-division",
+          "name": "细胞分裂",
+          "group": "cell",
+          "description": "一个细胞分成两个细胞，使细胞数目增加。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "cell-growth",
+          "name": "细胞生长",
+          "group": "cell",
+          "description": "细胞从周围环境吸收营养物质，体积增大。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "differentiation",
+          "name": "细胞分化",
+          "group": "cell",
+          "description": "细胞在形态、结构和生理功能上发生差异性变化。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "co2",
+          "name": "二氧化碳",
+          "group": "energy",
+          "description": "二氧化碳是光合作用制造有机物的原料之一。",
+          "resourceIds": [
+            "A45760493DA8ECA44A316EA2BB54A041"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "water",
+          "name": "水",
+          "group": "energy",
+          "description": "水参与绿色植物的光合作用。",
+          "resourceIds": [
+            "A45760493DA8ECA44A316EA2BB54A041"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "oxygen-release",
+          "name": "氧气释放",
+          "group": "ecology",
+          "description": "光合作用产生氧气，并释放到周围环境。",
+          "resourceIds": [
+            "A45760493DA8ECA44A316EA2BB54A041"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "chlorophyll",
+          "name": "叶绿素",
+          "group": "energy",
+          "description": "叶绿素等色素能够吸收光能。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "sunlight",
+          "name": "光照条件",
+          "group": "inquiry",
+          "description": "光为光合作用提供能量。",
+          "resourceIds": [
+            "A45760493DA8ECA44A316EA2BB54A041"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "starch",
+          "name": "淀粉",
+          "group": "energy",
+          "description": "淀粉是植物中常见的储能有机物。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "decomposition",
+          "name": "有机物分解",
+          "group": "energy",
+          "description": "呼吸作用分解有机物并释放能量。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "transpiration",
+          "name": "蒸腾作用",
+          "group": "energy",
+          "description": "水分以水蒸气形式从植物体内散失到体外。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "root-absorption",
+          "name": "根吸水",
+          "group": "energy",
+          "description": "根部吸收水分，为植物生命活动提供水。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "stomata",
+          "name": "气孔",
+          "group": "energy",
+          "description": "气孔是叶片气体交换与蒸腾失水的重要通道。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "xylem",
+          "name": "导管",
+          "group": "energy",
+          "description": "导管运输水和无机盐。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "phloem",
+          "name": "筛管",
+          "group": "energy",
+          "description": "筛管运输植物制造的有机物。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "leaf",
+          "name": "叶片",
+          "group": "energy",
+          "description": "叶片通常是绿色植物进行光合作用的主要器官。",
+          "resourceIds": [
+            "A45760493DA8ECA44A316EA2BB54A041"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "population",
+          "name": "种群",
+          "group": "ecology",
+          "description": "一定区域内同种生物的全部个体构成种群。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "community",
+          "name": "群落",
+          "group": "ecology",
+          "description": "一定区域内各种生物种群共同组成群落。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "habitat",
+          "name": "生存环境",
+          "group": "ecology",
+          "description": "生物生活的环境包括生物因素和非生物因素。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "abiotic",
+          "name": "非生物因素",
+          "group": "ecology",
+          "description": "光、温度、水等因素影响生物的生活。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "decomposer",
+          "name": "分解者",
+          "group": "ecology",
+          "description": "分解者将有机物分解为较简单的物质。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "consumer",
+          "name": "消费者",
+          "group": "ecology",
+          "description": "消费者直接或间接以其他生物为食。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "energy-flow",
+          "name": "能量流动",
+          "group": "ecology",
+          "description": "生态系统中的能量沿食物链和食物网流动。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "material-cycle",
+          "name": "物质循环",
+          "group": "ecology",
+          "description": "物质在生物与非生物环境之间循环。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "biodiversity",
+          "name": "生物多样性",
+          "group": "ecology",
+          "description": "生物多样性包括生物种类、基因和生态系统的多样性。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "adaptation",
+          "name": "适应环境",
+          "group": "ecology",
+          "description": "生物的形态结构和生活方式与环境相适应。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "food-web",
+          "name": "食物网",
+          "group": "ecology",
+          "description": "多条食物链相互交织形成食物网。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "slide",
+          "name": "临时装片",
+          "group": "inquiry",
+          "description": "制作临时装片以便利用显微镜观察细胞。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "stain",
+          "name": "染色观察",
+          "group": "inquiry",
+          "description": "适当染色可以使细胞结构更容易分辨。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "iodine",
+          "name": "碘液检验淀粉",
+          "group": "inquiry",
+          "description": "利用淀粉遇碘变蓝的特性进行检验。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "dark-treatment",
+          "name": "暗处理",
+          "group": "inquiry",
+          "description": "将植物置于黑暗中，使叶片原有淀粉被消耗或转运。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "decolorization",
+          "name": "酒精脱色",
+          "group": "inquiry",
+          "description": "用酒精对叶片脱色，便于观察淀粉显色。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "microscope-focus",
+          "name": "显微镜调焦",
+          "group": "inquiry",
+          "description": "通过调节焦距使观察到的物像清晰。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "magnification",
+          "name": "放大倍数",
+          "group": "inquiry",
+          "description": "显微镜的总放大倍数为目镜与物镜放大倍数的乘积。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "hypothesis",
+          "name": "提出假设",
+          "group": "inquiry",
+          "description": "根据已有知识和观察，对问题作出可检验的解释。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "observation",
+          "name": "观察记录",
+          "group": "inquiry",
+          "description": "记录实验现象和条件，为分析提供依据。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "conclusion",
+          "name": "分析结论",
+          "group": "inquiry",
+          "description": "根据记录与证据分析实验结果，回应探究问题。",
+          "resourceIds": [],
+          "demoCovered": true
+        }
+      ],
+      "edges": [
+        [
+          "cell-structure",
+          "plant-cell",
+          "包含类型"
+        ],
+        [
+          "cell-structure",
+          "animal-cell",
+          "包含类型"
+        ],
+        [
+          "cell-structure",
+          "membrane",
+          "组成结构"
+        ],
+        [
+          "cell-structure",
+          "nucleus",
+          "组成结构"
+        ],
+        [
+          "plant-cell",
+          "chloroplast",
+          "部分细胞含有"
+        ],
+        [
+          "chloroplast",
+          "photosynthesis",
+          "进行"
+        ],
+        [
+          "photosynthesis",
+          "light-energy",
+          "实现"
+        ],
+        [
+          "photosynthesis",
+          "organic-matter",
+          "产生"
+        ],
+        [
+          "organic-matter",
+          "respiration",
+          "有机物参与"
+        ],
+        [
+          "producer",
+          "photosynthesis",
+          "绿色植物通过"
+        ],
+        [
+          "ecosystem",
+          "producer",
+          "包含"
+        ],
+        [
+          "producer",
+          "food-chain",
+          "作为起点"
+        ],
+        [
+          "photosynthesis",
+          "carbon-oxygen",
+          "有助维持"
+        ],
+        [
+          "respiration",
+          "carbon-oxygen",
+          "参与循环"
+        ],
+        [
+          "compare-cells",
+          "plant-cell",
+          "比较对象"
+        ],
+        [
+          "compare-cells",
+          "animal-cell",
+          "比较对象"
+        ],
+        [
+          "microscope",
+          "cell-structure",
+          "观察"
+        ],
+        [
+          "photo-experiment",
+          "photosynthesis",
+          "探究"
+        ],
+        [
+          "photo-experiment",
+          "controlled-variable",
+          "运用方法"
+        ],
+        [
+          "plant-cell",
+          "cell-wall",
+          "具有结构"
+        ],
+        [
+          "cell-structure",
+          "cytoplasm",
+          "组成结构"
+        ],
+        [
+          "plant-cell",
+          "vacuole",
+          "具有结构"
+        ],
+        [
+          "respiration",
+          "mitochondria",
+          "主要场所"
+        ],
+        [
+          "nucleus",
+          "chromosomes",
+          "含有"
+        ],
+        [
+          "chromosomes",
+          "dna",
+          "包含"
+        ],
+        [
+          "dna",
+          "gene",
+          "具有遗传效应的片段"
+        ],
+        [
+          "cell-structure",
+          "tissue",
+          "构成"
+        ],
+        [
+          "tissue",
+          "organ",
+          "构成"
+        ],
+        [
+          "organ",
+          "organism",
+          "构成"
+        ],
+        [
+          "cell-structure",
+          "cell-division",
+          "通过分裂增多"
+        ],
+        [
+          "cell-structure",
+          "cell-growth",
+          "通过生长增大"
+        ],
+        [
+          "differentiation",
+          "tissue",
+          "形成"
+        ],
+        [
+          "photosynthesis",
+          "co2",
+          "利用原料"
+        ],
+        [
+          "photosynthesis",
+          "water",
+          "利用原料"
+        ],
+        [
+          "photosynthesis",
+          "oxygen-release",
+          "释放"
+        ],
+        [
+          "chloroplast",
+          "chlorophyll",
+          "含有色素"
+        ],
+        [
+          "photosynthesis",
+          "sunlight",
+          "需要条件"
+        ],
+        [
+          "organic-matter",
+          "starch",
+          "包括"
+        ],
+        [
+          "respiration",
+          "decomposition",
+          "分解有机物"
+        ],
+        [
+          "transpiration",
+          "water",
+          "散失水分"
+        ],
+        [
+          "root-absorption",
+          "water",
+          "吸收"
+        ],
+        [
+          "transpiration",
+          "stomata",
+          "主要通道"
+        ],
+        [
+          "root-absorption",
+          "xylem",
+          "向上运输"
+        ],
+        [
+          "organic-matter",
+          "phloem",
+          "运输"
+        ],
+        [
+          "photosynthesis",
+          "leaf",
+          "主要器官"
+        ],
+        [
+          "ecosystem",
+          "population",
+          "包含"
+        ],
+        [
+          "population",
+          "community",
+          "共同构成"
+        ],
+        [
+          "ecosystem",
+          "habitat",
+          "包含环境"
+        ],
+        [
+          "habitat",
+          "abiotic",
+          "包括"
+        ],
+        [
+          "ecosystem",
+          "decomposer",
+          "包含"
+        ],
+        [
+          "ecosystem",
+          "consumer",
+          "包含"
+        ],
+        [
+          "food-chain",
+          "energy-flow",
+          "沿食物链进行"
+        ],
+        [
+          "carbon-oxygen",
+          "material-cycle",
+          "体现"
+        ],
+        [
+          "ecosystem",
+          "biodiversity",
+          "与多样性相关"
+        ],
+        [
+          "habitat",
+          "adaptation",
+          "生物适应"
+        ],
+        [
+          "food-chain",
+          "food-web",
+          "交织形成"
+        ],
+        [
+          "microscope",
+          "slide",
+          "观察材料"
+        ],
+        [
+          "slide",
+          "stain",
+          "可经染色"
+        ],
+        [
+          "iodine",
+          "starch",
+          "检验"
+        ],
+        [
+          "photo-experiment",
+          "dark-treatment",
+          "实验准备"
+        ],
+        [
+          "photo-experiment",
+          "decolorization",
+          "实验步骤"
+        ],
+        [
+          "microscope",
+          "microscope-focus",
+          "操作方法"
+        ],
+        [
+          "microscope",
+          "magnification",
+          "表征"
+        ],
+        [
+          "controlled-variable",
+          "hypothesis",
+          "据假设设计实验"
+        ],
+        [
+          "photo-experiment",
+          "observation",
+          "记录现象"
+        ],
+        [
+          "observation",
+          "conclusion",
+          "提供依据"
+        ],
+        [
+          "mitochondria",
+          "plant-cell",
+          "存在于"
+        ],
+        [
+          "mitochondria",
+          "animal-cell",
+          "存在于"
+        ],
+        [
+          "cell-division",
+          "chromosomes",
+          "涉及分配"
+        ],
+        [
+          "differentiation",
+          "cell-division",
+          "与分裂共同形成结构层次"
+        ],
+        [
+          "gene",
+          "biodiversity",
+          "关联基因多样性"
+        ],
+        [
+          "co2",
+          "carbon-oxygen",
+          "参与循环"
+        ],
+        [
+          "oxygen-release",
+          "respiration",
+          "氧气参与有氧呼吸"
+        ],
+        [
+          "leaf",
+          "stomata",
+          "具有"
+        ],
+        [
+          "sunlight",
+          "controlled-variable",
+          "可作为实验变量"
+        ],
+        [
+          "chlorophyll",
+          "light-energy",
+          "参与能量转化"
+        ],
+        [
+          "slide",
+          "compare-cells",
+          "支持观察比较"
+        ],
+        [
+          "consumer",
+          "food-web",
+          "处于食物网"
+        ],
+        [
+          "decomposer",
+          "material-cycle",
+          "促进循环"
+        ],
+        [
+          "producer",
+          "energy-flow",
+          "引入能量"
+        ],
+        [
+          "hypothesis",
+          "conclusion",
+          "经证据检验"
+        ],
+        [
+          "cell-growth",
+          "water",
+          "需要水"
+        ],
+        [
+          "leaf",
+          "transpiration",
+          "主要器官"
+        ]
+      ]
+    },
+    {
+      "id": "math",
+      "name": "数学",
+      "scope": "小学至初中数学",
+      "defaultNode": "pythagorean",
+      "groups": [
+        {
+          "id": "geometry",
+          "name": "图形与几何",
+          "color": "#4774B9"
+        },
+        {
+          "id": "number",
+          "name": "数与运算",
+          "color": "#318674"
+        },
+        {
+          "id": "function",
+          "name": "函数与关系",
+          "color": "#B77B2E"
+        },
+        {
+          "id": "practice",
+          "name": "应用与探究",
+          "color": "#8A65AE"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "pythagorean",
+          "name": "勾股定理",
+          "group": "geometry",
+          "description": "通过正方形面积的关系，理解直角三角形三边之间的数量关系。",
+          "resourceIds": [
+            "314B268E642DBAE685F47391A9CCDDC4"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "right-triangle",
+          "name": "直角三角形",
+          "group": "geometry",
+          "description": "识别直角边、斜边及直角三角形的基本性质。",
+          "resourceIds": [
+            "314B268E642DBAE685F47391A9CCDDC4"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "square-area",
+          "name": "正方形面积",
+          "group": "geometry",
+          "description": "从面积拼合的角度理解勾股定理。",
+          "resourceIds": [
+            "314B268E642DBAE685F47391A9CCDDC4"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "similarity",
+          "name": "相似三角形",
+          "group": "geometry",
+          "description": "通过对应角与对应边的关系研究三角形相似。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "multiplication",
+          "name": "三位数乘两位数",
+          "group": "number",
+          "description": "理解乘法计算方法，并用计算解决实际问题。",
+          "resourceIds": [
+            "8A7E82D22F0DF49599F56674103EC2ED"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "square-number",
+          "name": "平方运算",
+          "group": "number",
+          "description": "认识一个数与自身相乘的运算，并联系面积。",
+          "resourceIds": [
+            "314B268E642DBAE685F47391A9CCDDC4"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "square-root",
+          "name": "平方根",
+          "group": "number",
+          "description": "通过平方与开平方的关系求未知的边长。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "coordinate",
+          "name": "平面直角坐标系",
+          "group": "function",
+          "description": "用有序数对描述点的位置。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "quadratic",
+          "name": "二次函数",
+          "group": "function",
+          "description": "通过表达式和图像认识二次函数的变化规律。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "graph-function",
+          "name": "函数图像",
+          "group": "function",
+          "description": "用图像表示变量间的对应关系。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "travel",
+          "name": "行程问题",
+          "group": "practice",
+          "description": "运用路程、速度、时间之间的关系解决实际问题。",
+          "resourceIds": [
+            "8A7E82D22F0DF49599F56674103EC2ED"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "area-proof",
+          "name": "面积拼补验证",
+          "group": "practice",
+          "description": "通过拼合和对比正方形面积探索勾股定理。",
+          "resourceIds": [
+            "314B268E642DBAE685F47391A9CCDDC4"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "time-unit",
+          "name": "时间单位换算",
+          "group": "practice",
+          "description": "结合人生天数计算，理解年、日等时间单位之间的联系。",
+          "resourceIds": [
+            "66FEA6B38E058EDAB62E4117D0F43DE7"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "triangle",
+          "name": "三角形",
+          "group": "geometry",
+          "description": "结合相关知识与具体例子，理解三角形。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "angles",
+          "name": "三角形内角和",
+          "group": "geometry",
+          "description": "结合相关知识与具体例子，理解三角形内角和。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "parallel",
+          "name": "平行线",
+          "group": "geometry",
+          "description": "结合相关知识与具体例子，理解平行线。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "congruence",
+          "name": "全等三角形",
+          "group": "geometry",
+          "description": "结合相关知识与具体例子，理解全等三角形。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "circle",
+          "name": "圆",
+          "group": "geometry",
+          "description": "结合相关知识与具体例子，理解圆。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "circle-angle",
+          "name": "圆周角",
+          "group": "geometry",
+          "description": "结合相关知识与具体例子，理解圆周角。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "area",
+          "name": "面积计算",
+          "group": "geometry",
+          "description": "结合相关知识与具体例子，理解面积计算。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "length",
+          "name": "线段长度",
+          "group": "geometry",
+          "description": "结合相关知识与具体例子，理解线段长度。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "integers",
+          "name": "整数",
+          "group": "number",
+          "description": "结合相关知识与具体例子，理解整数。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "fractions",
+          "name": "分数",
+          "group": "number",
+          "description": "结合相关知识与具体例子，理解分数。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "rational",
+          "name": "有理数",
+          "group": "number",
+          "description": "结合相关知识与具体例子，理解有理数。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "real",
+          "name": "实数",
+          "group": "number",
+          "description": "结合相关知识与具体例子，理解实数。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "power",
+          "name": "乘方",
+          "group": "number",
+          "description": "结合相关知识与具体例子，理解乘方。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "equation",
+          "name": "一元一次方程",
+          "group": "number",
+          "description": "结合相关知识与具体例子，理解一元一次方程。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "algebra",
+          "name": "代数式",
+          "group": "number",
+          "description": "结合相关知识与具体例子，理解代数式。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "ratio",
+          "name": "比例",
+          "group": "number",
+          "description": "结合相关知识与具体例子，理解比例。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "variable",
+          "name": "变量",
+          "group": "function",
+          "description": "结合相关知识与具体例子，理解变量。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "linear",
+          "name": "一次函数",
+          "group": "function",
+          "description": "结合相关知识与具体例子，理解一次函数。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "vertex",
+          "name": "抛物线顶点",
+          "group": "function",
+          "description": "结合相关知识与具体例子，理解抛物线顶点。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "symmetry",
+          "name": "对称轴",
+          "group": "function",
+          "description": "结合相关知识与具体例子，理解对称轴。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "origin",
+          "name": "原点",
+          "group": "function",
+          "description": "结合相关知识与具体例子，理解原点。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "distance",
+          "name": "两点距离",
+          "group": "practice",
+          "description": "结合相关知识与具体例子，理解两点距离。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "speed",
+          "name": "速度",
+          "group": "practice",
+          "description": "结合相关知识与具体例子，理解速度。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "statistics",
+          "name": "统计图",
+          "group": "practice",
+          "description": "结合相关知识与具体例子，理解统计图。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "probability",
+          "name": "随机事件",
+          "group": "practice",
+          "description": "结合相关知识与具体例子，理解随机事件。",
+          "resourceIds": [],
+          "demoCovered": true
+        }
+      ],
+      "edges": [
+        [
+          "pythagorean",
+          "right-triangle",
+          "适用于"
+        ],
+        [
+          "pythagorean",
+          "square-area",
+          "借助面积理解"
+        ],
+        [
+          "square-number",
+          "square-area",
+          "用于计算"
+        ],
+        [
+          "square-root",
+          "pythagorean",
+          "用于求边长"
+        ],
+        [
+          "area-proof",
+          "pythagorean",
+          "验证"
+        ],
+        [
+          "travel",
+          "multiplication",
+          "运用"
+        ],
+        [
+          "quadratic",
+          "graph-function",
+          "通过图像表示"
+        ],
+        [
+          "graph-function",
+          "coordinate",
+          "绘制于"
+        ],
+        [
+          "similarity",
+          "right-triangle",
+          "可研究"
+        ],
+        [
+          "right-triangle",
+          "triangle",
+          "属于"
+        ],
+        [
+          "triangle",
+          "angles",
+          "具有性质"
+        ],
+        [
+          "angles",
+          "parallel",
+          "可用于推导"
+        ],
+        [
+          "triangle",
+          "congruence",
+          "研究全等"
+        ],
+        [
+          "right-triangle",
+          "circle",
+          "可研究圆与三角形"
+        ],
+        [
+          "circle",
+          "circle-angle",
+          "相关概念"
+        ],
+        [
+          "square-area",
+          "area",
+          "属于"
+        ],
+        [
+          "pythagorean",
+          "length",
+          "可用于求解"
+        ],
+        [
+          "multiplication",
+          "integers",
+          "运算对象"
+        ],
+        [
+          "integers",
+          "fractions",
+          "联系数的表示"
+        ],
+        [
+          "integers",
+          "rational",
+          "包含整数"
+        ],
+        [
+          "square-root",
+          "real",
+          "关联实数"
+        ],
+        [
+          "square-number",
+          "power",
+          "属于"
+        ],
+        [
+          "travel",
+          "equation",
+          "可列方程解决"
+        ],
+        [
+          "equation",
+          "algebra",
+          "涉及"
+        ],
+        [
+          "similarity",
+          "ratio",
+          "研究边长关系"
+        ],
+        [
+          "graph-function",
+          "variable",
+          "描述变化"
+        ],
+        [
+          "graph-function",
+          "linear",
+          "具有图像"
+        ],
+        [
+          "quadratic",
+          "vertex",
+          "图像特征"
+        ],
+        [
+          "quadratic",
+          "symmetry",
+          "图像特征"
+        ],
+        [
+          "coordinate",
+          "origin",
+          "包含"
+        ],
+        [
+          "pythagorean",
+          "distance",
+          "可用于求解"
+        ],
+        [
+          "travel",
+          "speed",
+          "涉及"
+        ],
+        [
+          "graph-function",
+          "statistics",
+          "对比数据表达"
+        ],
+        [
+          "statistics",
+          "probability",
+          "联系数据分析"
+        ]
+      ]
+    },
+    {
+      "id": "chinese",
+      "name": "语文",
+      "scope": "小学至初中语文",
+      "defaultNode": "taohua",
+      "groups": [
+        {
+          "id": "classical",
+          "name": "文言阅读",
+          "color": "#4774B9"
+        },
+        {
+          "id": "poetry",
+          "name": "古诗鉴赏",
+          "color": "#318674"
+        },
+        {
+          "id": "language",
+          "name": "语言积累",
+          "color": "#B77B2E"
+        },
+        {
+          "id": "writing",
+          "name": "表达与写作",
+          "color": "#8A65AE"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "taohua",
+          "name": "桃花源记",
+          "group": "classical",
+          "description": "梳理渔人的行踪，理解桃花源的环境描写与理想寄托。",
+          "resourceIds": [
+            "637002DEE96D4D5D827A22362815BC60"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "classical-words",
+          "name": "文言词义",
+          "group": "classical",
+          "description": "结合语境理解文言词语的含义。",
+          "resourceIds": [
+            "637002DEE96D4D5D827A22362815BC60"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "narrative",
+          "name": "叙事线索",
+          "group": "classical",
+          "description": "从人物行踪等角度梳理记叙性作品的线索。",
+          "resourceIds": [
+            "637002DEE96D4D5D827A22362815BC60"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "waterfall",
+          "name": "望庐山瀑布",
+          "group": "poetry",
+          "description": "通过诗中的景物和想象理解李白诗歌的特点。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "imagery",
+          "name": "诗歌意象",
+          "group": "poetry",
+          "description": "从诗歌中的景物与形象体会情感。",
+          "resourceIds": [
+            "EB5C20A95266A25203329ED8CCB90EEC"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "recitation",
+          "name": "古诗积累",
+          "group": "poetry",
+          "description": "通过阅读与闯关练习积累古诗。",
+          "resourceIds": [
+            "EB5C20A95266A25203329ED8CCB90EEC"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "function-word",
+          "name": "文言虚词",
+          "group": "language",
+          "description": "结合具体句子理解文言虚词的用法。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "metaphor",
+          "name": "比喻与夸张",
+          "group": "language",
+          "description": "辨析修辞手法并理解表达效果。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "polysemy",
+          "name": "一词多义",
+          "group": "language",
+          "description": "根据上下文区分同一词语的不同含义。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "description",
+          "name": "景物描写",
+          "group": "writing",
+          "description": "观察景物的特点，运用恰当的描写表达感受。",
+          "resourceIds": [
+            "637002DEE96D4D5D827A22362815BC60"
+          ],
+          "demoCovered": false
+        },
+        {
+          "id": "argument",
+          "name": "论点与论据",
+          "group": "writing",
+          "description": "区分观点与支撑观点的材料。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "writing-order",
+          "name": "游记顺序",
+          "group": "writing",
+          "description": "按游踪组织内容，清晰呈现见闻。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "taoyuan",
+          "name": "桃源社会",
+          "group": "classical",
+          "description": "结合相关知识与具体例子，理解桃源社会。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "author-tao",
+          "name": "陶渊明",
+          "group": "classical",
+          "description": "结合相关知识与具体例子，理解陶渊明。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "translation",
+          "name": "文言翻译",
+          "group": "classical",
+          "description": "结合相关知识与具体例子，理解文言翻译。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "ancient-modern",
+          "name": "古今异义",
+          "group": "language",
+          "description": "结合相关知识与具体例子，理解古今异义。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "borrowed",
+          "name": "通假字",
+          "group": "language",
+          "description": "结合相关知识与具体例子，理解通假字。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "omission",
+          "name": "省略句",
+          "group": "classical",
+          "description": "结合相关知识与具体例子，理解省略句。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "inversion",
+          "name": "倒装句",
+          "group": "classical",
+          "description": "结合相关知识与具体例子，理解倒装句。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "rhythm",
+          "name": "朗读节奏",
+          "group": "language",
+          "description": "结合相关知识与具体例子，理解朗读节奏。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "rhyme",
+          "name": "押韵",
+          "group": "poetry",
+          "description": "结合相关知识与具体例子，理解押韵。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "poet-li",
+          "name": "李白",
+          "group": "poetry",
+          "description": "结合相关知识与具体例子，理解李白。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "poetic-mood",
+          "name": "诗歌意境",
+          "group": "poetry",
+          "description": "结合相关知识与具体例子，理解诗歌意境。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "emotion",
+          "name": "思想感情",
+          "group": "poetry",
+          "description": "结合相关知识与具体例子，理解思想感情。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "homesick",
+          "name": "思乡情感",
+          "group": "poetry",
+          "description": "结合相关知识与具体例子，理解思乡情感。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "metaphor-only",
+          "name": "比喻",
+          "group": "language",
+          "description": "结合相关知识与具体例子，理解比喻。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "hyperbole",
+          "name": "夸张",
+          "group": "language",
+          "description": "结合相关知识与具体例子，理解夸张。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "personification",
+          "name": "拟人",
+          "group": "language",
+          "description": "结合相关知识与具体例子，理解拟人。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "argument-method",
+          "name": "论证方法",
+          "group": "writing",
+          "description": "结合相关知识与具体例子，理解论证方法。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "examples",
+          "name": "举例论证",
+          "group": "writing",
+          "description": "结合相关知识与具体例子，理解举例论证。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "comparison",
+          "name": "对比论证",
+          "group": "writing",
+          "description": "结合相关知识与具体例子，理解对比论证。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "structure",
+          "name": "文章结构",
+          "group": "writing",
+          "description": "结合相关知识与具体例子，理解文章结构。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "detail",
+          "name": "细节描写",
+          "group": "writing",
+          "description": "结合相关知识与具体例子，理解细节描写。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "perspective",
+          "name": "观察视角",
+          "group": "writing",
+          "description": "结合相关知识与具体例子，理解观察视角。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "reading",
+          "name": "阅读理解",
+          "group": "classical",
+          "description": "结合相关知识与具体例子，理解阅读理解。",
+          "resourceIds": [],
+          "demoCovered": false
+        },
+        {
+          "id": "evidence",
+          "name": "文本依据",
+          "group": "classical",
+          "description": "结合相关知识与具体例子，理解文本依据。",
+          "resourceIds": [],
+          "demoCovered": true
+        },
+        {
+          "id": "expression",
+          "name": "表达效果",
+          "group": "writing",
+          "description": "结合相关知识与具体例子，理解表达效果。",
+          "resourceIds": [],
+          "demoCovered": true
+        }
+      ],
+      "edges": [
+        [
+          "taohua",
+          "classical-words",
+          "需要理解"
+        ],
+        [
+          "taohua",
+          "narrative",
+          "通过线索梳理"
+        ],
+        [
+          "classical-words",
+          "polysemy",
+          "关注"
+        ],
+        [
+          "classical-words",
+          "function-word",
+          "联系"
+        ],
+        [
+          "waterfall",
+          "imagery",
+          "借助意象理解"
+        ],
+        [
+          "waterfall",
+          "metaphor",
+          "运用修辞"
+        ],
+        [
+          "recitation",
+          "waterfall",
+          "积累篇目"
+        ],
+        [
+          "imagery",
+          "description",
+          "关联表达"
+        ],
+        [
+          "narrative",
+          "writing-order",
+          "用于组织"
+        ],
+        [
+          "taohua",
+          "description",
+          "包含"
+        ],
+        [
+          "taohua",
+          "taoyuan",
+          "描绘"
+        ],
+        [
+          "taohua",
+          "author-tao",
+          "作者"
+        ],
+        [
+          "classical-words",
+          "translation",
+          "支持"
+        ],
+        [
+          "classical-words",
+          "ancient-modern",
+          "需要辨析"
+        ],
+        [
+          "classical-words",
+          "borrowed",
+          "需要辨析"
+        ],
+        [
+          "translation",
+          "omission",
+          "注意句式"
+        ],
+        [
+          "translation",
+          "inversion",
+          "注意句式"
+        ],
+        [
+          "recitation",
+          "rhythm",
+          "注意"
+        ],
+        [
+          "recitation",
+          "rhyme",
+          "关注"
+        ],
+        [
+          "waterfall",
+          "poet-li",
+          "作者"
+        ],
+        [
+          "imagery",
+          "poetic-mood",
+          "营造"
+        ],
+        [
+          "poetic-mood",
+          "emotion",
+          "表达"
+        ],
+        [
+          "emotion",
+          "homesick",
+          "包含"
+        ],
+        [
+          "metaphor",
+          "metaphor-only",
+          "修辞方法"
+        ],
+        [
+          "metaphor",
+          "hyperbole",
+          "修辞方法"
+        ],
+        [
+          "description",
+          "personification",
+          "可运用"
+        ],
+        [
+          "argument",
+          "argument-method",
+          "支撑论点"
+        ],
+        [
+          "argument-method",
+          "examples",
+          "包含"
+        ],
+        [
+          "argument-method",
+          "comparison",
+          "包含"
+        ],
+        [
+          "narrative",
+          "structure",
+          "借助线索组织"
+        ],
+        [
+          "description",
+          "detail",
+          "联系描写方法"
+        ],
+        [
+          "writing-order",
+          "perspective",
+          "组织游记"
+        ],
+        [
+          "taohua",
+          "reading",
+          "阅读篇目"
+        ],
+        [
+          "reading",
+          "evidence",
+          "依据文本"
+        ],
+        [
+          "metaphor",
+          "expression",
+          "分析修辞"
+        ]
+      ]
+    }
+  ]
+}

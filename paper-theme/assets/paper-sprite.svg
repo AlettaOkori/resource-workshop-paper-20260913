@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+  <style>
+    .eye{transform-box:fill-box;transform-origin:center;animation:blink 7s ease-in-out infinite}
+    @keyframes blink{0%,33%,37%,79%,83%,100%{transform:scaleY(1)}35%,81%{transform:scaleY(.12)}}
+    @media(prefers-reduced-motion:reduce){.eye{animation:none}}
+  </style>
+  <path d="M19 43v5M36 43v5" stroke="#E53E3E" stroke-width="5" stroke-linecap="round"/>
+  <path d="M17 7h21c6 0 9 4 9 10v23c0 5-3 8-9 8H18C11 48 7 44 7 37V19C7 11 10 7 17 7Z" fill="#E53E3E"/>
+  <path d="M20 11h16c5 0 7 3 7 8v18c0 4-2 6-6 6H20c-4 0-6-2-6-6V18c0-5 2-7 6-7Z" fill="#FFFDFA"/>
+  <path d="M35 11v9l3-2 3 2v-7c-1.2-1.4-3.1-2-6-2Z" fill="#E53E3E"/>
+  <g class="eye"><ellipse cx="23" cy="28" rx="1.65" ry="2.2" fill="#493835"/></g>
+  <g class="eye"><ellipse cx="34" cy="28" rx="1.65" ry="2.2" fill="#493835"/></g>
+  <path d="M26 33c1.4 1.7 3.6 1.7 5 0" stroke="#493835" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

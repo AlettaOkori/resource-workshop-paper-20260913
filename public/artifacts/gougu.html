@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Security-Policy" content="img-src 'self' data: blob: https://*.fbcontent.cn https://*.aliyuncs.com https://storage.googleapis.com; media-src 'self' data: blob: https://*.fbcontent.cn https://*.aliyuncs.com https://storage.googleapis.com;">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>勾股定理：从面积关系到定理</title>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      svg: { fontCache: 'global' },
+      startup: { typeset: false }
+    };
+  </script>
+  <script src="/artifacts/vendor/metis-app.js"></script>
+  <style>
+    :root {
+      --bg: #F5F7FA;
+      --ink: #16243A;
+      --muted: #66758A;
+      --blue: #1769AA;
+      --blue-2: #DCEEFF;
+      --orange: #F08A24;
+      --orange-2: #FFF0DE;
+      --green: #2F8F63;
+      --green-2: #E4F5EC;
+      --red: #D95C43;
+      --red-2: #FCE9E4;
+      --line: #D7E0EA;
+      --surface: #FFFFFF;
+      --shadow: 0 16px 36px rgba(22, 36, 58, 0.10);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      touch-action: none;
+      user-select: none; -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .app { min-height: 100vh; padding: 26px 32px 30px; }
+    .topbar { max-width: 1500px; margin: 0 auto 18px; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
+    .eyebrow { color: var(--orange); font-weight: 800; letter-spacing: .12em; font-size: 12px; }
+    h1 { margin: 6px 0 0; font-size: clamp(28px, 3vw, 46px); line-height: 1.1; letter-spacing: -.03em; }
+    .subtitle { margin: 9px 0 0; color: var(--muted); font-size: 15px; }
+    .status-chip { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 10px 16px; color: var(--blue); font-weight: 700; box-shadow: 0 8px 20px rgba(22,36,58,.05); white-space: nowrap; }
+    .stage-nav { max-width: 1500px; margin: 0 auto 18px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 9px; }
+    .stage-btn { border: 1px solid var(--line); background: rgba(255,255,255,.72); color: var(--muted); border-radius: 13px; padding: 11px 10px; font-weight: 700; transition: .2s ease; }
+    .stage-btn.active { color: var(--blue); background: var(--blue-2); border-color: #9DC8EE; }
+    .stage-btn.done { color: var(--green); border-color: #A8D8BF; background: var(--green-2); }
+    .workspace { max-width: 1500px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(340px, .65fr); gap: 18px; align-items: stretch; }
+    .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .explore-panel { min-height: 650px; padding: 22px; display: flex; flex-direction: column; }
+    .prompt { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+    .prompt h2 { margin: 0; font-size: 22px; }
+    .prompt p { margin: 7px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .stage-badge { flex: 0 0 auto; color: var(--blue); background: var(--blue-2); border: 1px solid #A8CDEE; border-radius: 999px; padding: 7px 11px; font-size: 12px; font-weight: 800; }
+    .geometry-wrap { position: relative; min-height: 390px; margin-top: 16px; border: 1px solid #E4EAF0; border-radius: 16px; background: linear-gradient(145deg, #FBFDFF 0%, #F2F7FC 100%); overflow: hidden; }
+    .geometry-wrap::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(#E8EEF5 1px, transparent 1px), linear-gradient(90deg, #E8EEF5 1px, transparent 1px); background-size: 32px 32px; opacity: .62; }
+    #geometrySvg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .geom-label { font-size: 15px; font-weight: 800; fill: var(--ink); }
+    .edge-label { font-size: 14px; font-weight: 800; }
+    .side-card { position: absolute; min-width: 90px; padding: 9px 12px; border-radius: 13px; border: 2px solid; background: rgba(255,255,255,.95); box-shadow: 0 8px 18px rgba(22,36,58,.10); text-align: center; cursor: grab; touch-action: none; }
+    .side-card:active { cursor: grabbing; }
+    .side-card small { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .side-card.orange { border-color: var(--orange); color: #A8540D; right: 29%; bottom: 7%; }
+    .side-card.green { border-color: var(--green); color: #216644; right: 15%; bottom: 7%; }
+    .side-card.red { border-color: var(--red); color: #9B3C2D; right: 1.5%; bottom: 7%; }
+    .drop-zone { position: absolute; width: 114px; height: 48px; border: 2px dashed rgba(23,105,170,.55); border-radius: 12px; display: flex; justify-content: center; align-items: center; color: var(--blue); font-size: 12px; font-weight: 800; background: rgba(220,238,255,.6); z-index: 3; }
+    .drop-zone.matched { border-style: solid; border-color: var(--green); background: rgba(228,245,236,.9); color: var(--green); }
+    .drop-zone[data-target="a"] { left: 17%; bottom: 10%; }
+    .drop-zone[data-target="b"] { left: 5%; top: 17%; transform: rotate(-90deg); }
+    .drop-zone[data-target="c"] { right: 10%; top: 25%; transform: rotate(-34deg); }
+    .drag-bank { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; padding: 13px; background: #F8FAFC; border: 1px solid #E3EAF1; border-radius: 14px; }
+    .drag-bank .bank-title { color: var(--muted); font-size: 12px; font-weight: 800; margin-right: 4px; }
+    .measure-tip { min-height: 48px; margin-top: 13px; padding: 12px 14px; border-radius: 12px; background: #F8FAFC; color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .controls { display: flex; flex-wrap: wrap; gap: 9px; margin-top: auto; padding-top: 17px; }
+    .btn { border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 11px; padding: 10px 14px; font-weight: 800; transition: .18s ease; }
+    .btn:hover { transform: translateY(-1px); border-color: #9AB7D1; }
+    .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .btn.accent { background: var(--orange); border-color: var(--orange); color: #fff; }
+    .btn.success { background: var(--green); border-color: var(--green); color: #fff; }
+    .btn.ghost { background: transparent; }
+    .btn:disabled { opacity: .42; cursor: not-allowed; transform: none; }
+    .side-panel { padding: 20px; display: flex; flex-direction: column; min-height: 650px; }
+    .side-panel h3 { margin: 0; font-size: 18px; }
+    .side-panel .hint { margin: 7px 0 14px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .record-card, .task-card, .proof-card, .practice-card { border: 1px solid var(--line); border-radius: 14px; padding: 14px; background: #FCFDFE; margin-bottom: 12px; }
+    .record-head { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+    .record-head strong { font-size: 14px; }
+    .case-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+    .case-pill { border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--muted); padding: 6px 9px; font-size: 12px; font-weight: 800; }
+    .case-pill.active { color: var(--blue); border-color: #9DC8EE; background: var(--blue-2); }
+    .table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+    .table th, .table td { padding: 7px 5px; border-bottom: 1px solid #E7EDF3; text-align: center; }
+    .table th { color: var(--muted); font-weight: 700; }
+    .formula-box { min-height: 45px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid #B8D3E9; border-left: 5px solid var(--blue); border-radius: 12px; margin-top: 10px; padding: 8px 10px; color: var(--blue); font-size: 22px; overflow: auto; }
+    .task-card h4, .proof-card h4, .practice-card h4 { margin: 0 0 8px; font-size: 14px; }
+    .task-card p, .proof-card p, .practice-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .choice-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+    .choice { border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 9px; padding: 8px 10px; font-size: 12px; font-weight: 800; }
+    .choice.selected { border-color: var(--blue); background: var(--blue-2); color: var(--blue); }
+    .choice.correct { border-color: var(--green); background: var(--green-2); color: var(--green); }
+    .choice.wrong { border-color: var(--red); background: var(--red-2); color: var(--red); }
+    .feedback { margin-top: 10px; padding: 10px; border-radius: 10px; font-size: 12px; line-height: 1.5; display: none; }
+    .feedback.show { display: block; }
+    .feedback.good { color: var(--green); background: var(--green-2); }
+    .feedback.warn { color: #A8540D; background: var(--orange-2); }
+    .feedback.bad { color: var(--red); background: var(--red-2); }
+    .proof-card { display: none; }
+    .proof-card.show { display: block; }
+    .proof-step { min-height: 54px; background: #fff; border-radius: 10px; padding: 10px; border: 1px solid #E2EAF1; color: var(--ink); font-size: 13px; line-height: 1.5; }
+    .proof-step .formula-line { color: var(--blue); font-size: 18px; margin-top: 6px; }
+    .practice-card { display: none; }
+    .practice-card.show { display: block; }
+    .practice-progress { color: var(--orange); font-size: 12px; font-weight: 800; }
+    .practice-actions { display: flex; gap: 8px; margin-top: 10px; }
+    .micro { color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .reveal { animation: reveal .42s ease both; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes wrong-shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+    .wrong-shake { animation: wrong-shake .4s ease-in-out; }
+    .flash { animation: flash .7s ease; }
+    @keyframes flash { 0%,100% { filter: none; } 50% { filter: drop-shadow(0 0 10px rgba(47,143,99,.75)); } }
+    .hidden { display: none !important; }
+    @media (max-width: 1040px) {
+      .app { padding: 20px 16px 24px; }
+      .workspace { grid-template-columns: 1fr; }
+      .explore-panel, .side-panel { min-height: auto; }
+    }
+    @media (max-width: 680px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .stage-nav { grid-template-columns: repeat(2, 1fr); }
+      .geometry-wrap { min-height: 330px; }
+      .drop-zone { transform: scale(.86); }
+      .drop-zone[data-target="b"] { transform: rotate(-90deg) scale(.86); }
+      .drop-zone[data-target="c"] { transform: rotate(-34deg) scale(.86); }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">八年级数学 · 主动探究</div>
+        <h1>勾股定理：从面积关系到定理</h1>
+        <p class="subtitle">先观察，再测量；先提出猜想，再用图形和逻辑把它说清楚。</p>
+      </div>
+      <div class="status-chip" id="statusChip">当前：观察图形</div>
+    </header>
+
+    <nav class="stage-nav" aria-label="探究阶段">
+      <button class="stage-btn active" data-stage="observe">01 观察</button>
+      <button class="stage-btn" data-stage="measure">02 测量</button>
+      <button class="stage-btn" data-stage="compare">03 猜想</button>
+      <button class="stage-btn" data-stage="proof">04 证明</button>
+      <button class="stage-btn" data-stage="practice">05 应用</button>
+    </nav>
+
+    <section class="workspace">
+      <section class="panel explore-panel">
+        <div class="prompt">
+          <div>
+            <h2 id="promptTitle">哪一块正方形的面积最大？</h2>
+            <p id="promptText">观察直角标记、三条边和边上的正方形。先不要急着写公式，试着说出你的发现。</p>
+          </div>
+          <span class="stage-badge" id="stageBadge">观察</span>
+        </div>
+
+        <div class="geometry-wrap" id="geometryWrap">
+          <svg id="geometrySvg" viewBox="0 0 720 420" role="img" aria-label="直角三角形与三块正方形">
+            <polygon id="squareA" points="190,320 390,320 390,120 190,120" fill="#F08A24" fill-opacity=".18" stroke="#F08A24" stroke-width="3"/>
+            <polygon id="squareB" points="190,320 190,80 430,80 430,320" fill="#2F8F63" fill-opacity=".15" stroke="#2F8F63" stroke-width="3"/>
+            <polygon id="triangle" points="190,320 390,320 190,80" fill="#DCEEFF" stroke="#1769AA" stroke-width="4"/>
+            <polygon id="squareC" points="390,320 190,80 430, -160 630,80" fill="#D95C43" fill-opacity=".16" stroke="#D95C43" stroke-width="3"/>
+            <path d="M190 320 L215 320 L215 295 L190 295" fill="none" stroke="#1769AA" stroke-width="3"/>
+            <text x="177" y="339" class="geom-label">A</text>
+            <text x="395" y="339" class="geom-label">B</text>
+            <text x="175" y="73" class="geom-label">C</text>
+            <text x="282" y="344" class="edge-label" fill="#A8540D">a</text>
+            <text x="163" y="204" class="edge-label" fill="#216644">b</text>
+            <text x="298" y="185" class="edge-label" fill="#9B3C2D">c</text>
+            <text x="218" y="302" id="auxD" class="geom-label hidden">D</text>
+            <line id="altitude" x1="190" y1="320" x2="190" y2="320" stroke="#216644" stroke-width="4" stroke-dasharray="8 6" class="hidden"/>
+            <line id="proofSplit" x1="0" y1="0" x2="0" y2="0" stroke="#F08A24" stroke-width="4" class="hidden"/>
+          </svg>
+          <div class="drop-zone" data-target="a">放到 a 边</div>
+          <div class="drop-zone" data-target="b">放到 b 边</div>
+          <div class="drop-zone" data-target="c">放到 c 边</div>
+          <div class="side-card orange hidden" data-word="a" data-drag id="dragA">a 正方形<small>对应直角边</small></div>
+          <div class="side-card green hidden" data-word="b" data-drag id="dragB">b 正方形<small>对应直角边</small></div>
+          <div class="side-card red hidden" data-word="c" data-drag id="dragC">c 正方形<small>对应斜边</small></div>
+        </div>
+
+        <div class="drag-bank" id="dragBank">
+          <span class="bank-title">拖拽探究</span>
+          <button class="btn ghost" id="showDragBtn">显示三块正方形</button>
+          <button class="btn ghost hidden" id="hideDragBtn">收起拖拽卡片</button>
+          <span class="micro">把卡片拖到对应边附近，观察“边长—正方形—面积”的对应关系。</span>
+        </div>
+        <div class="measure-tip" id="measureTip">提示：最大的正方形建立在直角所对的边上。点击正方形或切换案例，开始测量。</div>
+
+        <div class="controls">
+          <button class="btn" id="prevBtn">上一步</button>
+          <button class="btn primary" id="nextBtn">下一步</button>
+          <button class="btn" id="toggleAreaBtn">显示面积</button>
+          <button class="btn" id="toggleAuxBtn">显示辅助线</button>
+          <button class="btn accent" id="resetBtn">重置探究</button>
+        </div>
+      </section>
+
+      <aside class="panel side-panel">
+        <h3>任务记录与反馈</h3>
+        <p class="hint">记录你的观察，不急着接受结论。至少比较三个案例后，猜想才更有说服力。</p>
+
+        <div class="record-card">
+          <div class="record-head"><strong>案例切换</strong><span class="micro" id="caseCount">已比较 0 / 3</span></div>
+          <div class="case-pills" style="margin-top:10px">
+            <button class="case-pill active" data-case="0">3，4，5</button>
+            <button class="case-pill" data-case="1">5，12，13</button>
+            <button class="case-pill" data-case="2">6，8，10</button>
+            <button class="case-pill" data-case="3">6，7，约9.22</button>
+          </div>
+          <table class="table">
+            <thead><tr><th>量</th><th>当前值</th><th>含义</th></tr></thead>
+            <tbody>
+              <tr><td>a</td><td id="valA">—</td><td>直角边</td></tr>
+              <tr><td>b</td><td id="valB">—</td><td>直角边</td></tr>
+              <tr><td>c</td><td id="valC">—</td><td>斜边</td></tr>
+              <tr><td>a²+b²</td><td id="sumVal">—</td><td>两个小正方形面积和</td></tr>
+              <tr><td>c²</td><td id="squareVal">—</td><td>斜边正方形面积</td></tr>
+            </tbody>
+          </table>
+          <div class="formula-box" id="formulaBox" aria-live="polite"></div>
+        </div>
+
+        <div class="task-card" id="guessCard">
+          <h4>你的猜想</h4>
+          <p>最大的正方形面积，可能与另外两块正方形面积有什么关系？</p>
+          <div class="choice-row">
+            <button class="choice" data-guess="sum">等于另外两块面积之和</button>
+            <button class="choice" data-guess="diff">等于另外两块面积之差</button>
+            <button class="choice" data-guess="none">没有固定关系</button>
+          </div>
+          <div class="feedback" id="guessFeedback"></div>
+        </div>
+
+        <div class="proof-card" id="proofCard">
+          <h4>证明步骤 <span class="micro" id="proofProgress">1 / 5</span></h4>
+          <div class="proof-step" id="proofText">从直角顶点 A 向斜边 BC 作高 AD。</div>
+          <div class="formula-line" id="proofFormula"></div>
+          <div class="practice-actions">
+            <button class="btn" id="proofPrevBtn">证明上一步</button>
+            <button class="btn primary" id="proofNextBtn">证明下一步</button>
+          </div>
+        </div>
+
+        <div class="practice-card" id="practiceCard">
+          <div class="record-head"><h4 style="margin:0">即时反馈练习</h4><span class="practice-progress" id="practiceProgress">第 1 / 3 题</span></div>
+          <p id="practiceQuestion"></p>
+          <div class="choice-row" id="practiceChoices"></div>
+          <div class="feedback" id="practiceFeedback"></div>
+          <div class="practice-actions"><button class="btn primary" id="practiceNextBtn" disabled>下一题</button></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const cases = [
+      { a: 3, b: 4, c: 5, label: '3，4，5' },
+      { a: 5, b: 12, c: 13, label: '5，12，13' },
+      { a: 6, b: 8, c: 10, label: '6，8，10' },
+      { a: 6, b: 7, c: 9.219544, label: '6，7，约9.22' }
+    ];
+    const practice = [
+      { q: '两条直角边分别为 6 厘米和 8 厘米，斜边是多少？', options: ['9 厘米', '10 厘米', '12 厘米', '14 厘米'], answer: 1, good: '先求斜边的平方：c²=6²+8²=100，再取长度的正值，所以 c=10 厘米。', bad: '请比较边长的平方，而不是直接把两条边相加。' },
+      { q: '斜边为 13 厘米，一条直角边为 5 厘米，另一条直角边是多少？', options: ['8 厘米', '10 厘米', '12 厘米', '18 厘米'], answer: 2, good: 'b²=c²-a²=13²-5²=144，所以 b=12 厘米。', bad: '已知斜边和一条直角边，应使用“斜边平方减去已知直角边平方”。' },
+      { q: '三边为 7 厘米、24 厘米、25 厘米，它是直角三角形吗？', options: ['是', '不是'], answer: 0, good: '最大边是25，且7²+24²=25²，因此它是直角三角形。', bad: '先找最大边，再检验最大边的平方是否等于另外两边平方和。' }
+    ];
+
+    let currentCase = 0;
+    let stageIndex = 0;
+    let areaVisible = false;
+    let auxVisible = false;
+    let measured = new Set();
+    let compared = new Set();
+    let proofStep = 1;
+    let practiceIndex = 0;
+    let practiceAnswered = false;
+    let activeEl = null, activePid = null, offsetX = 0, offsetY = 0;
+    let startClientX = 0, startClientY = 0, dragMoved = false;
+    let originalParent = null, originalNext = null;
+
+    const stageNames = ['观察图形', '测量面积', '提出猜想', '分步证明', '迁移应用'];
+    const prompts = [
+      ['哪一块正方形的面积最大？', '观察直角标记、三条边和边上的正方形。先不要急着写公式，试着说出你的发现。'],
+      ['边长平方，藏在哪里？', '点击三块正方形，记录边长和面积。把“边长的平方”看成对应正方形的面积。'],
+      ['多个案例都成立吗？', '比较 a²+b² 与 c²。一个案例只能支持猜想，多个案例会让猜想更有力量。'],
+      ['为什么一定成立？', '让高线和相似三角形把“看起来相等”变成“能够说明白”。'],
+      ['把结论用起来', '完成求斜边、求直角边和判定直角三角形三类练习。']
+    ];
+
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => Array.from(document.querySelectorAll(s));
+
+    async function typesetRoot(root) {
+      if (!root || !root.textContent.trim()) return;
+      await MathJax.startup.promise;
+      MathJax.typesetClear([root]);
+      await MathJax.typesetPromise([root]);
+    }
+    async function setFormula(root, tex, display = false) {
+      root.innerHTML = tex ? (display ? `\\[${tex}\\]` : `\\(${tex}\\)`) : '';
+      await typesetRoot(root);
+    }
+
+    function updatePrompt() {
+      $('#promptTitle').textContent = prompts[stageIndex][0];
+      $('#promptText').textContent = prompts[stageIndex][1];
+      $('#stageBadge').textContent = ['观察','测量','猜想','证明','应用'][stageIndex];
+      $('#statusChip').textContent = '当前：' + stageNames[stageIndex];
+      $$('.stage-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === stageIndex);
+        btn.classList.toggle('done', i < stageIndex);
+      });
+      $('#prevBtn').disabled = stageIndex === 0;
+      $('#nextBtn').textContent = stageIndex === 4 ? '重新练习' : '下一步';
+      $('#proofCard').classList.toggle('show', stageIndex === 3);
+      $('#practiceCard').classList.toggle('show', stageIndex === 4);
+      renderGeometry();
+      if (stageIndex === 4) renderPractice();
+    }
+
+    function renderGeometry() {
+      const c = cases[currentCase];
+      const scale = Math.min(1.25, Math.max(.72, c.b / 4));
+      $('#triangle').setAttribute('transform', `translate(0 0) scale(${Math.min(1.05, scale / 1.1)})`);
+      $('#squareA').setAttribute('opacity', currentCase === 0 ? '1' : '.8');
+      $('#squareB').setAttribute('opacity', currentCase === 0 ? '1' : '.8');
+      $('#squareC').setAttribute('opacity', currentCase === 0 ? '1' : '.8');
+      $$('.case-pill').forEach((p, i) => p.classList.toggle('active', i === currentCase));
+      $('#valA').textContent = c.a;
+      $('#valB').textContent = c.b;
+      $('#valC').textContent = c.c < 10 ? c.c.toFixed(2) : c.c;
+      $('#sumVal').textContent = measured.size >= 1 ? `${c.a*c.a + c.b*c.b}` : '—';
+      $('#squareVal').textContent = measured.size >= 2 ? `${(c.c*c.c).toFixed(2).replace(/\\.00$/, '')}` : '—';
+      $('#caseCount').textContent = `已比较 ${compared.size} / 3`;
+      $('#toggleAreaBtn').textContent = areaVisible ? '隐藏面积' : '显示面积';
+      $('#toggleAuxBtn').textContent = auxVisible ? '隐藏辅助线' : '显示辅助线';
+      $('#auxD').classList.toggle('hidden', !(auxVisible && stageIndex === 3));
+      $('#altitude').classList.toggle('hidden', !(auxVisible && stageIndex === 3));
+      $('#proofSplit').classList.toggle('hidden', !(auxVisible && stageIndex === 3 && proofStep >= 2));
+      const cards = [$('#dragA'), $('#dragB'), $('#dragC')];
+      cards.forEach((card, i) => card.classList.toggle('hidden', !$('#showDragBtn').classList.contains('hidden') && false));
+      if (stageIndex === 0) setFormula($('#formulaBox'), '', false);
+      if (stageIndex === 2 && compared.size >= 3) setFormula($('#formulaBox'), 'a^2+b^2=c^2', false);
+    }
+
+    function updateMeasureTip(text, cls = '') {
+      const el = $('#measureTip');
+      el.textContent = text;
+      el.className = 'measure-tip ' + cls;
+      el.classList.add('reveal');
+      setTimeout(() => el.classList.remove('reveal'), 500);
+    }
+
+    function showSquareInfo(which) {
+      const c = cases[currentCase];
+      measured.add(which);
+      const map = { a: ['a', c.a, c.a*c.a, '橙色正方形对应直角边 a'], b: ['b', c.b, c.b*c.b, '绿色正方形对应直角边 b'], c: ['c', c.c, c.c*c.c, '红色正方形对应斜边 c'] };
+      const [label, side, area, desc] = map[which];
+      areaVisible = true;
+      $('#toggleAreaBtn').textContent = '隐藏面积';
+      updateMeasureTip(`${desc}。边长为 ${side < 10 ? side : side.toFixed(2)}，面积为 ${area.toFixed(2).replace(/\\.00$/, '')} 平方单位。`, 'reveal');
+      const root = $('#formulaBox');
+      setFormula(root, `${label}^2=${side < 10 ? side : side.toFixed(2)}^2=${area.toFixed(2).replace(/\\.00$/, '')}`, false);
+      renderGeometry();
+    }
+
+    function compareCurrent() {
+      const c = cases[currentCase];
+      compared.add(currentCase);
+      measured = new Set(['a','b','c']);
+      areaVisible = true;
+      const sum = c.a*c.a + c.b*c.b;
+      const c2 = c.c*c.c;
+      const equal = Math.abs(sum - c2) < .02;
+      updateMeasureTip(equal ? `${c.label}：两个小正方形面积之和与斜边正方形面积相等。继续切换案例，检验这不是偶然。` : '请重新检查数据。', equal ? 'reveal' : '');
+      setFormula($('#formulaBox'), `${c.a}^2+${c.b}^2=${sum}\\quad\\text{，}\\quad c^2\\approx${c2.toFixed(2)}`, false);
+      renderGeometry();
+      if (compared.size >= 3) {
+        $('#guessFeedback').textContent = '你已经比较了至少三个案例。现在可以把观察结果写成猜想，但还需要证明。';
+        $('#guessFeedback').className = 'feedback show good';
+      }
+    }
+
+    function setStage(next) {
+      stageIndex = Math.max(0, Math.min(4, next));
+      if (stageIndex >= 1 && measured.size === 0) measured = new Set(['a','b','c']);
+      updatePrompt();
+      if (stageIndex === 3) {
+        proofStep = 1;
+        renderProof();
+      }
+      if (stageIndex === 4) renderPractice();
+    }
+
+    function renderProof() {
+      const steps = [
+        ['作高 AD', '从直角顶点 A 向斜边 BC 作高 AD，设 BD=m，DC=n。', 'm+n=c'],
+        ['分割斜边正方形', '过 D 作分割线，斜边上的正方形被分成两个矩形。', 'c^2=cm+cn'],
+        ['得到第一个面积等式', '因为 △ABD∽△ABC，所以 AB/BC=BD/AB。', 'a^2=cm'],
+        ['得到第二个面积等式', '因为 △ACD∽△ABC，所以 AC/BC=DC/AC。', 'b^2=cn'],
+        ['合并面积关系', '两个矩形面积之和就是斜边正方形面积。', 'c^2=cm+cn=a^2+b^2']
+      ];
+      const s = steps[proofStep - 1];
+      $('#proofText').innerHTML = `<strong>${s[0]}</strong><br>${s[1]}`;
+      setFormula($('#proofFormula'), s[2], false);
+      $('#proofProgress').textContent = `${proofStep} / ${steps.length}`;
+      $('#proofPrevBtn').disabled = proofStep === 1;
+      $('#proofNextBtn').textContent = proofStep === steps.length ? '进入练习' : '证明下一步';
+      $('#proofSplit').classList.toggle('hidden', !(auxVisible && proofStep >= 2));
+      $('#auxD').classList.toggle('hidden', !(auxVisible && proofStep >= 1));
+      $('#altitude').classList.toggle('hidden', !(auxVisible && proofStep >= 1));
+      updateMeasureTip(proofStep === 5 ? '证明完成：面积分割与相似三角形共同支撑了这个关系。' : '每一步都要说明“为什么”，不要只看图形像不像。');
+    }
+
+    function renderPractice() {
+      const p = practice[practiceIndex];
+      practiceAnswered = false;
+      $('#practiceProgress').textContent = `第 ${practiceIndex + 1} / ${practice.length} 题`;
+      $('#practiceQuestion').textContent = p.q;
+      $('#practiceChoices').innerHTML = p.options.map((x, i) => `<button class="choice" data-practice="${i}">${x}</button>`).join('');
+      $('#practiceFeedback').className = 'feedback';
+      $('#practiceFeedback').textContent = '';
+      $('#practiceNextBtn').disabled = true;
+    }
+
+    function answerPractice(i) {
+      if (practiceAnswered) return;
+      practiceAnswered = true;
+      const p = practice[practiceIndex];
+      $$('#practiceChoices .choice').forEach((btn, idx) => {
+        if (idx === p.answer) btn.classList.add('correct');
+        if (idx === i && idx !== p.answer) btn.classList.add('wrong');
+      });
+      const fb = $('#practiceFeedback');
+      fb.textContent = i === p.answer ? p.good : p.bad;
+      fb.className = `feedback show ${i === p.answer ? 'good' : 'bad'}`;
+      $('#practiceNextBtn').disabled = false;
+    }
+
+    // 以下拖拽代码遵循 C-2 坐标/异形 drop 模板；错误分支采用同步直接归位降级，避免连续操作时异步回调竞争。
+    document.addEventListener('pointerdown', (e) => {
+      const el = e.target.closest('[data-drag]');
+      if (!el) return;
+      if (activeEl) forceResetActive();
+      activeEl = el;
+      activePid = e.pointerId;
+      originalParent = el.parentNode;
+      originalNext = el.nextSibling;
+      const r = el.getBoundingClientRect();
+      offsetX = e.clientX - r.left;
+      offsetY = e.clientY - r.top;
+      startClientX = e.clientX;
+      startClientY = e.clientY;
+      dragMoved = false;
+      el.style.height = r.height + 'px';
+      el.style.position = 'fixed';
+      el.style.left = r.left + 'px';
+      el.style.top = r.top + 'px';
+      el.style.zIndex = '9999';
+      el.classList.add('dragging');
+      document.body.appendChild(el);
+      el.setPointerCapture(e.pointerId);
+    });
+
+    document.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== activePid || !activeEl) return;
+      if (Math.hypot(e.clientX - startClientX, e.clientY - startClientY) > 5) dragMoved = true;
+      activeEl.style.left = (e.clientX - offsetX) + 'px';
+      activeEl.style.top = (e.clientY - offsetY) + 'px';
+    });
+
+    document.addEventListener('pointerup', (e) => {
+      if (e.pointerId !== activePid || !activeEl) return;
+      const releasedEl = activeEl;
+      if (!dragMoved) {
+        const parent = originalParent;
+        const next = originalNext;
+        if (parent) parent.insertBefore(releasedEl, next);
+        resetFloatStyles(releasedEl);
+        releasedEl.classList.remove('dragging');
+        try { releasedEl.releasePointerCapture(e.pointerId); } catch (_) {}
+        activeEl = null; activePid = null;
+        showSquareInfo(releasedEl.dataset.word);
+        return;
+      }
+      activeEl.style.pointerEvents = 'none';
+      const hit = document.elementFromPoint(e.clientX, e.clientY);
+      activeEl.style.pointerEvents = '';
+      const zone = hit && hit.closest('.drop-zone');
+      const correct = zone && zone.dataset.target === activeEl.dataset.word && !zone.classList.contains('matched');
+      try { activeEl.releasePointerCapture(e.pointerId); } catch (_) {}
+      activeEl.classList.remove('dragging');
+      if (correct) {
+        zone.classList.add('matched');
+        zone.appendChild(activeEl);
+        resetFloatStyles(activeEl);
+        activeEl.removeAttribute('data-drag');
+        activeEl.style.cursor = 'default';
+        updateMeasureTip(`对齐成功：${activeEl.dataset.word} 正方形与对应边建立了关系。`, 'reveal');
+        zone.classList.add('flash');
+        setTimeout(() => zone.classList.remove('flash'), 720);
+      } else {
+        // 降级（必检 #17）：卡片可能被连续操作，采用同步直接归位 + CSS shake，不使用异步 FLIP 弹回。
+        const el = activeEl;
+        const parent = originalParent;
+        const next = originalNext;
+        if (el && parent) {
+          parent.insertBefore(el, next);
+          resetFloatStyles(el);
+          el.classList.add('wrong-shake');
+          setTimeout(() => el.classList.remove('wrong-shake'), 400);
+        }
+        updateMeasureTip('还没有对齐。请根据卡片上的 a、b、c，判断它应当对应哪一条边。', 'reveal');
+      }
+      activeEl = null; activePid = null;
+    });
+
+    document.addEventListener('pointercancel', (e) => {
+      if (e.pointerId !== activePid || !activeEl) return;
+      originalParent.insertBefore(activeEl, originalNext);
+      resetFloatStyles(activeEl);
+      try { activeEl.releasePointerCapture(e.pointerId); } catch (_) {}
+      activeEl.classList.remove('dragging');
+      activeEl = null; activePid = null;
+    });
+
+    function resetFloatStyles(el) {
+      el.style.position = '';
+      el.style.left = el.style.top = '';
+      el.style.width = el.style.height = '';
+      el.style.zIndex = '';
+      el.style.pointerEvents = '';
+      el.style.cursor = '';
+    }
+
+    function forceResetActive() {
+      if (!activeEl) return;
+      if (originalParent) {
+        try { originalParent.insertBefore(activeEl, originalNext); } catch (_) {}
+      }
+      resetFloatStyles(activeEl);
+      activeEl.classList.remove('dragging');
+      try { activeEl.releasePointerCapture(activePid); } catch (_) {}
+      activeEl = null; activePid = null;
+    }
+
+    $$('.case-pill').forEach(btn => btn.addEventListener('click', () => {
+      currentCase = Number(btn.dataset.case);
+      measured = new Set();
+      areaVisible = false;
+      updateMeasureTip(`已切换到案例 ${cases[currentCase].label}。先观察，再点击三块正方形测量。`);
+      renderGeometry();
+    }));
+    $('#geometryWrap').addEventListener('click', e => {
+      const card = e.target.closest('.side-card');
+      if (card) showSquareInfo(card.dataset.word);
+    });
+    $$('.stage-btn').forEach((btn, i) => btn.addEventListener('click', () => setStage(i)));
+    $('#prevBtn').addEventListener('click', () => setStage(stageIndex - 1));
+    $('#nextBtn').addEventListener('click', () => setStage(stageIndex === 4 ? 4 : stageIndex + 1));
+    $('#toggleAreaBtn').addEventListener('click', () => {
+      areaVisible = !areaVisible;
+      updateMeasureTip(areaVisible ? '面积数值已显示。点击正方形可以查看具体计算。' : '面积数值已隐藏。请先凭图形观察面积关系。');
+      renderGeometry();
+    });
+    $('#toggleAuxBtn').addEventListener('click', () => {
+      auxVisible = !auxVisible;
+      updateMeasureTip(auxVisible ? '辅助线已显示。进入证明阶段后，可以按步骤观察 AD、D 和分割线。' : '辅助线已隐藏。');
+      renderGeometry();
+      if (stageIndex === 3) renderProof();
+    });
+    $('#showDragBtn').addEventListener('click', () => {
+      ['#dragA','#dragB','#dragC'].forEach(s => $(s).classList.remove('hidden'));
+      $('#showDragBtn').classList.add('hidden');
+      $('#hideDragBtn').classList.remove('hidden');
+      updateMeasureTip('拖动三张卡片到对应边附近。错误放置会自动回到原处。');
+    });
+    $('#hideDragBtn').addEventListener('click', () => {
+      ['#dragA','#dragB','#dragC'].forEach(s => $(s).classList.add('hidden'));
+      $('#showDragBtn').classList.remove('hidden');
+      $('#hideDragBtn').classList.add('hidden');
+    });
+    $('#guessCard').addEventListener('click', e => {
+      const choice = e.target.closest('[data-guess]');
+      if (!choice) return;
+      $$('#guessCard .choice').forEach(x => x.classList.remove('selected','correct','wrong'));
+      choice.classList.add('selected');
+      const fb = $('#guessFeedback');
+      if (choice.dataset.guess === 'sum') {
+        fb.textContent = '这是一个有依据的猜想。接下来用高线和相似三角形说明它为什么一定成立。';
+        fb.className = 'feedback show good';
+      } else {
+        fb.textContent = '先回到面积记录，比较 a²+b² 与 c²，再重新选择。';
+        fb.className = 'feedback show warn';
+      }
+    });
+    $('#proofPrevBtn').addEventListener('click', () => { proofStep = Math.max(1, proofStep - 1); renderProof(); });
+    $('#proofNextBtn').addEventListener('click', () => {
+      if (proofStep < 5) { proofStep++; renderProof(); }
+      else setStage(4);
+    });
+    $('#practiceChoices').addEventListener('click', e => {
+      const choice = e.target.closest('[data-practice]');
+      if (choice) answerPractice(Number(choice.dataset.practice));
+    });
+    $('#practiceNextBtn').addEventListener('click', () => {
+      if (practiceIndex < practice.length - 1) { practiceIndex++; renderPractice(); }
+      else { updateMeasureTip('三类应用都完成了。点击“重置探究”，再用不同案例重新发现一次。', 'reveal'); $('#practiceNextBtn').disabled = true; }
+    });
+    $('#resetBtn').addEventListener('click', () => {
+      forceResetActive();
+      currentCase = 0; stageIndex = 0; areaVisible = false; auxVisible = false; measured = new Set(); compared = new Set(); proofStep = 1; practiceIndex = 0;
+      $$('.drop-zone').forEach(z => z.classList.remove('matched'));
+      ['#dragA','#dragB','#dragC'].forEach(s => { const el = $(s); el.classList.add('hidden'); resetFloatStyles(el); $('#geometryWrap').appendChild(el); });
+      $('#showDragBtn').classList.remove('hidden'); $('#hideDragBtn').classList.add('hidden');
+      $('#guessFeedback').className = 'feedback'; $('#guessFeedback').textContent = '';
+      updateMeasureTip('已重置。请从“哪一块正方形的面积最大？”开始新的探究。');
+      updatePrompt();
+    });
+
+    updatePrompt();
+    setFormula($('#formulaBox'), '', false);
+  </script>
+</body>
+</html>
