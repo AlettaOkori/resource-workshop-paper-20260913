@@ -4,6 +4,7 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {randomBytes} from 'node:crypto';
+import {gzipSync} from 'node:zlib';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'hosting/dist');
 fs.rmSync(dist, {recursive:true, force:true});
@@ -22,6 +23,16 @@ try {
   const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
   manifest.preview={previewModeId:randomBytes(16).toString('hex'),previewModeSigningKey:randomBytes(32).toString('hex'),previewModeEncryptionKey:randomBytes(32).toString('hex')};
   fs.writeFileSync(manifestPath,JSON.stringify(manifest));
-  execFileSync('tar',['-czf',path.join(root,'hosting/functions/runtime.tar.gz'),'-C',tmp,'.'],{env:{...process.env,COPYFILE_DISABLE:'1'}});
+  const entries=[];
+  function walk(dir) {
+    for (const name of fs.readdirSync(dir)) {
+      const file=path.join(dir,name), stat=fs.lstatSync(file), relative=path.relative(tmp,file);
+      if(stat.isDirectory()) walk(file);
+      else if(stat.isSymbolicLink()) entries.push({path:relative,link:fs.readlinkSync(file)});
+      else entries.push({path:relative,data:fs.readFileSync(file).toString('base64'),mode:stat.mode & 0o777});
+    }
+  }
+  walk(tmp);
+  fs.writeFileSync(path.join(root,'hosting/functions/runtime.bundle.gz'),gzipSync(JSON.stringify(entries)));
 } finally { fs.rmSync(tmp,{recursive:true,force:true}); }
 console.log('Netlify assets and standalone runtime ready.');

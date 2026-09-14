@@ -3,14 +3,22 @@ const path = require('node:path');
 const os = require('node:os');
 const http = require('node:http');
 const net = require('node:net');
-const {spawn,execFileSync} = require('node:child_process');
+const {spawn} = require('node:child_process');
+const {gunzipSync} = require('node:zlib');
 let ready;
 async function boot() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(),'workshop-'));
-  const candidates=[path.join(__dirname,'runtime.tar.gz'),path.join(process.cwd(),'functions/runtime.tar.gz'),path.join(process.cwd(),'hosting/functions/runtime.tar.gz')];
+  const candidates=[path.join(__dirname,'runtime.bundle.gz'),path.join(process.cwd(),'functions/runtime.bundle.gz'),path.join(process.cwd(),'hosting/functions/runtime.bundle.gz')];
   const archive=candidates.find(p=>fs.existsSync(p));
   if(!archive) throw new Error('Standalone runtime archive missing');
-  execFileSync('tar',['-xzf',archive,'-C',root]);
+  const entries=JSON.parse(gunzipSync(fs.readFileSync(archive)).toString('utf8'));
+  for(const entry of entries) {
+    const file=path.resolve(root,entry.path);
+    if(!file.startsWith(root+path.sep)) throw new Error('Invalid runtime path');
+    fs.mkdirSync(path.dirname(file),{recursive:true});
+    if(entry.link) fs.symlinkSync(entry.link,file);
+    else fs.writeFileSync(file,Buffer.from(entry.data,'base64'),{mode:entry.mode});
+  }
   const probe=net.createServer();
   await new Promise(resolve=>probe.listen(0,'127.0.0.1',resolve));
   const port=probe.address().port;

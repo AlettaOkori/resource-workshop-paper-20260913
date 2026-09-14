@@ -9,3 +9,4 @@ hosting/dist/
 hosting/functions/runtime.tar.gz
 .netlify/
 *.log
+hosting/functions/runtime.bundle.gz

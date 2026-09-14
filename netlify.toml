@@ -8,7 +8,7 @@
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
 [functions]
   node_bundler = "esbuild"
-  included_files = ["functions/runtime.tar.gz"]
+  included_files = ["functions/runtime.bundle.gz"]
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/workshop"
