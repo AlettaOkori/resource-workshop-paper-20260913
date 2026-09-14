@@ -144,3 +144,13 @@ npm run verify:integrity
 三个资源列表的切换导航与页面标题合并：教学资源、教学应用、我的资源。当前页以大字号及红色短线标识，其他入口为轻量文字；面包屑、各页内部筛选与分组功能保持不变。桌面和手机三页往返、当前页标记与分类更新后的去重已验证。
 
 模拟覆盖配色：按用户明确要求，把约 80% 的知识点展示为有资源；生物 52/65、数学 30/38、语文 30/37，其余保留灰色。使用演示数据字段 `demoCovered`，不修改原资源引用；页面标记“模拟资源覆盖”，未关联具体作品的彩色节点在详情中显示模拟占位。灰色筛选、图例与状态同步。`demo-colors.cjs` 已验证四种彩色、13 个生物灰色缺口、模拟详情及筛选。
+
+## Netlify 部署（2026-09-14）
+
+GitHub 仓库保存当前新版原型及其独立运行文件。`netlify.toml` 使用 `hosting/` 作为构建目录，执行 `npm run build`；公共素材、新版样式和 Next.js 客户端文件由 CDN 提供，页面与 RSC 请求由 `hosting/functions/workshop.js` 转给原 standalone 运行层。
+
+由于当前交付物没有原始 Next.js 业务源码，`runtime/node-modules.tar.gz` 保存已有运行依赖。新机器本地启动前，在仓库根目录执行 `tar -xzf runtime/node-modules.tar.gz`，然后使用 Node.js 24 运行 `npm start`。不要对根目录执行 `npm install` 来替换原构建依赖。部署构建只使用 Node 内置模块，不重新安装原应用。
+
+修改 `paper-theme/` 或公共素材后，提交并推送 `main`，Netlify 将自动部署。原型依旧使用演示生成流程，个人资源与分组保存在各访客浏览器本地，不跨设备同步。
+
+`verification/` 是本机历史验收资料，未上传到仓库；本 README 中相关历史链接仅在原工作目录可用。
