@@ -64,6 +64,7 @@
       if (!wheel) return;
       mark(wheel, 'flywheel');
       mark(wheel.parentElement, 'flywheel-stage');
+      mark(wheel.parentElement.parentElement, 'flywheel-viewport');
       wheel.parentElement.querySelectorAll(':scope > span, :scope > button').forEach(node => {
         if (node.hasAttribute('data-paper-orbit')) return;
         const offset = value => {
@@ -73,8 +74,10 @@
         const x = offset(node.style.left);
         const y = offset(node.style.top);
         if (x === undefined || y === undefined) return;
-        node.style.setProperty('--orbit-x', x + 'px');
-        node.style.setProperty('--orbit-y', y + 'px');
+        // Give phase labels a separate outer orbit, clear of upright card corners.
+        const orbitScale = node.tagName === 'SPAN' ? 204 / Math.hypot(x, y) : 1;
+        node.style.setProperty('--orbit-x', x * orbitScale + 'px');
+        node.style.setProperty('--orbit-y', y * orbitScale + 'px');
         mark(node, 'orbit');
       });
     });

@@ -5,12 +5,15 @@
  to{transform:rotate(360deg) translate(var(--orbit-x),var(--orbit-y)) rotate(-360deg) translate(-50%,-50%)}
 }
 body[data-paper-page="dashboard"] [data-paper-flywheel]{
+ width:420px;height:400px;max-width:none;margin:auto;
  transform-box:view-box;transform-origin:50% 50%;
- animation:paper-flywheel-turn 75s linear infinite;
+ animation:paper-flywheel-turn 90s linear infinite;
 }
+body[data-paper-page="dashboard"] [data-paper-flywheel-viewport]{overflow-x:auto;overscroll-behavior-x:contain}
+body[data-paper-page="dashboard"] [data-paper-flywheel-stage]{min-width:448px;height:448px!important}
 body[data-paper-page="dashboard"] [data-paper-orbit]{
  left:50%!important;top:50%!important;
- animation:paper-flywheel-orbit 75s linear infinite;
+ animation:paper-flywheel-orbit 90s linear infinite;
 }
 body[data-paper-page="dashboard"] [data-paper-flywheel-stage]:is(:hover,:focus-within) :is([data-paper-flywheel],[data-paper-orbit]){animation-play-state:paused}
 body[data-paper-page="dashboard"] [data-paper-kpi]{font-variant-numeric:tabular-nums}
