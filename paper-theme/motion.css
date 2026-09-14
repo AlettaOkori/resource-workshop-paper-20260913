@@ -14,7 +14,7 @@ body[data-paper-page="dashboard"] [data-paper-orbit]{
 }
 body[data-paper-page="dashboard"] [data-paper-flywheel-stage]:is(:hover,:focus-within) :is([data-paper-flywheel],[data-paper-orbit]){animation-play-state:paused}
 body[data-paper-page="dashboard"] [data-paper-kpi]{font-variant-numeric:tabular-nums}
-body[data-paper-page="dashboard"] [data-paper-kpi][data-paper-count]{position:relative;color:transparent!important}
+body[data-paper-page="dashboard"] [data-paper-content] [data-paper-kpi][data-paper-count]{position:relative;color:transparent!important}
 body[data-paper-page="dashboard"] [data-paper-count]::after{
  content:attr(data-paper-count);content:attr(data-paper-count) / "";
  position:absolute;inset:0;color:var(--ink);white-space:nowrap;

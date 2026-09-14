@@ -12,7 +12,29 @@
   const installedCompanions = new WeakSet();
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const animatedKPIs = new WeakSet();
+  const trendResize = new ResizeObserver(entries => {
+    for (const { target, contentRect } of entries) {
+      if (contentRect.width > 0) target.style.setProperty('--trend-font-size', (13 * 244 / contentRect.width) + 'px');
+    }
+  });
+  let trendChart;
   function animateDashboard() {
+    const chart = document.querySelector('[data-paper-content] svg[viewBox="0 0 244 150"]');
+    if (chart) {
+      const title = chart.closest('section')?.querySelector('header > span');
+      // Rename only after React has attached the server-rendered title.
+      if (title?.textContent === '区域使用趋势') {
+        if (Object.keys(title).some(key => key.startsWith('__reactFiber$'))) title.firstChild.nodeValue = '使用趋势';
+        else setTimeout(schedule, 50);
+      }
+      if (chart.getAttribute('aria-label') !== '使用趋势折线图') chart.setAttribute('aria-label', '使用趋势折线图');
+      mark(chart, 'trend-chart');
+      if (trendChart !== chart) {
+        trendResize.disconnect();
+        trendChart = chart;
+        trendResize.observe(chart);
+      }
+    }
     document.querySelectorAll('[data-paper-content] .grid-cols-4 span[class*="text-[30px]"]').forEach(node => {
       if (animatedKPIs.has(node)) return;
       const finalText = node.textContent.trim();

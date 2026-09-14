@@ -369,6 +369,9 @@ body:not([data-paper-page="artifact"]) .rw-workbench .rw-filters select{max-widt
 body:not([data-paper-page="artifact"]) .rw-workbench .rw-card[data-in-target="true"]{opacity:1}
 body:not([data-paper-page="artifact"]) .rw-already-in{font-weight:500;border-color:#62675d}
 body[data-paper-page="dashboard"] [data-paper-content] svg text{font-size:13px;fill:#62675d}
+body[data-paper-page="dashboard"] [data-paper-content] [data-paper-trend-chart]{display:block;width:100%;max-width:360px;height:auto;margin:0 auto}
+body[data-paper-page="dashboard"] [data-paper-content] [data-paper-trend-chart] text{font-family:var(--paper-sans);font-size:var(--trend-font-size,9px);fill:var(--muted)}
+body[data-paper-page="dashboard"] [data-paper-content] [data-paper-trend-chart] :is(line,path,circle){vector-effect:non-scaling-stroke}
 @media(max-width:760px){
  body[data-paper-page="home"] [data-paper-home-heading]>div.ml-auto{left:0;right:0;top:54px;justify-content:center;gap:16px!important}
  body[data-paper-page="home"] [data-paper-home-heading]>div.ml-auto button{font-size:13px!important}
