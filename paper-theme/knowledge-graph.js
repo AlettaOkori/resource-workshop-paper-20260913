@@ -15,11 +15,11 @@
   function mount(host, original) {
     const root = document.createElement('section'); root.className='kg-app'; root.dataset.rwOwned='knowledge-graph'; root.setAttribute('aria-label','知识图谱工作区');
     original.setAttribute('data-kg-original',''); host.append(root);
-    const state = {root,host,original,subject:data.subjects[0],group:'all',status:'all',relation:'all',query:'',selected:null,view:'graph',zoom:1,tx:0,ty:0,navOpen:false};
+    const state = {root,host,original,subject:data.subjects[0],group:'all',status:'all',relation:'all',query:'',selected:null,view:'graph',zoom:1,tx:0,ty:0};
     root.innerHTML = `<header class="kg-header"><a href="/" class="kg-home">${icon('back')}首页</a><span class="kg-slash">/</span><h1>AI知识图谱</h1><a class="kg-library" href="/?page=my-resources">${icon('book')}我的资源</a><button type="button" class="kg-export" aria-label="导出知识点清单">${icon('download')}<span>导出</span></button></header>
       <div class="kg-context"><div class="kg-subjects" role="group" aria-label="学科">${data.subjects.map(s=>`<button type="button" data-subject="${s.id}" aria-pressed="false">${s.name}</button>`).join('')}</div><span class="kg-context-note">以知识点为中心，连接教学内容与资源</span><label class="kg-search">${icon('search')}<input type="search" aria-label="搜索知识点" placeholder="搜索知识点或关联内容"/><button type="button" data-action="clear-search" aria-label="清空搜索" hidden>${icon('close')}</button></label></div>
-      <div class="kg-workspace"><aside class="kg-nav" aria-label="知识导航"><div class="kg-nav-heading"><h2>知识导航</h2><button type="button" data-action="nav" aria-label="收起知识导航">×</button></div><div class="kg-scope"></div><div class="kg-tree"></div><div class="kg-nav-foot">${icon('book')}<div>教材是定位线索<p>知识点可以跨主题关联<br/>教材版本待标注</p></div></div></aside>
-      <main class="kg-main"><div class="kg-toolbar"><button type="button" class="kg-nav-toggle" data-action="nav" aria-expanded="false">知识导航</button><div class="kg-views" role="group" aria-label="浏览方式"><button type="button" data-view="graph" aria-pressed="true">${icon('network')}关系图谱</button><button type="button" data-view="list" aria-pressed="false">知识清单</button></div><label class="kg-relation-label">关系<select aria-label="关系类型"><option value="all">全部关系</option><option value="cross">跨主题关系</option></select></label><label class="kg-gap-toggle"><input type="checkbox" aria-label="只看缺失资源"/>只看缺失资源</label></div>
+      <div class="kg-workspace">
+      <main class="kg-main"><div class="kg-toolbar"><div class="kg-views" role="group" aria-label="浏览方式"><button type="button" data-view="graph" aria-pressed="true">${icon('network')}关系图谱</button><button type="button" data-view="list" aria-pressed="false">知识清单</button></div><label class="kg-relation-label">关系<select aria-label="关系类型"><option value="all">全部关系</option><option value="cross">跨主题关系</option></select></label><label class="kg-gap-toggle"><input type="checkbox" aria-label="只看缺失资源"/>只看缺失资源</label></div>
       <div class="kg-summary" aria-live="polite"></div><div class="kg-stage"><svg class="kg-canvas" aria-label="知识关联网络，可拖动画布或使用缩放按钮" role="group"><defs><marker id="kg-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9" fill="#839098"/></marker></defs><g class="kg-viewport"></g></svg><div class="kg-empty" role="status" hidden></div><div class="kg-list" hidden></div><div class="kg-map-controls"><button type="button" data-action="out" aria-label="缩小">${icon('minus')}</button><output class="kg-zoom">100%</output><button type="button" data-action="in" aria-label="放大">${icon('plus')}</button><button type="button" data-action="fit" aria-label="复位图谱" title="居中查看全部节点">${icon('fit')}</button></div></div><footer class="kg-legend"></footer></main>
       <aside class="kg-detail" aria-label="知识点详情"></aside></div><div class="kg-toast" role="status" hidden></div>`;
     mounted=state;
@@ -27,7 +27,7 @@
     root.querySelector('.kg-search input').addEventListener('input',e=>{state.query=e.target.value.trim(); state.selected=null;render(state);});
     root.querySelector('.kg-gap-toggle input').addEventListener('change',e=>{state.status=e.target.checked?'missing':'all';state.selected=null;render(state);});
     root.querySelector('.kg-relation-label select').addEventListener('change',e=>{state.relation=e.target.value;state.selected=null;render(state);});
-    root.addEventListener('keydown',e=>{if(e.key==='Escape'){state.selected=null;state.navOpen=false;render(state);}if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-node]')){e.preventDefault();e.target.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
+    root.addEventListener('keydown',e=>{if(e.key==='Escape'){state.selected=null;render(state);}if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-node]')){e.preventDefault();e.target.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
     const canvas=root.querySelector('.kg-canvas');let drag;
     canvas.addEventListener('pointerdown',e=>{if(e.target.closest('[data-node],[data-group]')||e.button!==0)return;drag={x:e.clientX,y:e.clientY,tx:state.tx,ty:state.ty};canvas.setPointerCapture(e.pointerId);canvas.classList.add('is-dragging');});
     canvas.addEventListener('pointermove',e=>{if(!drag)return;state.tx=drag.tx+e.clientX-drag.x;state.ty=drag.ty+e.clientY-drag.y;transform(state);});
@@ -40,19 +40,18 @@
     const b=e.target.closest('button,a,[data-node],[data-group]');if(!b)return;
     if(b.dataset.subject){s.subject=data.subjects.find(x=>x.id===b.dataset.subject);s.group='all';s.query='';s.selected=null;s.root.querySelector('.kg-search input').value='';s.zoom=1;s.tx=s.ty=0;render(s);}
     else if(b.dataset.node)select(s,b.dataset.node);
-    else if(b.dataset.group){s.group=b.dataset.group;s.selected=null;s.navOpen=false;s.zoom=1;s.tx=s.ty=0;render(s);}
+    else if(b.dataset.group){s.group=b.dataset.group;s.selected=null;s.zoom=1;s.tx=s.ty=0;render(s);}
     else if(b.dataset.view){s.view=b.dataset.view;render(s);}
     else if(b.classList.contains('kg-export'))download(s);
     else if(b.dataset.action){switch(b.dataset.action){
       case 'clear-search': s.query='';s.root.querySelector('.kg-search input').value='';render(s);s.root.querySelector('.kg-search input').focus();break;
       case 'clear': s.query='';s.group='all';s.status='all';s.relation='all';s.selected=null;s.root.querySelector('.kg-search input').value='';render(s);break;
-      case 'nav':s.navOpen=!s.navOpen;render(s);break;
       case 'in':zoom(s,.2);break;case 'out':zoom(s,-.2);break;
       case 'fit':fit(s);break;
       case 'close':{const id=s.selected;s.selected=null;render(s);s.root.querySelector(`${s.view==='graph'?'.kg-canvas':'.kg-list'} [data-node="${id}"]`)?.focus({preventScroll:true});break;}
     }}
   }
-  function select(s,id){if(!filtered(s).some(n=>n.id===id)){s.group='all';s.status='all';s.relation='all';s.query='';s.root.querySelector('.kg-search input').value='';}s.selected=id;s.navOpen=false;render(s);const title=s.root.querySelector('.kg-detail h2');title?.setAttribute('tabindex','-1');title?.focus({preventScroll:true});if(innerWidth<=1200)s.root.querySelector('.kg-detail').scrollIntoView({behavior:'instant',block:'nearest'});}
+  function select(s,id){if(!filtered(s).some(n=>n.id===id)){s.group='all';s.status='all';s.relation='all';s.query='';s.root.querySelector('.kg-search input').value='';}s.selected=id;render(s);const title=s.root.querySelector('.kg-detail h2');title?.setAttribute('tabindex','-1');title?.focus({preventScroll:true});if(innerWidth<=1200)s.root.querySelector('.kg-detail').scrollIntoView({behavior:'instant',block:'nearest'});}
   function filtered(s){
     const ns=s.subject.nodes, groupMap=new Map(s.subject.groups.map(g=>[g.id,g]));
     const cross=new Set(s.subject.edges.filter(([a,b])=>ns.find(n=>n.id===a).group!==ns.find(n=>n.id===b).group).flatMap(e=>e.slice(0,2)));
@@ -64,11 +63,8 @@
     r.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===s.view)));
     r.querySelector('.kg-gap-toggle input').checked=s.status==='missing';r.querySelector('.kg-relation-label select').value=s.relation;
     r.querySelector('[data-action="clear-search"]').hidden=!s.query;
-    r.querySelector('.kg-scope').innerHTML=`<strong>${esc(s.subject.scope)}</strong><span>知识点索引</span>`;
-    r.querySelector('.kg-tree').innerHTML=`<div class="kg-tree-nodes">${s.visible.map(n=>{const g=s.subject.groups.find(g=>g.id===n.group);return `<button type="button" data-node="${n.id}" style="--kg-color:${g.color}" class="${missing(n)?'is-missing':''} ${s.selected===n.id?'is-selected':''}" aria-label="${esc(n.name)}，${coverageLabel(n)}"><i></i><span>${esc(n.name)}</span>${missing(n)?'<small>缺</small>':''}</button>`;}).join('')}</div>`;
     r.querySelector('.kg-summary').innerHTML=`<div><strong>${s.visible.length}</strong> 个知识点<span class="kg-summary-divider"></span><span class="kg-have-dot"></span>已覆盖 <b>${s.visible.filter(n=>!missing(n)).length}</b><span class="kg-missing-dot"></span>缺失 <b>${s.visible.filter(missing).length}</b></div><span class="kg-summary-hint">知识关系网络${s.relation==='cross'?' · 跨主题':''}</span>`;
     r.querySelector('.kg-legend').innerHTML=`<span class="kg-color-key">${s.subject.groups.map(g=>`<i style="background:${g.color}"></i>`).join('')}已有资源 · 颜色区分知识类别</span><span class="kg-legend-missing"><i></i>本校缺失资源</span><span class="kg-legend-note">点击探索关联 · 拖动 / 缩放</span>`;
-    r.classList.toggle('kg-nav-open',s.navOpen);r.querySelector('.kg-nav-toggle').setAttribute('aria-expanded',String(s.navOpen));
     r.classList.toggle('kg-selected',!!s.selected);r.classList.toggle('kg-list-view',s.view==='list');
     const list=r.querySelector('.kg-list');list.hidden=s.view!=='list';
     list.innerHTML=s.visible.map(n=>{const g=s.subject.groups.find(g=>g.id===n.group);return `<button type="button" class="kg-list-row ${missing(n)?'is-missing':''} ${s.selected===n.id?'is-selected':''}" data-node="${n.id}" style="--kg-color:${g.color}"><i></i><span><strong>${esc(n.name)}</strong><small>${esc(s.subject.scope)}</small></span><span class="kg-list-status">${coverageLabel(n)}</span>${icon('arrow')}</button>`;}).join('');
