@@ -69,8 +69,11 @@
     else if(location.pathname==='/chat'){
       host=content.querySelector('button[aria-label="返回首页"]')?.parentElement?.parentElement;
       host?.classList.add('ws-chat-navigation');
-      // Retire the bundled share control without removing React-owned nodes.
-      for(const button of host?.querySelectorAll(':scope > div > button')||[])if(button.textContent.trim()==='分享')button.dataset.wsChatShare='';
+      // Retire obsolete header controls without removing React-owned nodes.
+      for(const actions of host?.querySelectorAll(':scope > div')||[]){
+        for(const button of actions.querySelectorAll(':scope > button'))if(button.textContent.trim()==='分享'||button.querySelector('.lucide-rotate-ccw'))button.dataset.wsChatRetiredAction='';
+        actions.toggleAttribute('data-ws-chat-empty-actions',!actions.querySelector(':scope > button:not([data-ws-chat-retired-action])'));
+      }
     }
     else if(location.pathname.startsWith('/plaza/'))host=content.querySelector('button[aria-label="返回首页"]')?.parentElement;
     else if(location.pathname==='/'){

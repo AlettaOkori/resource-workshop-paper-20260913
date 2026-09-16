@@ -31,6 +31,18 @@
     });
   }
   const resource=id=>resources().find(r=>r.id===id)||catalog.find(r=>r.id===id && r.legacy);
+  function detailHref(item) {
+    const r = typeof item === 'string' ? resource(item) : item;
+    if (!r || r.mock || r.legacy) return '';
+    if (r.href?.startsWith('/share/')) return r.href;
+    if (!r.artifact) return '';
+    const templates = catalog.filter(item => !item.mock && item.href?.startsWith('/share/'));
+    const template = templates.find(item => item.artifact === r.artifact) || templates[0];
+    if (!template) return '';
+    const url = new URL(template.href, location.origin);
+    url.searchParams.set('resourceId', r.id);
+    return url.pathname + url.search;
+  }
   const knowledge=id=>{const ids=new Set(resource(id)?.knowledgeIds||meta.resources[id]?.knowledgeIds||[]);return nodes.filter(n=>ids.has(n.id));};
   function setKnowledge(id,ids,context={}){const valid=new Set(nodes.map(n=>n.id));return patchResource(id,{...context,knowledgeIds:[...new Set(ids)].filter(x=>valid.has(x))});}
   function toggle(action,id){
@@ -48,7 +60,7 @@
   }
   const api=window.WorkshopData={
     base:{profile:{},subjects:[],grades:[],editions:[],features:[]},graph:{subjects:[]},
-    resources,resource,library,knowledge,allKnowledge:()=>nodes,setKnowledge,patchResource,
+    resources,resource,detailHref,library,knowledge,allKnowledge:()=>nodes,setKnowledge,patchResource,
     contextFor:id=>{const r=resource(id)||meta.resources[id]||{};return Object.fromEntries(['subject','grade','edition','chapterId','unitId','topicId','customTopic','knowledgeMode','knowledgeConfirmed'].map(k=>[k,r[k]??'']));},
     notify,subscribe:fn=>{document.addEventListener('workshop-data-changed',fn);return()=>document.removeEventListener('workshop-data-changed',fn);},
     toggle,isLiked:id=>!!library().liked[id],isSaved:id=>!!library().saved[id],

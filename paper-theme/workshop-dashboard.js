@@ -198,9 +198,10 @@
     return element;
   }
 
-  function openList(title, resources, invoker) {
+  function openList(title, resources, invoker, detailsOnly = false) {
     rankingDialog = null;
     resources = resources.filter(resource => !resource.legacy && (resource.mock || resource.artifact || resource.href));
+    if (detailsOnly) resources = resources.map(resource => ({...resource, href:D.detailHref(resource)})).filter(resource => resource.href);
     const element = makeDialog(title, invoker);
     element.querySelector('[data-dialog-content]').innerHTML = `<div class="wd-result-cards">${resources.map(resource => `<article class="wd-result-card">${resource.href && !resource.mock ? `<a href="${esc(resource.href)}">` : '<div>'}<div class="wd-result-preview">${window.WorkshopPreviews?.markup(resource) || '<span>暂无预览</span>'}</div><strong>${esc(resource.title)}</strong><small>${esc(resource.author || '未标注教师')} · ${esc(resource.kind || subject(resource))}</small>${resource.href && !resource.mock ? '</a>' : '</div>'}</article>`).join('') || '<p class="wd-empty">暂无资源</p>'}</div>`;
     element.showModal();
@@ -232,7 +233,7 @@
       selectTheme(chosen === button.dataset.theme ? '' : button.dataset.theme);
     } else if (button.dataset.outcomes) {
       const theme = currentGroups.find(group => group.name === button.dataset.outcomes);
-      if (theme) openList(`${theme.name} · 生成成果`, theme.outcomes, button);
+      if (theme) openList(`${theme.name} · 生成成果`, theme.outcomes, button, true);
     } else if (button.dataset.heat) {
       openList(`${button.dataset.subject} · ${button.dataset.grade}`, dashboardResources().filter(r => subject(r) === button.dataset.subject && grade(r) === button.dataset.grade && isApp(r) === (button.dataset.heat === 'app')), button);
     } else if (button.dataset.teacher) {

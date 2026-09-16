@@ -4,20 +4,27 @@
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const icon = name => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+({like:'<path d="M7 10H4v11h3zm0 0 5-8c3 0 3 3 2 7h6c2 0 2 2 1 5l-2 7H7z"/>',save:'<path d="M6 3h12v18l-6-4-6 4z"/>',download:'<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>',search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',fullscreen:'<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>'}[name]||'')+'</svg>';
   let data, current, pending = false, revision = 0;
+  if (location.pathname.startsWith('/share/') && new URLSearchParams(location.search).has('resourceId')) document.documentElement.dataset.rwResourcePending = '';
   const attached = n => n && Object.keys(n).some(k => k.startsWith('__reactProps$'));
   const usable = r => !r.legacy && !r.mock && r.href;
   const visible = r => !r.legacy && !!(r.mock || r.artifact || r.href);
   function mount() {
     pending = false;
     if (!data || !location.pathname.startsWith('/share/')) { current = null; return; }
-    const id = decodeURIComponent(location.pathname.split('/').pop()), resource = data.resource(id);
+    const requestedId = new URLSearchParams(location.search).get('resourceId');
+    const id = requestedId || decodeURIComponent(location.pathname.split('/').pop()), resource = data.resource(id);
     const main = document.querySelector('main'), frame = main?.querySelector('iframe');
+    if (requestedId && !resource && main && document.readyState === 'complete') {
+      if (!main.querySelector('[data-rw-missing-resource]')) main.innerHTML = '<section data-rw-owned data-rw-missing-resource><h1>资源不存在或已移除</h1><a href="/dashboard">返回数据看板</a></section>';
+      delete document.documentElement.dataset.rwResourcePending;
+      return;
+    }
     if (!resource || !frame || !attached(frame) || document.readyState !== 'complete') return;
     const section = frame.closest('section'), nativeInfo = [...section.children].find(n => n !== frame.parentElement && !n.hasAttribute('data-rw-owned'));
     const aside = main.querySelector('aside');
     if (!nativeInfo || !aside || !attached(nativeInfo)) return;
     if (!current || current.id !== id || current.frame !== frame || !current.panel.isConnected) {
-      const adapt = [...nativeInfo.querySelectorAll('button')].find(b => b.textContent.trim() === '一键改编');
+      const adapt = !requestedId && [...nativeInfo.querySelectorAll('button')].find(b => b.textContent.trim() === '一键改编');
       const topTitle = main.querySelector('header > span');
       if (topTitle) topTitle.dataset.rwDetailOldTitle = '';
       nativeInfo.dataset.rwDetailOldInfo = ''; section.dataset.rwDetailSection = ''; section.parentElement.dataset.rwDetailColumns = '';
@@ -37,6 +44,12 @@
       aside.append(related);
       current = {id,frame,section,panel,related,toolbar,adapt,query:'',signature:'',point:'',graphFocus:''};
       const state = current;
+      if (requestedId) {
+        frame.removeAttribute('srcdoc');
+        frame.src = resource.artifact;
+        frame.title = resource.title;
+        document.title = resource.title + ' · 资源工坊';
+      }
       related.querySelector('input').addEventListener('input', event => {state.query = event.target.value; renderRecommendations(state);});
       related.querySelector('[data-related-more]').addEventListener('click', event => openResources('资源推荐',state.recommendations,event.currentTarget));
       const onAction = event => {
@@ -45,7 +58,7 @@
         if (action === 'like' || action === 'save') data.toggle(action,state.id);
         if (action === 'adapt') {
           if(state.adapt?.isConnected)state.adapt.click();
-          else {const r=data.resource(state.id);const q=new URLSearchParams({chatId:'sim-adapt-'+crypto.randomUUID(),featureId:'20',feat:r.feature||'互动课件',adapt:r.title,html:r.artifact,art:r.filename||r.title+'.html'});location.assign('/chat?'+q);}
+          else {const r=data.resource(state.id);const q=new URLSearchParams({chatId:'sim-adapt-'+crypto.randomUUID(),featureId:'20',feat:r.feature||'互动课件',adapt:r.title,sourceId:r.id,html:r.artifact,art:r.filename||r.title+'.html'});location.assign('/chat?'+q);}
         }
         if (action === 'download') void download(state,button);
         if (action === 'fullscreen') toggleFullscreen(state);
@@ -66,6 +79,7 @@
       related.addEventListener('keydown', event => {if ((event.key==='Enter'||event.key===' ') && event.target.matches('[data-detail-point]')) {event.preventDefault();event.target.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
     }
     render(current);
+    delete document.documentElement.dataset.rwResourcePending;
   }
   function toggleFullscreen(state) {
     const expanded = state.frame.parentElement.classList.toggle('rw-detail-fullscreen');
