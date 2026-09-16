@@ -52,7 +52,8 @@ exports.handler=async(event,context)=>{
     for(const key of ['connection','keep-alive','transfer-encoding','content-length','etag']) delete outputHeaders[key];
     let body=response.body;
     if(/text\/html/i.test(outputHeaders['content-type']||'')&&!incoming.pathname.startsWith('/artifacts/')) {
-      body=Buffer.from(body.toString('utf8').replace('</head>','<link rel="stylesheet" href="/paper-theme/paper.css"><script defer src="/paper-theme/presentation.js"></script></head>'));
+      const gate='<script>(function(){var push=history.pushState.bind(history),replace=history.replaceState.bind(history);function hold(value){try{var u=new URL(value,location.href),p=u.searchParams,id=p.get("chatId"),prompt=p.get("q"),saved=JSON.parse(sessionStorage.getItem("resource-workshop.creation.v2:"+id)||"{}");if(u.pathname!="/chat"||!id||id.indexOf("sim-")!==0||!prompt||saved.phase==="generating"||saved.phase==="complete")return null;sessionStorage.setItem("resource-workshop.prompt.v2:"+id,JSON.stringify({prompt:prompt,createdAt:Date.now(),featureId:p.get("featureId")||"",feature:p.get("feat")||""}));p.delete("q");return u.pathname+"?"+p.toString()+u.hash}catch(e){return null}}var initial=hold(location.href);if(initial)replace(history.state,"",initial);history.pushState=function(state,title,url){var held=url&&hold(url);if(held){location.assign(held);return}return push(state,title,url)}})();</script>';
+      body=Buffer.from(body.toString('utf8').replace('<head>','<head>'+gate).replace('</head>','<link rel="stylesheet" href="/paper-theme/paper.css"><script defer src="/paper-theme/presentation.js"></script></head>'));
       outputHeaders['cache-control']='no-store';
     }
     const multiValueHeaders={};

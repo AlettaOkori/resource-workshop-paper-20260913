@@ -1,0 +1,125 @@
+{
+  "profile": {
+    "id": "1000202320",
+    "name": "王红敏",
+    "subject": "生物",
+    "grade": "七年级",
+    "edition": "人教版"
+  },
+  "subjects": [
+    "语文",
+    "数学",
+    "英语",
+    "物理",
+    "化学",
+    "生物",
+    "道德与法治",
+    "历史",
+    "地理",
+    "信息科技",
+    "其他"
+  ],
+  "grades": [
+    "一年级",
+    "二年级",
+    "三年级",
+    "四年级",
+    "五年级",
+    "六年级",
+    "七年级",
+    "八年级",
+    "九年级"
+  ],
+  "editions": [
+    "人教版",
+    "北师大版",
+    "苏教版"
+  ],
+  "features": [
+    "教学动画",
+    "教育应用",
+    "教学游戏",
+    "互动课件",
+    "AI命题",
+    "AI组题"
+  ],
+  "teachers": [
+    {
+      "id": "1000986980",
+      "name": "刘瑞鹏",
+      "subject": "语文",
+      "grade": "七年级",
+      "edition": "人教版"
+    },
+    {
+      "id": "demo-teacher-1",
+      "name": "陈思远",
+      "subject": "数学",
+      "grade": "七年级",
+      "edition": "人教版"
+    },
+    {
+      "id": "demo-teacher-2",
+      "name": "林晓彤",
+      "subject": "英语",
+      "grade": "七年级",
+      "edition": "人教版"
+    },
+    {
+      "id": "1000202320",
+      "name": "王红敏",
+      "subject": "生物",
+      "grade": "七年级",
+      "edition": "人教版"
+    },
+    {
+      "id": "demo-teacher-4",
+      "name": "周明哲",
+      "subject": "物理",
+      "grade": "八年级",
+      "edition": "人教版"
+    },
+    {
+      "id": "demo-teacher-5",
+      "name": "赵雅静",
+      "subject": "化学",
+      "grade": "九年级",
+      "edition": "人教版"
+    },
+    {
+      "id": "demo-teacher-6",
+      "name": "许佳宁",
+      "subject": "道德与法治",
+      "grade": "七年级",
+      "edition": "人教版"
+    },
+    {
+      "id": "demo-teacher-7",
+      "name": "李文博",
+      "subject": "历史",
+      "grade": "七年级",
+      "edition": "人教版"
+    },
+    {
+      "id": "demo-teacher-8",
+      "name": "沈知遥",
+      "subject": "地理",
+      "grade": "七年级",
+      "edition": "人教版"
+    },
+    {
+      "id": "demo-teacher-9",
+      "name": "张一帆",
+      "subject": "信息科技",
+      "grade": "七年级",
+      "edition": "人教版"
+    },
+    {
+      "id": "demo-teacher-10",
+      "name": "吴雨桐",
+      "subject": "其他",
+      "grade": "七年级",
+      "edition": "人教版"
+    }
+  ]
+}

@@ -136,17 +136,28 @@
   addEventListener('resize', scheduleCompanion, {passive:true});
   reducedMotion.addEventListener('change', resetCompanion);
   function updateMyResources(home) { window.PaperResources?.sync(home); }
-  const graphScript = document.createElement('script');
-  graphScript.src = '/paper-theme/knowledge-graph.js';
-  document.head.appendChild(graphScript);
-  const filterScript = document.createElement('script');
-  filterScript.src = '/paper-theme/resource-filters.js';
-  document.head.appendChild(filterScript);
-  const resourcesScript = document.createElement('script');
-  resourcesScript.src = '/paper-theme/my-resources.js';
-  resourcesScript.defer = true;
-  document.head.appendChild(resourcesScript);
+  function setupExamCard(card) {
+    if (!card || card.querySelector('.paper-exam-stack')) return;
+    const image = card.querySelector('[data-paper-card-image]');
+    if (!image) return;
+    const title = card.querySelector('[data-paper-card-title]')?.textContent?.trim() || '阶段检测卷';
+    const shortTitle = title.split('｜')[0].split(':')[0].split('：')[0].trim() || '阶段检测卷';
+    const stack = document.createElement('div');
+    stack.className = 'paper-exam-stack';
+    stack.setAttribute('aria-hidden', 'true');
+    stack.innerHTML = `<div class="paper-exam-sheet paper-exam-sheet-back"></div><div class="paper-exam-sheet paper-exam-sheet-mid"></div><div class="paper-exam-sheet paper-exam-sheet-front"><div class="paper-exam-kicker">${shortTitle}</div><div class="paper-exam-heading">${title}</div><div class="paper-exam-rule"></div><div class="paper-exam-fields"><span>姓名 <i></i></span><span>班级 <i></i></span><span>得分 <i></i></span></div><div class="paper-exam-section">一、选择题</div><div class="paper-exam-question">1. 下列说法正确的是（　　）</div><div class="paper-exam-line"></div><div class="paper-exam-question">2. 请根据材料完成作答。</div><div class="paper-exam-line"></div><div class="paper-exam-foot"><span>共 6 题</span><b>第 1 页</b></div></div>`;
+    image.appendChild(stack);
+  }
+  const loadModule=name=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/paper-theme/'+name+'.js';script.onload=resolve;script.onerror=()=>reject(new Error('无法加载 '+script.src));document.head.append(script);});
+  (async()=>{
+    await loadModule('workshop-data');await window.WorkshopData.ready;
+    for(const name of ['uploads','my-resources','knowledge-picker','knowledge-graph','resource-filters','resource-details','workshop-shell','workshop-dashboard']){
+      // A page module must not prevent unrelated current pages from loading.
+      try{await loadModule(name);}catch(error){console.error('工坊模块加载失败：'+name,error);}
+    }
+  })().catch(error=>console.error('工坊基础数据加载失败',error));
   document.addEventListener('paper-resources-ready', () => schedule());
+  document.addEventListener('workshop-data-changed', () => schedule());
   let pending = false;
   function decorate() {
     pending = false;
@@ -167,11 +178,33 @@
       if (card.closest('[data-rw-owned]')) return;
       const img = card.querySelector('img'); if (!img) return;
       mark(card, 'card');
-      const thumb = card.children[0], info = card.children[1];
+      const [thumb, info] = [...card.children].filter(node => !node.classList.contains('paper-book-caption'));
       mark(thumb, 'card-image'); mark(info, 'card-info');
       if (info) { mark(info.children[0], 'card-title'); mark(info.children[1], 'card-meta'); }
+      // Append the caption after the original children so repeated decoration
+      // keeps identifying the same image, title, and metadata nodes.
+      if (route === '/' && !document.body.hasAttribute('data-paper-library-page') && thumb && Object.keys(card).some(key => key.startsWith('__reactProps$'))) {
+        const id = new URL(card.href, location.origin).pathname.split('/').pop();
+        const resource = window.WorkshopData?.resource(id);
+        let caption = card.querySelector('.paper-book-caption');
+        if (!caption) {
+          caption = document.createElement('span');
+          caption.className = 'paper-book-caption';
+          caption.innerHTML = '<span></span><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 9 9 3M5 3h4v4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          card.appendChild(caption);
+        }
+        // The first decoration pass can happen before WorkshopData finishes
+        // loading; update the same caption on the later pass instead of
+        // leaving the generic fallback text in place.
+        const kind = resource?.kind || resource?.feature;
+        if (kind && caption.firstElementChild.textContent !== kind) caption.firstElementChild.textContent = kind;
+      }
       const src = img.getAttribute('src') || '';
-      for (const [match, theme] of Object.entries(coverNames)) if (src.includes(match)) { mark(card, 'cover', theme); break; }
+      for (const [match, theme] of Object.entries(coverNames)) if (src.includes(match)) {
+        mark(card, 'cover', theme);
+        if (route === '/' && !document.body.hasAttribute('data-paper-library-page') && theme === 'exam') setupExamCard(card);
+        break;
+      }
       if (card.parentElement.classList.contains('grid')) mark(card.parentElement, 'card-grid');
     });
     if (route === '/') {
@@ -185,6 +218,9 @@
           const home = composer.parentElement; mark(home, 'home-body'); mark(home.children[0], 'home-heading'); setupCompanion(home.children[0]?.querySelector(':scope > svg'));
           mark(home.children[2], 'home-tabs'); mark(home.children[3], 'home-gallery');
           mark(home.parentElement, 'home-scroll');
+          document.querySelectorAll('body[data-paper-page="home"] button').forEach(button => {
+            if (/更多教学(?:资源|应用)/.test(button.textContent.trim())) mark(button, 'resource-more');
+          });
           updateMyResources(home);
         }
       }

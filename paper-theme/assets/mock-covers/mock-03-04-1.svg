@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400"><defs>
+ <linearGradient id="leaf" x2="1" y2="1"><stop stop-color="#b9d395"/><stop offset="1" stop-color="#366f50"/></linearGradient>
+ <radialGradient id="cell"><stop stop-color="#d6e9de"/><stop offset="1" stop-color="#7cafb2"/></radialGradient>
+ <radialGradient id="nucleus"><stop stop-color="#bbb4de"/><stop offset="1" stop-color="#716b9e"/></radialGradient>
+ <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#67434f" stroke-opacity=".04"/></pattern></defs>
+ <rect width="640" height="400" fill="#f0e6e6"/><circle cx="484" cy="205" r="149" fill="#e3cdd3"/><rect width="640" height="400" fill="url(#grid)"/>
+ <g font-family="PingFang SC,Microsoft YaHei,sans-serif" fill="#67434f"><text x="32" y="35" font-size="15" letter-spacing="1">生物 / 七年级</text>
+ <text x="34" y="140" font-size="30" font-weight="600">生态系统的组成</text><path d="M34 163H83" stroke="#67434f" stroke-width="3"/>
+ <text x="34" y="201" font-size="17">互动实验</text>
+ <g transform="translate(322 58) rotate(-5 155 150)"><circle cx="253" cy="50" r="28" fill="#efc96c" /><path d="M0 220Q75 130 143 209Q217 120 310 209V300H0Z" fill="#b0cba0"/><path d="M0 260Q120 209 310 236V300H0Z" fill="#568765"/><g transform="translate(64 226) scale(0.75)"><path d="M0 0C-65-65-15-115 0-125C70-75 50-25 0 0Z" fill="url(#leaf)"/><path d="M0 10V-100M0-40L-20-65M0-65L18-87" stroke="#d7eed1" stroke-width="2" fill="none"/></g><ellipse cx="170" cy="213" rx="31" ry="21" fill="#f9efdc"/><ellipse cx="186" cy="185" rx="8" ry="30" fill="#f9efdc"/><path d="M225 114Q250 85 267 114Q289 85 305 113" stroke="#456a73" fill="none" stroke-width="5"/><path d="M105 206L132 206" stroke="#bb8749" stroke-width="3" fill="none"/><text x="151" y="63" font-size="14" fill="#305361" text-anchor="middle">能量的流动</text></g>
+ <path d="M32 353H607" stroke="#67434f" stroke-opacity=".18"/><text x="32" y="379" font-size="14">人教版 · 教学应用</text><text x="608" y="379" text-anchor="end" font-size="14">05 / 探究课堂</text></g></svg>

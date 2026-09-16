@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400"><defs>
+ <linearGradient id="leaf" x2="1" y2="1"><stop stop-color="#b9d395"/><stop offset="1" stop-color="#366f50"/></linearGradient>
+ <radialGradient id="cell"><stop stop-color="#d6e9de"/><stop offset="1" stop-color="#7cafb2"/></radialGradient>
+ <radialGradient id="nucleus"><stop stop-color="#bbb4de"/><stop offset="1" stop-color="#716b9e"/></radialGradient>
+ <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#65462f" stroke-opacity=".04"/></pattern></defs>
+ <rect width="640" height="400" fill="#f4eadb"/><path d="M315 0H640V400H380Q294 194 315 0Z" fill="#ead5b6"/><rect width="640" height="400" fill="url(#grid)"/>
+ <g font-family="PingFang SC,Microsoft YaHei,sans-serif" fill="#65462f"><text x="32" y="35" font-size="15" letter-spacing="1">语文 / 一年级</text>
+ <text x="34" y="140" font-size="30" font-weight="600">拼音王国</text><path d="M34 163H83" stroke="#65462f" stroke-width="3"/>
+ <text x="34" y="201" font-size="17">概念探究课件</text>
+ <g transform="translate(322 55)"><path d="M155 98Q84 47 33 85V235Q94 209 155 253Q218 209 278 235V85Q219 47 155 98Z" fill="#fffaed" stroke="#a59172" stroke-width="3"/><path d="M155 98V253" stroke="#bda688" stroke-width="3"/><path d="M55 144L127 149" stroke="#b8baa3" stroke-width="3" fill="none"/><path d="M180 149L254 144" stroke="#b8baa3" stroke-width="3" fill="none"/><path d="M55 170L127 175" stroke="#b8baa3" stroke-width="3" fill="none"/><path d="M180 175L254 170" stroke="#b8baa3" stroke-width="3" fill="none"/><path d="M55 196L127 201" stroke="#b8baa3" stroke-width="3" fill="none"/><path d="M180 201L254 196" stroke="#b8baa3" stroke-width="3" fill="none"/><text x="91" y="121" font-size="30" fill="#305361" text-anchor="middle">文</text><text x="218" y="121" font-size="30" fill="#305361" text-anchor="middle">诗</text><g transform="translate(265 82) scale(0.6)"><path d="M0 0C-65-65-15-115 0-125C70-75 50-25 0 0Z" fill="url(#leaf)"/><path d="M0 10V-100M0-40L-20-65M0-65L18-87" stroke="#d7eed1" stroke-width="2" fill="none"/></g><circle cx="61" cy="44" r="20" fill="#e4ba79" /></g>
+ <path d="M32 353H607" stroke="#65462f" stroke-opacity=".18"/><text x="32" y="379" font-size="14">北师大版 · 互动课件</text><text x="608" y="379" text-anchor="end" font-size="14">07 / 探究课堂</text></g></svg>

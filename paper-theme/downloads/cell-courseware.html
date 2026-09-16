@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>细胞结构与功能｜动物细胞与植物细胞</title>
+  <style>
+    :root{
+      --canvas:#DBEFED;
+      --surface:#EDF7F8;
+      --surface-alt:#E9F8F5;
+      --ink:#3C5B5D;
+      --ink-muted:#587476;
+      --primary:#71D4D1;
+      --primary-deep:#62B2B1;
+      --highlight:#BFE8E5;
+      --attention:#D66A58;
+      --positive:#2C6751;
+      --border:#C3D2D3;
+      --white:#FFFFFF;
+      --shadow:0 10px 24px rgba(60,91,93,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--canvas);color:var(--ink);font-family:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif}
+    button{font:inherit;color:inherit}
+    .app{min-height:100vh;padding:24px 28px 20px;display:flex;flex-direction:column;gap:14px}
+    .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;max-width:1600px;width:100%;margin:0 auto}
+    .eyebrow{font-size:13px;letter-spacing:.16em;color:var(--ink-muted);margin-bottom:6px}
+    h1{margin:0;font-size:clamp(28px,3.2vw,46px);line-height:1.08;letter-spacing:-.04em;font-weight:800;color:var(--ink)}
+    .subtitle{margin:8px 0 0;font-size:15px;color:var(--ink-muted)}
+    .top-actions{display:flex;gap:8px;align-items:center;padding-top:4px}
+    .btn{border:1px solid var(--border);border-radius:0;background:var(--surface-alt);padding:10px 14px;cursor:pointer;transition:.2s ease;min-height:42px}
+    .btn:hover,.btn:focus-visible{background:var(--highlight);outline:none;transform:translateY(-1px)}
+    .btn.primary{background:var(--primary);border-color:var(--primary-deep);color:#000;font-weight:700}
+    .stage{max-width:1600px;width:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(310px,.75fr);gap:14px;min-height:500px;flex:1}
+    .panel{background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow)}
+    .visual-panel{display:flex;flex-direction:column;min-width:0}
+    .panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border)}
+    .panel-title{font-weight:800;font-size:16px}
+    .hint{font-size:12px;color:var(--ink-muted)}
+    .steps{display:flex;gap:8px;padding:12px 16px 8px;overflow:auto}
+    .step{border:1px solid var(--border);background:var(--surface-alt);padding:8px 11px;white-space:nowrap;cursor:pointer;font-size:13px;min-height:36px;transition:.2s ease}
+    .step.active{background:var(--primary);border-color:var(--primary-deep);color:#000;font-weight:700}
+    .step:hover,.step:focus-visible{background:var(--highlight);outline:none}
+    .svg-wrap{padding:4px 14px 10px;flex:1;min-height:365px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    svg{width:100%;height:auto;max-height:520px;display:block}
+    .cell-title{font-size:16px;font-weight:800;fill:var(--ink)}
+    .cell-subtitle{font-size:12px;fill:var(--ink-muted)}
+    .structure{cursor:pointer;transition:opacity .35s ease,filter .25s ease,transform .25s ease;transform-box:fill-box;transform-origin:center}
+    .structure:hover,.structure:focus-visible{filter:drop-shadow(0 0 7px rgba(113,212,209,.75));outline:none}
+    .structure.hidden{opacity:.08;pointer-events:none}
+    .structure.dim{opacity:.28}
+    .structure.selected{filter:drop-shadow(0 0 10px rgba(98,178,177,.9));transform:scale(1.035)}
+    .membrane-line{fill:none;stroke:#4A9997;stroke-width:4}
+    .cell-wall{fill:#CFEDE8;stroke:#5FAEAA;stroke-width:3}
+    .cell-fill-animal{fill:#DDF4F0;stroke:#71D4D1;stroke-width:3}
+    .cell-fill-plant{fill:#D9F1DF;stroke:#71B99A;stroke-width:3}
+    .cytoplasm{fill:#BFE8E5;opacity:.75;stroke:#71D4D1;stroke-width:2}
+    .nucleus{fill:#F1C5A2;stroke:#C97E58;stroke-width:2.5}
+    .nucleolus{fill:#D66A58}
+    .chloroplast{fill:#9DCFAE;stroke:#2C6751;stroke-width:2}
+    .vacuole{fill:#FFFFFF;opacity:.7;stroke:#7AB8B2;stroke-width:2}
+    .mito{fill:#E8C08A;stroke:#B66E43;stroke-width:2}
+    .label-line{stroke:#587476;stroke-width:1.4;fill:none;stroke-dasharray:4 3}
+    .svg-label{font-size:12px;fill:var(--ink);font-weight:700}
+    .legend{display:flex;gap:12px;flex-wrap:wrap;padding:0 16px 14px;font-size:12px;color:var(--ink-muted)}
+    .dot{width:10px;height:10px;display:inline-block;margin-right:5px;border:1px solid rgba(60,91,93,.25);vertical-align:-1px}
+    .dot.core{background:#F1C5A2}.dot.boundary{background:#71D4D1}.dot.special{background:#9DCFAE}
+    .info-panel{display:flex;flex-direction:column;min-width:0}
+    .info-body{padding:18px 18px 14px;display:flex;flex-direction:column;gap:14px;flex:1}
+    .kicker{font-size:12px;color:var(--ink-muted);letter-spacing:.08em}
+    .info-title{margin:0;font-size:30px;letter-spacing:-.03em;color:var(--ink)}
+    .info-tag{display:inline-flex;align-self:flex-start;padding:5px 8px;background:var(--highlight);font-size:12px;font-weight:700}
+    .info-copy{font-size:15px;line-height:1.75;margin:0;color:var(--ink)}
+    .function-box{background:var(--surface-alt);border-left:4px solid var(--primary-deep);padding:12px 13px}
+    .function-box strong{display:block;font-size:13px;margin-bottom:5px}
+    .function-box span{font-size:14px;line-height:1.6}
+    .callout{border:1px solid var(--border);padding:12px 13px;background:#F5FBFB;font-size:13px;line-height:1.6}
+    .callout b{color:var(--positive)}
+    .info-footer{display:flex;gap:8px;padding-top:4px}
+    .info-footer .btn{flex:1}
+    .bottom-grid{max-width:1600px;width:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:14px}
+    .compare-panel,.quiz-panel{padding:16px}
+    .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px}
+    .section-head h2{font-size:17px;margin:0}
+    .section-head span{font-size:12px;color:var(--ink-muted)}
+    .compare-table{display:grid;grid-template-columns:1.1fr 1fr 1fr;border:1px solid var(--border)}
+    .compare-cell{padding:9px 10px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);font-size:13px;line-height:1.45;min-height:46px}
+    .compare-cell:nth-child(3n){border-right:0}.compare-cell:nth-last-child(-n+3){border-bottom:0}
+    .compare-cell.header{font-weight:800;background:var(--highlight)}
+    .compare-cell.feature{font-weight:700;background:var(--surface-alt)}
+    .quiz-question{font-size:15px;line-height:1.5;font-weight:700;margin:4px 0 12px}
+    .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .option{background:var(--surface-alt);border:1px solid var(--border);padding:10px 11px;text-align:left;cursor:pointer;min-height:44px;font-size:13px;transition:.2s ease}
+    .option:hover,.option:focus-visible{background:var(--highlight);outline:none}
+    .option.correct{background:#D8F0DF;border-color:var(--positive);color:var(--positive);font-weight:700}
+    .option.wrong{background:#F8DDD7;border-color:var(--attention);color:#8D3B2D}
+    .quiz-feedback{margin-top:10px;min-height:22px;font-size:13px;font-weight:700}
+    .quiz-feedback.good{color:var(--positive)}.quiz-feedback.bad{color:var(--attention)}
+    .quiz-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px}
+    .progress{font-size:12px;color:var(--ink-muted)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media (max-width:1050px){
+      .stage{grid-template-columns:1fr}.info-panel{min-height:300px}.bottom-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:650px){
+      .app{padding:16px 12px}.topbar{display:block}.top-actions{margin-top:12px}.stage{min-height:auto}.svg-wrap{min-height:300px;padding:4px}.quiz-options{grid-template-columns:1fr}.compare-table{font-size:12px}.compare-cell{padding:8px 6px}.info-title{font-size:25px}
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">初中生物 · 结构与功能</div>
+        <h1>细胞是怎样工作的？</h1>
+        <p class="subtitle">观察动物细胞与植物细胞：从共同结构到植物细胞的特殊“装备”。</p>
+      </div>
+      <div class="top-actions">
+        <button class="btn primary" id="playBtn">播放分步骤</button>
+        <button class="btn" id="resetBtn">重置视图</button>
+      </div>
+    </header>
+
+    <section class="stage">
+      <section class="panel visual-panel" aria-label="细胞结构探索区">
+        <div class="panel-head">
+          <div class="panel-title">结构探索区</div>
+          <div class="hint">点击结构，可查看名称与功能</div>
+        </div>
+        <nav class="steps" aria-label="分步骤讲解">
+          <button class="step active" data-step="0">01 整体观察</button>
+          <button class="step" data-step="1">02 细胞膜</button>
+          <button class="step" data-step="2">03 细胞质</button>
+          <button class="step" data-step="3">04 细胞核</button>
+          <button class="step" data-step="4">05 植物特有结构</button>
+        </nav>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 900 470" role="img" aria-labelledby="cellSvgTitle cellSvgDesc">
+            <title id="cellSvgTitle">动物细胞与植物细胞结构示意图</title>
+            <desc id="cellSvgDesc">两种细胞并列显示，包含细胞膜、细胞质、细胞核，以及植物细胞的细胞壁、液泡和叶绿体。</desc>
+            <defs>
+               <lineargradient id="animalGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDF7F8"></stop><stop offset="1" stop-color="#CBECEA"></stop></lineargradient>
+               <lineargradient id="plantGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0FAF1"></stop><stop offset="1" stop-color="#CAE8D2"></stop></lineargradient>
+            </defs>
+            <text x="220" y="28" text-anchor="middle" class="cell-title">动物细胞</text>
+            <text x="220" y="48" text-anchor="middle" class="cell-subtitle">形态较灵活，没有细胞壁和叶绿体</text>
+            <text x="680" y="28" text-anchor="middle" class="cell-title">植物细胞</text>
+            <text x="680" y="48" text-anchor="middle" class="cell-subtitle">有细胞壁、液泡和叶绿体</text>
+
+            <g id="animalCell">
+              <path class="structure cell-fill-animal" data-part="cell-membrane" d="M92,241 C85,170 132,94 226,83 C316,72 374,127 360,219 C349,294 293,362 204,360 C132,359 98,317 92,241 Z"/>
+              <path class="structure membrane-line" data-part="cell-membrane" d="M92,241 C85,170 132,94 226,83 C316,72 374,127 360,219 C349,294 293,362 204,360 C132,359 98,317 92,241 Z"/>
+              <path class="structure cytoplasm" data-part="cytoplasm" d="M120,236 C116,180 151,119 225,111 C290,104 338,145 329,215 C321,277 275,331 207,331 C151,331 124,294 120,236 Z"/>
+              <g class="structure" data-part="nucleus" tabindex="0" aria-label="动物细胞细胞核">
+                <ellipse class="nucleus" cx="225" cy="220" rx="54" ry="47"/>
+                <circle class="nucleolus" cx="239" cy="211" r="12"/>
+              </g>
+              <g class="structure" data-part="mitochondria" tabindex="0" aria-label="动物细胞线粒体">
+                <ellipse class="mito" cx="161" cy="173" rx="24" ry="13" transform="rotate(-24 161 173)"/><path d="M146 176q12-15 26 0q-12 10-22 1" fill="none" stroke="#B66E43" stroke-width="2"/>
+              </g>
+              <g class="structure" data-part="mitochondria" tabindex="0" aria-label="动物细胞线粒体">
+                <ellipse class="mito" cx="286" cy="275" rx="24" ry="13" transform="rotate(25 286 275)"/><path d="M272 271q12 15 26 0q-12-10-22-1" fill="none" stroke="#B66E43" stroke-width="2"/>
+              </g>
+              <path class="label-line" d="M122 149L50 110"/><text x="12" y="105" class="svg-label">细胞膜</text>
+              <path class="label-line" d="M181 318L56 344"/><text x="10" y="361" class="svg-label">细胞质</text>
+              <path class="label-line" d="M258 179L345 130"/><text x="350" y="124" class="svg-label">细胞核</text>
+            </g>
+
+            <g id="plantCell">
+              <path class="structure cell-wall" data-part="cell-wall" d="M509,129 Q515,91 553,85 L801,85 Q839,90 845,129 L845,332 Q838,371 800,377 L554,377 Q516,371 509,332 Z"/>
+              <path class="structure cell-fill-plant" data-part="cell-membrane" d="M526,139 Q530,111 561,106 L793,106 Q824,111 828,139 L828,322 Q822,351 793,356 L561,356 Q532,351 526,322 Z"/>
+              <path class="structure membrane-line" data-part="cell-membrane" d="M526,139 Q530,111 561,106 L793,106 Q824,111 828,139 L828,322 Q822,351 793,356 L561,356 Q532,351 526,322 Z"/>
+              <path class="structure cytoplasm" data-part="cytoplasm" d="M545,151 Q550,127 577,123 L778,123 Q807,128 810,151 L810,310 Q805,337 778,340 L577,340 Q550,336 545,310 Z"/>
+              <g class="structure" data-part="nucleus" tabindex="0" aria-label="植物细胞细胞核">
+                <ellipse class="nucleus" cx="675" cy="230" rx="56" ry="50"/><circle class="nucleolus" cx="690" cy="219" r="12"/>
+              </g>
+              <g class="structure" data-part="chloroplast" tabindex="0" aria-label="植物细胞叶绿体">
+                <ellipse class="chloroplast" cx="585" cy="168" rx="30" ry="15" transform="rotate(-18 585 168)"/><path d="M562 168h45M568 161h32M569 175h30" stroke="#2C6751" stroke-width="2"/>
+              </g>
+              <g class="structure" data-part="chloroplast" tabindex="0" aria-label="植物细胞叶绿体">
+                <ellipse class="chloroplast" cx="767" cy="298" rx="30" ry="15" transform="rotate(18 767 298)"/><path d="M744 298h45M750 291h32M751 305h30" stroke="#2C6751" stroke-width="2"/>
+              </g>
+              <g class="structure" data-part="vacuole" tabindex="0" aria-label="植物细胞液泡">
+                <ellipse class="vacuole" cx="753" cy="190" rx="35" ry="24"/>
+              </g>
+              <path class="label-line" d="M542 122L486 95"/><text x="418" y="91" class="svg-label">细胞壁</text>
+              <path class="label-line" d="M594 168L510 153"/><text x="420" y="151" class="svg-label">叶绿体</text>
+              <path class="label-line" d="M770 191L840 164"/><text x="845" y="159" class="svg-label">液泡</text>
+              <path class="label-line" d="M708 280L827 329"/><text x="830" y="346" class="svg-label">细胞核</text>
+            </g>
+          </svg>
+        </div>
+        <div class="legend">
+          <span><i class="dot boundary"></i>边界结构</span>
+          <span><i class="dot core"></i>遗传信息中心</span>
+          <span><i class="dot special"></i>植物特有结构</span>
+        </div>
+      </section>
+
+      <aside class="panel info-panel" aria-live="polite">
+        <div class="panel-head"><div class="panel-title">当前讲解</div><div class="hint" id="stepHint">第 1 步 / 共 5 步</div></div>
+        <div class="info-body">
+          <div class="kicker" id="infoKicker">共同结构</div>
+          <h2 class="info-title" id="infoTitle">先看整体</h2>
+          <span class="info-tag" id="infoTag">两种细胞都有</span>
+          <p class="info-copy" id="infoCopy">动物细胞和植物细胞都由细胞膜、细胞质和细胞核等结构组成。它们像一个分工明确的小系统，共同完成生命活动。</p>
+          <div class="function-box"><strong>功能关键词</strong><span id="functionText">保护与控制｜支持生命活动｜储存遗传信息</span></div>
+          <div class="callout" id="callout"><b>观察提示：</b>先比较外轮廓，再寻找两种细胞中都能看到的结构。</div>
+          <div class="info-footer">
+            <button class="btn" id="prevBtn">上一步</button>
+            <button class="btn primary" id="nextBtn">下一步</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="bottom-grid">
+      <section class="panel compare-panel" aria-label="结构对比">
+        <div class="section-head"><h2>一眼看懂异同</h2><span>共同结构是基础，特殊结构体现适应性</span></div>
+        <div class="compare-table">
+          <div class="compare-cell header">结构或特征</div><div class="compare-cell header">动物细胞</div><div class="compare-cell header">植物细胞</div>
+          <div class="compare-cell feature">细胞膜、细胞质、细胞核</div><div class="compare-cell">都有</div><div class="compare-cell">都有</div>
+          <div class="compare-cell feature">细胞壁</div><div class="compare-cell">没有</div><div class="compare-cell">有，支持和保护</div>
+          <div class="compare-cell feature">叶绿体</div><div class="compare-cell">没有</div><div class="compare-cell">有，进行光合作用</div>
+          <div class="compare-cell feature">液泡</div><div class="compare-cell">通常不明显</div><div class="compare-cell">较大，储存细胞液</div>
+        </div>
+      </section>
+
+      <section class="panel quiz-panel" aria-label="互动练习">
+        <div class="section-head"><h2>快速判断</h2><span id="quizCount">第 1 题 / 3</span></div>
+        <div class="quiz-question" id="quizQuestion">哪一种结构能控制物质进出细胞？</div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div>
+        <div class="quiz-footer"><span class="progress" id="quizScore">得分：0</span><button class="btn" id="nextQuizBtn">下一题</button></div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const parts = {
+      overall:{kicker:'共同结构',title:'先看整体',tag:'两种细胞都有',copy:'动物细胞和植物细胞都由细胞膜、细胞质和细胞核等结构组成。它们像一个分工明确的小系统，共同完成生命活动。',func:'保护与控制｜支持生命活动｜储存遗传信息',callout:'先比较外轮廓，再寻找两种细胞中都能看到的结构。'},
+      membrane:{kicker:'边界结构',title:'细胞膜',tag:'控制物质进出',copy:'细胞膜包在细胞最外层，像一道有选择性的“门”。它让有用物质进入，也帮助排出不需要的物质。',func:'保护细胞｜控制物质进出｜维持内部环境',callout:'两种细胞都有细胞膜；植物细胞的细胞膜位于细胞壁里面。'},
+      cytoplasm:{kicker:'活动场所',title:'细胞质',tag:'生命活动的重要场所',copy:'细胞质位于细胞膜以内、细胞核以外，呈胶状。许多生命活动在这里进行，细胞器也分布其中。',func:'为细胞器提供活动空间｜支持多种生命活动',callout:'观察细胞质时，可以把它看成“细胞内部的工作区”。'},
+      nucleus:{kicker:'遗传信息中心',title:'细胞核',tag:'储存遗传信息',copy:'细胞核通常是细胞中较明显的结构，里面含有遗传物质。它对细胞的生命活动起着控制作用。',func:'储存遗传信息｜控制细胞生命活动',callout:'动物细胞和植物细胞都有细胞核，这是两者的共同结构之一。'},
+      plant:{kicker:'植物特有结构',title:'细胞壁、叶绿体和液泡',tag:'体现植物生活方式',copy:'细胞壁支持和保护；叶绿体是光合作用的场所；液泡中有细胞液，能够储存物质。',func:'支持保护｜进行光合作用｜储存细胞液',callout:'结构不同，往往与生活方式有关：植物需要固定、获取光能并储存水分和物质。'}
+    };
+    const steps = [...document.querySelectorAll('.step')];
+    const structures = [...document.querySelectorAll('.structure')];
+    const infoKicker = document.getElementById('infoKicker');
+    const infoTitle = document.getElementById('infoTitle');
+    const infoTag = document.getElementById('infoTag');
+    const infoCopy = document.getElementById('infoCopy');
+    const functionText = document.getElementById('functionText');
+    const callout = document.getElementById('callout');
+    const stepHint = document.getElementById('stepHint');
+    let currentStep = 0;
+    let timer = null;
+
+    function updateInfo(key){
+      const p = parts[key];
+      infoKicker.textContent=p.kicker; infoTitle.textContent=p.title; infoTag.textContent=p.tag; infoCopy.textContent=p.copy; functionText.textContent=p.func; callout.innerHTML='<b>观察提示：</b>'+p.callout;
+    }
+    function applyStep(step){
+      currentStep = step;
+      steps.forEach((el,i)=>el.classList.toggle('active',i===step));
+      stepHint.textContent=`第 ${step+1} 步 / 共 5 步`;
+      structures.forEach(el=>{el.classList.remove('hidden','dim','selected')});
+      let key='overall';
+      if(step===1){key='membrane'; structures.filter(el=>el.dataset.part!=='cell-membrane').forEach(el=>el.classList.add('dim'));}
+      if(step===2){key='cytoplasm'; structures.filter(el=>!['cell-membrane','cytoplasm'].includes(el.dataset.part)).forEach(el=>el.classList.add('dim'));}
+      if(step===3){key='nucleus'; structures.filter(el=>el.dataset.part!=='nucleus').forEach(el=>el.classList.add('dim'));}
+      if(step===4){key='plant'; structures.filter(el=>!['cell-wall','chloroplast','vacuole'].includes(el.dataset.part)).forEach(el=>el.classList.add('dim'));}
+      updateInfo(key);
+      window.__interactionState={step,selected:key,quizIndex:window.__interactionState?.quizIndex??0,quizScore:window.__interactionState?.quizScore??0};
+    }
+    function selectPart(part, el){
+      structures.forEach(s=>s.classList.remove('selected'));
+      if(el) el.classList.add('selected');
+      const key = ['cell-membrane'].includes(part)?'membrane':part==='cytoplasm'?'cytoplasm':part==='nucleus'?'nucleus':part==='cell-wall'||part==='chloroplast'||part==='vacuole'?'plant':'overall';
+      updateInfo(key);
+      window.__interactionState={...window.__interactionState,selected:part};
+    }
+    steps.forEach((el,i)=>el.addEventListener('click',()=>applyStep(i)));
+    structures.forEach(el=>{
+      el.addEventListener('click',()=>selectPart(el.dataset.part,el));
+      el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectPart(el.dataset.part,el)}});
+    });
+    document.getElementById('prevBtn').addEventListener('click',()=>applyStep(Math.max(0,currentStep-1)));
+    document.getElementById('nextBtn').addEventListener('click',()=>applyStep(Math.min(4,currentStep+1)));
+    document.getElementById('resetBtn').addEventListener('click',()=>{clearInterval(timer);timer=null;document.getElementById('playBtn').textContent='播放分步骤';applyStep(0);structures.forEach(s=>s.classList.remove('selected'));});
+    document.getElementById('playBtn').addEventListener('click',()=>{
+      if(timer){clearInterval(timer);timer=null;document.getElementById('playBtn').textContent='播放分步骤';return;}
+      applyStep(0);document.getElementById('playBtn').textContent='暂停播放';
+      timer=setInterval(()=>{if(currentStep>=4){clearInterval(timer);timer=null;document.getElementById('playBtn').textContent='播放分步骤';return;}applyStep(currentStep+1)},1500);
+    });
+
+    const quizzes=[
+      {q:'哪一种结构能控制物质进出细胞？',opts:['细胞膜','细胞核','叶绿体','液泡'],answer:0,why:'细胞膜像有选择性的门，负责控制物质进出。'},
+      {q:'下列哪一项是植物细胞具有、动物细胞没有的结构？',opts:['细胞质','细胞膜','叶绿体','细胞核'],answer:2,why:'叶绿体是植物细胞特有结构之一，是光合作用的场所。'},
+      {q:'细胞核的主要作用是什么？',opts:['储存遗传信息并控制生命活动','进行光合作用','支持和保护细胞','储存细胞液'],answer:0,why:'细胞核储存遗传信息，并对细胞生命活动起控制作用。'}
+    ];
+    let quizIndex=0,score=0,answered=false;
+    const quizQuestion=document.getElementById('quizQuestion'),quizOptions=document.getElementById('quizOptions'),quizFeedback=document.getElementById('quizFeedback'),quizCount=document.getElementById('quizCount'),quizScore=document.getElementById('quizScore');
+    function renderQuiz(){
+      const item=quizzes[quizIndex]; answered=false; quizQuestion.textContent=item.q;quizCount.textContent=`第 ${quizIndex+1} 题 / ${quizzes.length}`;quizFeedback.textContent='';quizFeedback.className='quiz-feedback';quizOptions.innerHTML='';
+      item.opts.forEach((text,i)=>{const b=document.createElement('button');b.className='option';b.textContent=text;b.addEventListener('click',()=>answerQuiz(i,b));quizOptions.appendChild(b)});
+      window.__interactionState={...window.__interactionState,quizIndex,quizScore:score};
+    }
+    function answerQuiz(i,btn){
+      if(answered)return;answered=true;const item=quizzes[quizIndex];const buttons=[...quizOptions.children];buttons[item.answer].classList.add('correct');
+      if(i===item.answer){score++;quizFeedback.textContent='回答正确。'+item.why;quizFeedback.className='quiz-feedback good';}else{btn.classList.add('wrong');quizFeedback.textContent='再想一想。'+item.why;quizFeedback.className='quiz-feedback bad';}
+      quizScore.textContent=`得分：${score}`;window.__interactionState={...window.__interactionState,quizIndex,quizScore:score};
+    }
+    document.getElementById('nextQuizBtn').addEventListener('click',()=>{quizIndex=(quizIndex+1)%quizzes.length;renderQuiz()});
+    renderQuiz();applyStep(0);
+  </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>资源卡片 · 首页外观方向对比</title>
+  <style>
+    :root{
+      --page:#f4f5f1;--paper:#fbfcf8;--ink:#222720;--muted:#687168;--line:#d9ddd4;
+      --red:#c73539;--green:#3f6957;--blue:#496b87;--orange:#d06b3e;--yellow:#d5ad56;
+      --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      --serif:"Songti SC","STSong","Noto Serif CJK SC",serif;
+    }
+    *{box-sizing:border-box} body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);font-size:14px}
+    .page{max-width:1480px;margin:0 auto;padding:42px 46px 78px}
+    .mast{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px;color:var(--muted);font-size:12px;letter-spacing:.08em}
+    .brand{font-weight:700;color:var(--ink);letter-spacing:.02em}.brand b{display:inline-grid;place-items:center;width:20px;height:20px;margin-right:8px;border:1px solid var(--red);border-radius:50%;color:var(--red);font-size:14px}
+    .intro{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:48px;padding:68px 0 42px;align-items:end}
+    .eyebrow{color:var(--red);font-size:11px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:15px}
+    h1{font-family:var(--serif);font-size:clamp(32px,4vw,58px);font-weight:400;line-height:1.08;letter-spacing:.02em;margin:0 0 20px;max-width:720px}
+    h1 em{font-style:normal;color:var(--red)} .intro-copy{color:var(--muted);line-height:1.8;max-width:430px;margin:0}
+    .brief{border-left:2px solid var(--red);padding:0 0 0 18px;color:var(--muted);line-height:1.8}.brief strong{display:block;color:var(--ink);font-size:15px;margin-bottom:8px}
+    .legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}.legend span{padding:7px 10px;border:1px solid var(--line);background:#fafbf8;color:var(--muted);font-size:12px}
+    .direction{border-top:1px solid var(--line);padding:30px 0 46px}.direction-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:22px}
+    .direction-title{display:flex;align-items:baseline;gap:14px}.direction-number{color:var(--red);font-size:11px;letter-spacing:.12em}.direction h2{font-family:var(--serif);font-size:27px;font-weight:400;margin:0}.direction-desc{max-width:480px;color:var(--muted);font-size:13px;line-height:1.65;margin:0;text-align:right}
+    .shelf{height:365px;display:flex;align-items:flex-end;gap:14px;overflow:hidden;padding:10px 0 0}.resource-card{position:relative;flex:1 1 0;min-width:0;height:var(--h);display:flex;flex-direction:column;overflow:hidden;transition:transform .2s ease}.resource-card:hover{transform:translateY(-5px)}
+    .resource-card:nth-child(1){--h:244px}.resource-card:nth-child(2){--h:278px}.resource-card:nth-child(3){--h:326px}.resource-card:nth-child(4){--h:300px}.resource-card:nth-child(5){--h:264px}.resource-card:nth-child(6){--h:234px}
+    .thumb{position:relative;min-height:0;flex:1;overflow:hidden}.thumb img{display:block;width:100%;height:100%;object-fit:cover}.type{font-size:10px;letter-spacing:.04em}.arrow{font-size:15px;line-height:1}.name{margin:0;font-family:var(--serif);font-weight:400}.meta{font-size:11px;color:var(--muted);white-space:nowrap}.meta b{font-weight:400;color:var(--ink)}
+
+    /* 01: preview-first. The content preview remains dominant, while the
+       type and continuation cue are readable outside the artwork. */
+    .preview-first{border:1px solid #ccd2c8;background:var(--paper);box-shadow:0 5px 13px #29322812}.preview-first .thumb{order:0}.preview-first .thumb:after{content:"";position:absolute;inset:auto 0 0;height:34%;background:linear-gradient(transparent,#1d2d2688)}.preview-first .topline{position:absolute;z-index:2;left:10px;right:10px;top:9px;display:flex;justify-content:space-between;color:#eef4ee;text-shadow:0 1px 2px #122016}.preview-first .copy{padding:10px 11px 11px;display:grid;grid-template-columns:1fr auto;gap:5px 8px;background:var(--paper)}.preview-first .name{font-size:17px;line-height:1.25;grid-column:1/-1}.preview-first .meta{grid-column:1}.preview-first .meta b{color:var(--green)}.preview-first .status{align-self:end;font-size:10px;color:var(--green)}
+
+    /* Scheme 01 special case: a worksheet is a stack of pages, not a cover
+       image. The paper edges and the printed page anatomy make that resource
+       type legible at a glance while keeping the card's original footprint. */
+    .exam-stack{overflow:visible;background:transparent;border:0;box-shadow:none;padding:0 10px 10px 0;isolation:isolate}
+    .exam-stack::before,.exam-stack::after{content:"";position:absolute;z-index:-1;background:#ebe5d6;border:1px solid #d2cbbb;box-shadow:1px 2px 4px #6d5b301c}
+    .exam-stack::before{inset:7px 0 0 9px;transform:rotate(1.35deg)}
+    .exam-stack::after{inset:4px 5px 5px 4px;transform:rotate(-.9deg);background:#f3eee2}
+    .exam-stack .exam-sheet{position:relative;z-index:1;display:flex;flex-direction:column;min-height:0;flex:1;background:#faf6ec;border:1px solid #d0c8b7;box-shadow:0 3px 9px #6d5b3026;padding:9px 10px 8px;color:#252922}
+    .exam-stack .exam-sheet::after{content:"";position:absolute;right:-1px;top:26px;bottom:8px;width:2px;background:repeating-linear-gradient(to bottom,#d5d7cf 0 1px,transparent 1px 4px);opacity:.8}
+    .exam-stack .exam-topline{display:flex;justify-content:space-between;align-items:center;color:#667068;font-size:9px;line-height:1;margin-bottom:7px}.exam-stack .exam-topline .type{font-size:9px;color:#a88642}.exam-stack .exam-topline .arrow{font-size:13px;color:#9a9f95}
+    .exam-stack .exam-title{font-family:var(--sans);font-size:13px;line-height:1.3;text-align:center;font-weight:700;letter-spacing:.01em;margin:0}.exam-stack .exam-subtitle{text-align:center;color:#73786f;font-size:8px;line-height:1.4;margin-top:2px}.exam-stack .exam-rule{border-top:1px solid #333;margin:6px 0 5px}.exam-stack .exam-fields{display:flex;gap:7px;font-size:7.5px;line-height:1.3;color:#51574f;white-space:nowrap}.exam-stack .exam-fields i{display:inline-block;width:25px;border-bottom:1px solid #a6aaa1;height:7px;vertical-align:bottom}
+    .exam-stack .exam-section{font-family:var(--sans);font-size:8px;font-weight:700;margin-top:7px;border-bottom:1px solid #d7d9d2;padding-bottom:3px}.exam-stack .exam-question{font-family:var(--serif);font-size:8px;line-height:1.65;margin-top:4px}.exam-stack .answer-line{height:8px;border-bottom:1px solid #d5d7d0;margin:0 0 2px}.exam-stack .exam-foot{display:flex;justify-content:space-between;align-items:end;margin-top:auto;padding-top:5px;border-top:1px solid #d7d9d2;color:#858b82;font-size:7px}.exam-stack .exam-foot b{font-weight:400;color:#a88642}
+
+    /* 02: workbench. It reads like a generated object with its next action,
+       not like a book waiting on a shelf. */
+    .workbench{background:var(--paper);border:1px solid #cad4d0;border-radius:9px;box-shadow:0 4px 9px #34484012}.workbench:before{content:"";position:absolute;z-index:3;left:0;top:0;bottom:0;width:4px;background:var(--green)}.workbench .thumb{margin:10px 10px 0;border-radius:5px;flex:none;height:57%}.workbench .thumb:before{content:"预览";position:absolute;z-index:2;right:8px;top:8px;padding:4px 6px;background:#eff5f0d9;color:var(--green);font-size:10px;border-radius:3px}.workbench .copy{padding:11px 12px 12px}.workbench .name{font-size:17px;line-height:1.25;margin-bottom:8px}.workbench .meta{display:flex;justify-content:space-between;align-items:center}.workbench .footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #e2e7e2;padding:8px 12px;color:var(--muted);font-size:10px}.workbench .footer strong{font-weight:500;color:var(--green)}
+
+    /* 03: artifact result. Small format and state labels make the output
+       feel reusable and downloadable, which is the key resource attribute. */
+    .artifact{background:#27352e;border-radius:4px;color:#f5f7f2;box-shadow:0 8px 14px #26372d24;padding:7px}.artifact .artifact-head{height:23px;display:flex;justify-content:space-between;align-items:center;color:#bdc9bf;font-size:10px;padding:0 3px 5px}.artifact .dot{width:6px;height:6px;border-radius:50%;display:inline-block;background:#96c5a0;margin-right:5px}.artifact .thumb{flex:none;height:58%;border:1px solid #809185;box-shadow:0 2px 5px #10171155}.artifact .thumb img{opacity:.95}.artifact .copy{padding:10px 3px 3px}.artifact .type{color:#a9d6ae;display:flex;justify-content:space-between;margin-bottom:7px}.artifact .name{font-size:16px;line-height:1.25;color:#fff}.artifact .bottom{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding:8px 3px 1px;color:#b6c2b9;font-size:10px;border-top:1px solid #506258}.artifact .bottom b{font-weight:400;color:#e7c77b}
+
+    /* 04: indexed signal. A colored rail encodes the real resource type and
+       gives the home shelf a clear visual index without adding a new layout. */
+    .indexed{background:#fff;border:1px solid #d6d8d0;border-radius:2px;box-shadow:3px 5px 0 #dfe2d9}.indexed:before{content:"";position:absolute;z-index:4;left:0;top:0;bottom:0;width:7px;background:var(--accent,var(--orange))}.indexed .thumb{margin:8px 8px 0 15px;height:51%;flex:none}.indexed .index-top{display:flex;justify-content:space-between;align-items:center;margin:0 10px 0 15px;padding:9px 0 7px;border-bottom:1px solid #e2e3dd;color:var(--accent,var(--orange))}.indexed .index-top .type{font-weight:600}.indexed .copy{padding:10px 10px 11px 15px}.indexed .name{font-size:17px;line-height:1.3;margin-bottom:7px}.indexed .meta{display:flex;justify-content:space-between}.indexed .meta b{color:var(--accent,var(--orange))}.indexed .flag{margin-top:auto;padding:7px 10px 8px 15px;background:#f5f6f1;color:#788078;font-size:10px}.indexed.animation{--accent:#42745e}.indexed.course{--accent:#bf673d}.indexed.exam{--accent:#b48942}
+
+    .notes{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}.note{border-top:2px solid var(--line);padding-top:11px;color:var(--muted);font-size:12px;line-height:1.65}.note b{display:block;color:var(--ink);font-size:13px;font-weight:600;margin-bottom:3px}
+    .recommend{display:flex;gap:14px;align-items:baseline;border:1px solid #e1c7c4;background:#fff9f7;padding:18px 20px;margin-top:12px;color:var(--muted);line-height:1.7}.recommend b{color:var(--red);white-space:nowrap}
+    @media(max-width:900px){.page{padding:28px 20px 56px}.intro{grid-template-columns:1fr;gap:22px;padding-top:46px}.direction-head{display:block}.direction-desc{text-align:left;margin-top:9px}.shelf{height:325px;gap:9px;overflow-x:auto;padding-bottom:8px}.resource-card{flex:0 0 148px}.notes{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){h1{font-size:35px}.mast span{display:none}.shelf{height:302px}.resource-card:nth-child(1){--h:205px}.resource-card:nth-child(2){--h:238px}.resource-card:nth-child(3){--h:278px}.resource-card:nth-child(4){--h:252px}.resource-card:nth-child(5){--h:224px}.resource-card:nth-child(6){--h:198px}.notes{grid-template-columns:1fr}.recommend{display:block}.recommend b{display:block;margin-bottom:4px}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="mast"><span class="brand"><b>+</b>AI资源工坊 · 首页资源卡片视觉方向</span><span>DESIGN STUDY / 2026.09.15</span></header>
+    <section class="intro">
+      <div>
+        <div class="eyebrow">Resource card directions</div>
+        <h1>让资源卡片<br><em>像一份可继续使用的作品。</em></h1>
+        <p class="intro-copy">保留首页现有的错落展台和六份资源，只重新思考卡片如何表达“生成结果”：它是什么、能不能继续编辑、属于哪一种资源，以及下一步可以做什么。</p>
+      </div>
+      <div class="brief"><strong>本轮约束</strong>只改变卡片外观，不改变首页排版、资源顺序和现有封面素材。每个方向都用同一组资源、同一套高低错落卡位，方便直接比较。</div>
+    </section>
+    <div class="legend"><span>教学动画 · 光合作用</span><span>教学动画 · 勾股定理</span><span>教学动画 · 细胞结构</span><span>互动课件 · 人生有几万天</span><span>试卷 · 页叠预览</span><span>试卷 · 页叠预览</span></div>
+
+    <section class="direction">
+      <div class="direction-head"><div class="direction-title"><span class="direction-number">01</span><h2>预览条幅 · 内容先行</h2></div><p class="direction-desc">把“看见内容”放在第一位。动画和课件保留内容预览；试卷改为几页真实纸张的堆叠，直接露出标题、题号、答题线和页码。</p></div>
+      <div class="shelf">
+        <article class="resource-card preview-first" style="--h:244px"><div class="thumb"><img src="../assets/photosynthesis.svg" alt="光合作用"><div class="topline"><span class="type">教学动画</span><span class="arrow">↗</span></div></div><div class="copy"><h3 class="name">光合作用</h3><div class="meta"><b>生物 · 七年级</b></div><span class="status">可继续创作</span></div></article>
+        <article class="resource-card preview-first"><div class="thumb"><img src="../assets/geometry.svg" alt="勾股定理"><div class="topline"><span class="type">教学动画</span><span class="arrow">↗</span></div></div><div class="copy"><h3 class="name">勾股定理</h3><div class="meta"><b>数学 · 七年级</b></div><span class="status">可继续创作</span></div></article>
+        <article class="resource-card preview-first"><div class="thumb"><img src="../assets/cell.svg" alt="细胞结构"><div class="topline"><span class="type">教学动画</span><span class="arrow">↗</span></div></div><div class="copy"><h3 class="name">细胞结构</h3><div class="meta"><b>生物 · 七年级</b></div><span class="status">可继续创作</span></div></article>
+        <article class="resource-card preview-first"><div class="thumb"><img src="../assets/lifetime.svg" alt="人生有几万天"><div class="topline"><span class="type">互动课件</span><span class="arrow">↗</span></div></div><div class="copy"><h3 class="name">人生有几万天</h3><div class="meta"><b>班会 · 七年级</b></div><span class="status">可继续创作</span></div></article>
+        <article class="resource-card preview-first exam-stack"><div class="exam-sheet">
+          <div class="exam-topline"><span class="type">试卷 · 同步练习</span><span class="arrow">↗</span></div>
+          <h3 class="exam-title">三位数乘两位数</h3><div class="exam-subtitle">行程问题 · 同步练习题</div><div class="exam-rule"></div>
+          <div class="exam-fields"><span>姓名<i></i></span><span>班级<i></i></span><span>得分<i></i></span></div>
+          <div class="exam-section">一、基础计算</div><div class="exam-question">1. 180×50 的积末尾有（　）个 0。</div><div class="exam-question">2. 列竖式计算：145×12 =</div><div class="answer-line"></div><div class="exam-section">二、行程问题</div><div class="exam-question">3. 火车每小时行 145 千米，行驶 12 小时，共行驶多少千米？</div><div class="answer-line"></div><div class="exam-foot"><span>数学 · 四年级</span><b>第 1 页 / 4 页</b></div>
+        </div></article>
+        <article class="resource-card preview-first exam-stack"><div class="exam-sheet">
+          <div class="exam-topline"><span class="type">试卷 · 单元测试</span><span class="arrow">↗</span></div>
+          <h3 class="exam-title">第七单元测试</h3><div class="exam-subtitle">观察、猜想与证明 · 数学</div><div class="exam-rule"></div>
+          <div class="exam-fields"><span>姓名<i></i></span><span>班级<i></i></span><span>得分<i></i></span></div>
+          <div class="exam-section">一、选择题</div><div class="exam-question">1. 若 ∠AOB = 60°，则下列说法正确的是（　）。</div><div class="answer-line"></div><div class="exam-question">2. 观察图形，写出你发现的数量关系。</div><div class="answer-line"></div><div class="exam-section">二、填空题</div><div class="exam-question">3. 一个角是它余角的 4 倍，这个角是（　）°。</div><div class="answer-line"></div><div class="exam-foot"><span>数学 · 七年级</span><b>第 1 页 / 4 页</b></div>
+        </div></article>
+      </div>
+      <div class="notes"><div class="note"><b>识别速度</b>预览面积最大，用户先看到作品内容。</div><div class="note"><b>资源属性</b>“可继续创作”把卡片和工作台连起来。</div><div class="note"><b>视觉气质</b>轻量、清晰，最接近现有首页。</div><div class="note"><b>适合</b>作为首页默认方向，改造成本最低。</div></div>
+    </section>
+
+    <section class="direction">
+      <div class="direction-head"><div class="direction-title"><span class="direction-number">02</span><h2>工作台面板 · 可继续编辑</h2></div><p class="direction-desc">卡片像一个小型工作台，缩略图、资源类型、作品标题和“预览”状态分层呈现，突出资源不是静态文件。</p></div>
+      <div class="shelf">
+        <article class="resource-card workbench"><div class="thumb"><img src="../assets/photosynthesis.svg" alt="光合作用"></div><div class="copy"><h3 class="name">光合作用</h3><div class="meta"><span>教学动画</span><span>生物 · 七年级</span></div></div><div class="footer"><span>最近打开</span><strong>继续编辑 ↗</strong></div></article>
+        <article class="resource-card workbench"><div class="thumb"><img src="../assets/geometry.svg" alt="勾股定理"></div><div class="copy"><h3 class="name">勾股定理</h3><div class="meta"><span>教学动画</span><span>数学 · 七年级</span></div></div><div class="footer"><span>最近打开</span><strong>继续编辑 ↗</strong></div></article>
+        <article class="resource-card workbench"><div class="thumb"><img src="../assets/cell.svg" alt="细胞结构"></div><div class="copy"><h3 class="name">细胞结构</h3><div class="meta"><span>教学动画</span><span>生物 · 七年级</span></div></div><div class="footer"><span>最近打开</span><strong>继续编辑 ↗</strong></div></article>
+        <article class="resource-card workbench"><div class="thumb"><img src="../assets/lifetime.svg" alt="人生有几万天"></div><div class="copy"><h3 class="name">人生有几万天</h3><div class="meta"><span>互动课件</span><span>班会 · 七年级</span></div></div><div class="footer"><span>最近打开</span><strong>继续编辑 ↗</strong></div></article>
+        <article class="resource-card workbench"><div class="thumb"><img src="../assets/exam.svg" alt="同步练习"></div><div class="copy"><h3 class="name">同步练习</h3><div class="meta"><span>试卷</span><span>数学 · 四年级</span></div></div><div class="footer"><span>最近打开</span><strong>继续编辑 ↗</strong></div></article>
+        <article class="resource-card workbench"><div class="thumb"><img src="../assets/exam.svg" alt="单元测试"></div><div class="copy"><h3 class="name">单元测试</h3><div class="meta"><span>试卷</span><span>数学 · 七年级</span></div></div><div class="footer"><span>最近打开</span><strong>继续编辑 ↗</strong></div></article>
+      </div>
+      <div class="notes"><div class="note"><b>识别速度</b>信息层级完整，适合快速比较资源。</div><div class="note"><b>资源属性</b>强调“预览”和“继续编辑”两个真实动作。</div><div class="note"><b>视觉气质</b>像一个轻量编辑台，产品感更强。</div><div class="note"><b>适合</b>希望首页直接承接创作流程时使用。</div></div>
+    </section>
+
+    <section class="direction">
+      <div class="direction-head"><div class="direction-title"><span class="direction-number">03</span><h2>生成结果卡 · 作品状态</h2></div><p class="direction-desc">用“结果预览 + 格式 + 状态”表达 AI 生成物。深色外壳让卡片从浅色页面上浮出，适合把资源当成可交付作品。</p></div>
+      <div class="shelf">
+        <article class="resource-card artifact"><div class="artifact-head"><span><i class="dot"></i>已生成</span><span>HTML ↗</span></div><div class="thumb"><img src="../assets/photosynthesis.svg" alt="光合作用"></div><div class="copy"><div class="type"><span>教学动画</span><span>268 次浏览</span></div><h3 class="name">光合作用</h3></div><div class="bottom"><span>生物 · 七年级</span><b>打开作品</b></div></article>
+        <article class="resource-card artifact"><div class="artifact-head"><span><i class="dot"></i>已生成</span><span>HTML ↗</span></div><div class="thumb"><img src="../assets/geometry.svg" alt="勾股定理"></div><div class="copy"><div class="type"><span>教学动画</span><span>231 次浏览</span></div><h3 class="name">勾股定理</h3></div><div class="bottom"><span>数学 · 七年级</span><b>打开作品</b></div></article>
+        <article class="resource-card artifact"><div class="artifact-head"><span><i class="dot"></i>已生成</span><span>HTML ↗</span></div><div class="thumb"><img src="../assets/cell.svg" alt="细胞结构"></div><div class="copy"><div class="type"><span>教学动画</span><span>176 次浏览</span></div><h3 class="name">细胞结构</h3></div><div class="bottom"><span>生物 · 七年级</span><b>打开作品</b></div></article>
+        <article class="resource-card artifact"><div class="artifact-head"><span><i class="dot"></i>已生成</span><span>HTML ↗</span></div><div class="thumb"><img src="../assets/lifetime.svg" alt="人生有几万天"></div><div class="copy"><div class="type"><span>互动课件</span><span>342 次浏览</span></div><h3 class="name">人生有几万天</h3></div><div class="bottom"><span>班会 · 七年级</span><b>打开作品</b></div></article>
+        <article class="resource-card artifact"><div class="artifact-head"><span><i class="dot"></i>已生成</span><span>HTML ↗</span></div><div class="thumb"><img src="../assets/exam.svg" alt="同步练习"></div><div class="copy"><div class="type"><span>试卷</span><span>158 次浏览</span></div><h3 class="name">同步练习</h3></div><div class="bottom"><span>数学 · 四年级</span><b>打开作品</b></div></article>
+        <article class="resource-card artifact"><div class="artifact-head"><span><i class="dot"></i>已生成</span><span>HTML ↗</span></div><div class="thumb"><img src="../assets/exam.svg" alt="单元测试"></div><div class="copy"><div class="type"><span>试卷</span><span>203 次浏览</span></div><h3 class="name">单元测试</h3></div><div class="bottom"><span>数学 · 七年级</span><b>打开作品</b></div></article>
+      </div>
+      <div class="notes"><div class="note"><b>识别速度</b>深色标题栏建立强烈的作品边界。</div><div class="note"><b>资源属性</b>格式、生成状态、浏览量都可见。</div><div class="note"><b>视觉气质</b>更像发布后的数字作品或成果集。</div><div class="note"><b>适合</b>强调作品交付、预览和下载时使用。</div></div>
+    </section>
+
+    <section class="direction">
+      <div class="direction-head"><div class="direction-title"><span class="direction-number">04</span><h2>索引标签 · 类型可扫读</h2></div><p class="direction-desc">用左侧色条表达资源类型，像资源索引而不是藏书。卡片保持轻薄、可比较，适合首页资源量继续增长。</p></div>
+      <div class="shelf">
+        <article class="resource-card indexed animation"><div class="index-top"><span class="type">教学动画</span><span class="arrow">↗</span></div><div class="thumb"><img src="../assets/photosynthesis.svg" alt="光合作用"></div><div class="copy"><h3 class="name">光合作用</h3><div class="meta"><b>生物</b><span>七年级</span></div></div><div class="flag">可继续创作</div></article>
+        <article class="resource-card indexed animation"><div class="index-top"><span class="type">教学动画</span><span class="arrow">↗</span></div><div class="thumb"><img src="../assets/geometry.svg" alt="勾股定理"></div><div class="copy"><h3 class="name">勾股定理</h3><div class="meta"><b>数学</b><span>七年级</span></div></div><div class="flag">可继续创作</div></article>
+        <article class="resource-card indexed animation"><div class="index-top"><span class="type">教学动画</span><span class="arrow">↗</span></div><div class="thumb"><img src="../assets/cell.svg" alt="细胞结构"></div><div class="copy"><h3 class="name">细胞结构</h3><div class="meta"><b>生物</b><span>七年级</span></div></div><div class="flag">可继续创作</div></article>
+        <article class="resource-card indexed course"><div class="index-top"><span class="type">互动课件</span><span class="arrow">↗</span></div><div class="thumb"><img src="../assets/lifetime.svg" alt="人生有几万天"></div><div class="copy"><h3 class="name">人生有几万天</h3><div class="meta"><b>班会</b><span>七年级</span></div></div><div class="flag">可继续创作</div></article>
+        <article class="resource-card indexed exam"><div class="index-top"><span class="type">试卷</span><span class="arrow">↗</span></div><div class="thumb"><img src="../assets/exam.svg" alt="同步练习"></div><div class="copy"><h3 class="name">同步练习</h3><div class="meta"><b>数学</b><span>四年级</span></div></div><div class="flag">可继续创作</div></article>
+        <article class="resource-card indexed exam"><div class="index-top"><span class="type">试卷</span><span class="arrow">↗</span></div><div class="thumb"><img src="../assets/exam.svg" alt="单元测试"></div><div class="copy"><h3 class="name">单元测试</h3><div class="meta"><b>数学</b><span>七年级</span></div></div><div class="flag">可继续创作</div></article>
+      </div>
+      <div class="notes"><div class="note"><b>识别速度</b>左侧色条先告诉用户这是什么资源。</div><div class="note"><b>资源属性</b>类型成为可扫描的真实索引。</div><div class="note"><b>视觉气质</b>克制、轻薄，和资源列表关系自然。</div><div class="note"><b>适合</b>资源数量增加、需要快速浏览时使用。</div></div>
+    </section>
+
+    <div class="recommend"><b>初步建议</b><span>如果首页的首要任务是“发现一份资源并继续创作”，优先看 01；如果要强调“AI 已生成一件可交付作品”，优先看 03。02 与 04 更适合资源属性和后续操作较多的版本。</span></div>
+  </div>
+</body>
+</html>

@@ -1,6 +1,4 @@
 {
-  "mode": "demo",
-  "note": "资源覆盖为模拟展示；已关联资源可查看原有作品。",
   "subjects": [
     {
       "id": "biology",
@@ -38,9 +36,13 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "plant-cell",
+            "animal-cell"
+          ]
         },
         {
           "id": "plant-cell",
@@ -50,9 +52,14 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [
+            "cell-structure"
+          ],
+          "nextIds": [
+            "chloroplast"
+          ]
         },
         {
           "id": "animal-cell",
@@ -62,9 +69,12 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [
+            "cell-structure"
+          ],
+          "nextIds": []
         },
         {
           "id": "membrane",
@@ -74,9 +84,10 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "nucleus",
@@ -86,9 +97,10 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "photosynthesis",
@@ -98,9 +110,15 @@
           "resourceIds": [
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [
+            "chloroplast"
+          ],
+          "nextIds": [
+            "carbon-oxygen",
+            "photo-experiment"
+          ]
         },
         {
           "id": "chloroplast",
@@ -111,9 +129,14 @@
             "A45760493DA8ECA44A316EA2BB54A041",
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [
+            "plant-cell"
+          ],
+          "nextIds": [
+            "photosynthesis"
+          ]
         },
         {
           "id": "light-energy",
@@ -123,9 +146,10 @@
           "resourceIds": [
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "organic-matter",
@@ -135,9 +159,10 @@
           "resourceIds": [
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "respiration",
@@ -145,9 +170,12 @@
           "group": "energy",
           "description": "细胞通过分解有机物释放能量，供生命活动使用。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "carbon-oxygen"
+          ]
         },
         {
           "id": "ecosystem",
@@ -155,9 +183,12 @@
           "group": "ecology",
           "description": "在一定空间范围内，生物与环境相互作用形成统一整体。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "food-chain"
+          ]
         },
         {
           "id": "producer",
@@ -165,9 +196,12 @@
           "group": "ecology",
           "description": "绿色植物等生物能够制造有机物，为生态系统提供物质和能量来源。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "food-chain"
+          ]
         },
         {
           "id": "food-chain",
@@ -175,9 +209,13 @@
           "group": "ecology",
           "description": "认识生物之间由于捕食关系而形成的联系。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [
+            "producer",
+            "ecosystem"
+          ],
+          "nextIds": []
         },
         {
           "id": "carbon-oxygen",
@@ -185,9 +223,13 @@
           "group": "ecology",
           "description": "联系光合作用与呼吸作用，理解生物圈中的碳氧平衡。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [
+            "photosynthesis",
+            "respiration"
+          ],
+          "nextIds": []
         },
         {
           "id": "compare-cells",
@@ -197,9 +239,10 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "microscope",
@@ -207,9 +250,10 @@
           "group": "inquiry",
           "description": "掌握显微镜的基本使用方法，观察细胞结构。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "photo-experiment",
@@ -217,9 +261,12 @@
           "group": "inquiry",
           "description": "通过设置对照，探究光等条件与光合作用的关系。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [
+            "photosynthesis"
+          ],
+          "nextIds": []
         },
         {
           "id": "controlled-variable",
@@ -227,9 +274,10 @@
           "group": "inquiry",
           "description": "在对照实验中只改变待研究因素，使其他相关条件保持一致。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "cell-wall",
@@ -239,9 +287,10 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "cytoplasm",
@@ -251,9 +300,10 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "vacuole",
@@ -263,9 +313,10 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "mitochondria",
@@ -275,9 +326,10 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "chromosomes",
@@ -285,9 +337,10 @@
           "group": "cell",
           "description": "染色体主要由 DNA 和蛋白质组成。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "dna",
@@ -295,9 +348,10 @@
           "group": "cell",
           "description": "DNA 是主要的遗传物质。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "gene",
@@ -305,9 +359,10 @@
           "group": "cell",
           "description": "基因是有遗传效应的 DNA 片段。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "tissue",
@@ -315,9 +370,10 @@
           "group": "cell",
           "description": "形态相似、结构和功能相同的细胞联合形成组织。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "organ",
@@ -325,9 +381,10 @@
           "group": "cell",
           "description": "不同组织按照一定次序结合，形成具有一定功能的器官。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "organism",
@@ -335,9 +392,10 @@
           "group": "cell",
           "description": "生物体具有一定的结构层次，各部分共同完成生命活动。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "cell-division",
@@ -345,9 +403,10 @@
           "group": "cell",
           "description": "一个细胞分成两个细胞，使细胞数目增加。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "cell-growth",
@@ -355,9 +414,10 @@
           "group": "cell",
           "description": "细胞从周围环境吸收营养物质，体积增大。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "differentiation",
@@ -365,9 +425,10 @@
           "group": "cell",
           "description": "细胞在形态、结构和生理功能上发生差异性变化。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-1"
+          "chapterId": "biology-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "co2",
@@ -377,9 +438,10 @@
           "resourceIds": [
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "water",
@@ -389,9 +451,10 @@
           "resourceIds": [
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "oxygen-release",
@@ -401,9 +464,10 @@
           "resourceIds": [
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "chlorophyll",
@@ -411,9 +475,10 @@
           "group": "energy",
           "description": "叶绿素等色素能够吸收光能。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "sunlight",
@@ -423,9 +488,10 @@
           "resourceIds": [
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "starch",
@@ -433,9 +499,10 @@
           "group": "energy",
           "description": "淀粉是植物中常见的储能有机物。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "decomposition",
@@ -443,9 +510,10 @@
           "group": "energy",
           "description": "呼吸作用分解有机物并释放能量。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "transpiration",
@@ -453,9 +521,10 @@
           "group": "energy",
           "description": "水分以水蒸气形式从植物体内散失到体外。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "root-absorption",
@@ -463,9 +532,10 @@
           "group": "energy",
           "description": "根部吸收水分，为植物生命活动提供水。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "stomata",
@@ -473,9 +543,10 @@
           "group": "energy",
           "description": "气孔是叶片气体交换与蒸腾失水的重要通道。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "xylem",
@@ -483,9 +554,10 @@
           "group": "energy",
           "description": "导管运输水和无机盐。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "phloem",
@@ -493,9 +565,10 @@
           "group": "energy",
           "description": "筛管运输植物制造的有机物。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "leaf",
@@ -505,9 +578,10 @@
           "resourceIds": [
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-2"
+          "chapterId": "biology-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "population",
@@ -515,9 +589,10 @@
           "group": "ecology",
           "description": "一定区域内同种生物的全部个体构成种群。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "community",
@@ -525,9 +600,10 @@
           "group": "ecology",
           "description": "一定区域内各种生物种群共同组成群落。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "habitat",
@@ -535,9 +611,10 @@
           "group": "ecology",
           "description": "生物生活的环境包括生物因素和非生物因素。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "abiotic",
@@ -545,9 +622,10 @@
           "group": "ecology",
           "description": "光、温度、水等因素影响生物的生活。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "decomposer",
@@ -555,9 +633,10 @@
           "group": "ecology",
           "description": "分解者将有机物分解为较简单的物质。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "consumer",
@@ -565,9 +644,10 @@
           "group": "ecology",
           "description": "消费者直接或间接以其他生物为食。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "energy-flow",
@@ -575,9 +655,10 @@
           "group": "ecology",
           "description": "生态系统中的能量沿食物链和食物网流动。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "material-cycle",
@@ -585,9 +666,10 @@
           "group": "ecology",
           "description": "物质在生物与非生物环境之间循环。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "biodiversity",
@@ -595,9 +677,10 @@
           "group": "ecology",
           "description": "生物多样性包括生物种类、基因和生态系统的多样性。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "adaptation",
@@ -605,9 +688,10 @@
           "group": "ecology",
           "description": "生物的形态结构和生活方式与环境相适应。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "food-web",
@@ -615,9 +699,10 @@
           "group": "ecology",
           "description": "多条食物链相互交织形成食物网。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-3"
+          "chapterId": "biology-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "slide",
@@ -625,9 +710,10 @@
           "group": "inquiry",
           "description": "制作临时装片以便利用显微镜观察细胞。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "stain",
@@ -635,9 +721,10 @@
           "group": "inquiry",
           "description": "适当染色可以使细胞结构更容易分辨。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "iodine",
@@ -645,9 +732,10 @@
           "group": "inquiry",
           "description": "利用淀粉遇碘变蓝的特性进行检验。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "dark-treatment",
@@ -655,9 +743,10 @@
           "group": "inquiry",
           "description": "将植物置于黑暗中，使叶片原有淀粉被消耗或转运。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "decolorization",
@@ -665,9 +754,10 @@
           "group": "inquiry",
           "description": "用酒精对叶片脱色，便于观察淀粉显色。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "microscope-focus",
@@ -675,9 +765,10 @@
           "group": "inquiry",
           "description": "通过调节焦距使观察到的物像清晰。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "magnification",
@@ -685,9 +776,10 @@
           "group": "inquiry",
           "description": "显微镜的总放大倍数为目镜与物镜放大倍数的乘积。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "hypothesis",
@@ -695,9 +787,10 @@
           "group": "inquiry",
           "description": "根据已有知识和观察，对问题作出可检验的解释。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "observation",
@@ -705,9 +798,10 @@
           "group": "inquiry",
           "description": "记录实验现象和条件，为分析提供依据。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "conclusion",
@@ -715,9 +809,10 @@
           "group": "inquiry",
           "description": "根据记录与证据分析实验结果，回应探究问题。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "biology-chapter-4"
+          "chapterId": "biology-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "group": "cell",
@@ -725,7 +820,6 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-1",
           "name": "第一章 细胞的基本结构",
           "type": "chapter",
@@ -737,7 +831,6 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-1-objective",
           "name": "辨识细胞结构与功能",
           "type": "objective",
@@ -749,7 +842,6 @@
           "resourceIds": [
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-1-design",
           "name": "制作细胞结构对比图",
           "type": "design",
@@ -762,7 +854,6 @@
             "A45760493DA8ECA44A316EA2BB54A041",
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-2",
           "name": "第二章 绿色植物的生理活动",
           "type": "chapter",
@@ -775,7 +866,6 @@
             "A45760493DA8ECA44A316EA2BB54A041",
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-2-objective",
           "name": "解释光合作用与呼吸作用",
           "type": "objective",
@@ -788,7 +878,6 @@
             "A45760493DA8ECA44A316EA2BB54A041",
             "2D1E52CBB465EE8981405653A46D4C37"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-2-design",
           "name": "探究光合作用的条件",
           "type": "design",
@@ -800,7 +889,6 @@
           "resourceIds": [
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-3",
           "name": "第三章 生物与环境的关系",
           "type": "chapter",
@@ -812,7 +900,6 @@
           "resourceIds": [
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-3-objective",
           "name": "分析生态系统中的联系",
           "type": "objective",
@@ -824,7 +911,6 @@
           "resourceIds": [
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-3-design",
           "name": "绘制校园食物网",
           "type": "design",
@@ -837,7 +923,6 @@
             "2D1E52CBB465EE8981405653A46D4C37",
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-4",
           "name": "第四章 生物学实验方法",
           "type": "chapter",
@@ -850,7 +935,6 @@
             "2D1E52CBB465EE8981405653A46D4C37",
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-4-objective",
           "name": "设计对照实验并解释结果",
           "type": "objective",
@@ -863,7 +947,6 @@
             "2D1E52CBB465EE8981405653A46D4C37",
             "A45760493DA8ECA44A316EA2BB54A041"
           ],
-          "demoCovered": true,
           "id": "biology-chapter-4-design",
           "name": "观察与实验记录",
           "type": "design",
@@ -1831,6 +1914,182 @@
           "id": "biology-chapter-4",
           "name": "第四章 生物学实验方法"
         }
+      ],
+      "curriculum": [
+        {
+          "id": "bio-environment",
+          "name": "第一单元 生物和生物圈",
+          "edition": "人教版",
+          "grade": "七年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "bio-ecosystem",
+              "name": "生物与环境组成生态系统",
+              "chapterId": "biology-chapter-3",
+              "knowledgeIds": [
+                "ecosystem",
+                "producer",
+                "food-chain",
+                "population",
+                "community",
+                "habitat",
+                "abiotic",
+                "decomposer",
+                "consumer",
+                "energy-flow",
+                "material-cycle",
+                "biodiversity",
+                "adaptation",
+                "food-web"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bio-cells",
+          "name": "第二单元 生物体的结构层次",
+          "edition": "人教版",
+          "grade": "七年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "bio-microscope",
+              "name": "练习使用显微镜",
+              "chapterId": "biology-chapter-4",
+              "knowledgeIds": [
+                "microscope",
+                "microscope-focus",
+                "magnification",
+                "slide",
+                "stain",
+                "observation"
+              ]
+            },
+            {
+              "id": "bio-plant-cell",
+              "name": "植物细胞",
+              "chapterId": "biology-chapter-1",
+              "knowledgeIds": [
+                "cell-structure",
+                "plant-cell",
+                "membrane",
+                "nucleus",
+                "cell-wall",
+                "cytoplasm",
+                "vacuole",
+                "chloroplast"
+              ]
+            },
+            {
+              "id": "bio-animal-cell",
+              "name": "动物细胞",
+              "chapterId": "biology-chapter-1",
+              "knowledgeIds": [
+                "cell-structure",
+                "animal-cell",
+                "membrane",
+                "nucleus",
+                "cytoplasm",
+                "mitochondria",
+                "compare-cells"
+              ]
+            },
+            {
+              "id": "bio-cell-life",
+              "name": "细胞的生活",
+              "chapterId": "biology-chapter-1",
+              "knowledgeIds": [
+                "membrane",
+                "mitochondria",
+                "nucleus",
+                "chromosomes",
+                "dna",
+                "gene"
+              ]
+            },
+            {
+              "id": "bio-cell-growth",
+              "name": "细胞通过分裂产生新细胞",
+              "chapterId": "biology-chapter-1",
+              "knowledgeIds": [
+                "cell-division",
+                "cell-growth",
+                "differentiation",
+                "tissue",
+                "organ",
+                "organism"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bio-plants",
+          "name": "第三单元 生物圈中的绿色植物",
+          "edition": "人教版",
+          "grade": "七年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "bio-water",
+              "name": "绿色植物与生物圈的水循环",
+              "chapterId": "biology-chapter-2",
+              "knowledgeIds": [
+                "transpiration",
+                "root-absorption",
+                "stomata",
+                "xylem",
+                "water"
+              ]
+            },
+            {
+              "id": "bio-organic",
+              "name": "绿色植物是生物圈中有机物的制造者",
+              "chapterId": "biology-chapter-4",
+              "knowledgeIds": [
+                "photo-experiment",
+                "controlled-variable",
+                "sunlight",
+                "iodine",
+                "dark-treatment",
+                "decolorization",
+                "starch",
+                "hypothesis",
+                "observation",
+                "conclusion"
+              ]
+            },
+            {
+              "id": "bio-photosynthesis",
+              "name": "光合作用吸收二氧化碳释放氧气",
+              "chapterId": "biology-chapter-2",
+              "knowledgeIds": [
+                "photosynthesis",
+                "chloroplast",
+                "light-energy",
+                "organic-matter",
+                "co2",
+                "water",
+                "chlorophyll",
+                "leaf",
+                "phloem",
+                "carbon-oxygen",
+                "oxygen-release"
+              ]
+            },
+            {
+              "id": "bio-respiration",
+              "name": "绿色植物的呼吸作用",
+              "chapterId": "biology-chapter-2",
+              "knowledgeIds": [
+                "respiration",
+                "decomposition",
+                "mitochondria",
+                "carbon-oxygen"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -1869,9 +2128,17 @@
           "resourceIds": [
             "314B268E642DBAE685F47391A9CCDDC4"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [
+            "right-triangle",
+            "square-area",
+            "square-root"
+          ],
+          "nextIds": [
+            "distance",
+            "area-proof"
+          ]
         },
         {
           "id": "right-triangle",
@@ -1881,9 +2148,12 @@
           "resourceIds": [
             "314B268E642DBAE685F47391A9CCDDC4"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "pythagorean"
+          ]
         },
         {
           "id": "square-area",
@@ -1893,9 +2163,12 @@
           "resourceIds": [
             "314B268E642DBAE685F47391A9CCDDC4"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "pythagorean"
+          ]
         },
         {
           "id": "similarity",
@@ -1903,9 +2176,10 @@
           "group": "geometry",
           "description": "通过对应角与对应边的关系研究三角形相似。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "multiplication",
@@ -1915,9 +2189,12 @@
           "resourceIds": [
             "8A7E82D22F0DF49599F56674103EC2ED"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-2"
+          "chapterId": "math-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "travel"
+          ]
         },
         {
           "id": "square-number",
@@ -1927,9 +2204,10 @@
           "resourceIds": [
             "314B268E642DBAE685F47391A9CCDDC4"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-2"
+          "chapterId": "math-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "square-root",
@@ -1937,9 +2215,12 @@
           "group": "number",
           "description": "通过平方与开平方的关系求未知的边长。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-2"
+          "chapterId": "math-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "pythagorean"
+          ]
         },
         {
           "id": "coordinate",
@@ -1947,9 +2228,12 @@
           "group": "function",
           "description": "用有序数对描述点的位置。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-3"
+          "chapterId": "math-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "linear"
+          ]
         },
         {
           "id": "quadratic",
@@ -1957,9 +2241,12 @@
           "group": "function",
           "description": "通过表达式和图像认识二次函数的变化规律。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-3"
+          "chapterId": "math-chapter-3",
+          "prerequisiteIds": [
+            "linear"
+          ],
+          "nextIds": []
         },
         {
           "id": "graph-function",
@@ -1967,9 +2254,10 @@
           "group": "function",
           "description": "用图像表示变量间的对应关系。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-3"
+          "chapterId": "math-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "travel",
@@ -1979,9 +2267,12 @@
           "resourceIds": [
             "8A7E82D22F0DF49599F56674103EC2ED"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-4"
+          "chapterId": "math-chapter-4",
+          "prerequisiteIds": [
+            "multiplication"
+          ],
+          "nextIds": []
         },
         {
           "id": "area-proof",
@@ -1991,9 +2282,12 @@
           "resourceIds": [
             "314B268E642DBAE685F47391A9CCDDC4"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-4"
+          "chapterId": "math-chapter-4",
+          "prerequisiteIds": [
+            "pythagorean"
+          ],
+          "nextIds": []
         },
         {
           "id": "time-unit",
@@ -2003,9 +2297,10 @@
           "resourceIds": [
             "66FEA6B38E058EDAB62E4117D0F43DE7"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-4"
+          "chapterId": "math-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "triangle",
@@ -2013,9 +2308,10 @@
           "group": "geometry",
           "description": "结合相关知识与具体例子，理解三角形。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "angles",
@@ -2023,9 +2319,10 @@
           "group": "geometry",
           "description": "结合相关知识与具体例子，理解三角形内角和。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "parallel",
@@ -2033,9 +2330,10 @@
           "group": "geometry",
           "description": "结合相关知识与具体例子，理解平行线。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "congruence",
@@ -2043,9 +2341,10 @@
           "group": "geometry",
           "description": "结合相关知识与具体例子，理解全等三角形。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "circle",
@@ -2053,9 +2352,10 @@
           "group": "geometry",
           "description": "结合相关知识与具体例子，理解圆。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "circle-angle",
@@ -2063,9 +2363,10 @@
           "group": "geometry",
           "description": "结合相关知识与具体例子，理解圆周角。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "area",
@@ -2073,9 +2374,10 @@
           "group": "geometry",
           "description": "结合相关知识与具体例子，理解面积计算。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "length",
@@ -2083,9 +2385,10 @@
           "group": "geometry",
           "description": "结合相关知识与具体例子，理解线段长度。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-1"
+          "chapterId": "math-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "integers",
@@ -2093,9 +2396,10 @@
           "group": "number",
           "description": "结合相关知识与具体例子，理解整数。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-2"
+          "chapterId": "math-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "fractions",
@@ -2103,9 +2407,10 @@
           "group": "number",
           "description": "结合相关知识与具体例子，理解分数。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-2"
+          "chapterId": "math-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "rational",
@@ -2113,9 +2418,10 @@
           "group": "number",
           "description": "结合相关知识与具体例子，理解有理数。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-2"
+          "chapterId": "math-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "real",
@@ -2123,9 +2429,10 @@
           "group": "number",
           "description": "结合相关知识与具体例子，理解实数。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-2"
+          "chapterId": "math-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "power",
@@ -2133,9 +2440,10 @@
           "group": "number",
           "description": "结合相关知识与具体例子，理解乘方。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-2"
+          "chapterId": "math-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "equation",
@@ -2143,9 +2451,10 @@
           "group": "number",
           "description": "结合相关知识与具体例子，理解一元一次方程。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-2"
+          "chapterId": "math-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "algebra",
@@ -2153,9 +2462,10 @@
           "group": "number",
           "description": "结合相关知识与具体例子，理解代数式。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-2"
+          "chapterId": "math-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "ratio",
@@ -2163,9 +2473,10 @@
           "group": "number",
           "description": "结合相关知识与具体例子，理解比例。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-2"
+          "chapterId": "math-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "variable",
@@ -2173,9 +2484,10 @@
           "group": "function",
           "description": "结合相关知识与具体例子，理解变量。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-3"
+          "chapterId": "math-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "linear",
@@ -2183,9 +2495,14 @@
           "group": "function",
           "description": "结合相关知识与具体例子，理解一次函数。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-3"
+          "chapterId": "math-chapter-3",
+          "prerequisiteIds": [
+            "coordinate"
+          ],
+          "nextIds": [
+            "quadratic"
+          ]
         },
         {
           "id": "vertex",
@@ -2193,9 +2510,10 @@
           "group": "function",
           "description": "结合相关知识与具体例子，理解抛物线顶点。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-3"
+          "chapterId": "math-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "symmetry",
@@ -2203,9 +2521,10 @@
           "group": "function",
           "description": "结合相关知识与具体例子，理解对称轴。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-3"
+          "chapterId": "math-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "origin",
@@ -2213,9 +2532,10 @@
           "group": "function",
           "description": "结合相关知识与具体例子，理解原点。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-3"
+          "chapterId": "math-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "distance",
@@ -2223,9 +2543,12 @@
           "group": "practice",
           "description": "结合相关知识与具体例子，理解两点距离。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-4"
+          "chapterId": "math-chapter-4",
+          "prerequisiteIds": [
+            "pythagorean"
+          ],
+          "nextIds": []
         },
         {
           "id": "speed",
@@ -2233,9 +2556,10 @@
           "group": "practice",
           "description": "结合相关知识与具体例子，理解速度。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-4"
+          "chapterId": "math-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "statistics",
@@ -2243,9 +2567,10 @@
           "group": "practice",
           "description": "结合相关知识与具体例子，理解统计图。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "math-chapter-4"
+          "chapterId": "math-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "probability",
@@ -2253,9 +2578,10 @@
           "group": "practice",
           "description": "结合相关知识与具体例子，理解随机事件。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "math-chapter-4"
+          "chapterId": "math-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "group": "geometry",
@@ -2263,7 +2589,6 @@
           "resourceIds": [
             "314B268E642DBAE685F47391A9CCDDC4"
           ],
-          "demoCovered": true,
           "id": "math-chapter-1",
           "name": "第一章 三角形与几何证明",
           "type": "chapter",
@@ -2275,7 +2600,6 @@
           "resourceIds": [
             "314B268E642DBAE685F47391A9CCDDC4"
           ],
-          "demoCovered": true,
           "id": "math-chapter-1-objective",
           "name": "运用几何性质解决问题",
           "type": "objective",
@@ -2287,7 +2611,6 @@
           "resourceIds": [
             "314B268E642DBAE685F47391A9CCDDC4"
           ],
-          "demoCovered": true,
           "id": "math-chapter-1-design",
           "name": "拼图验证勾股定理",
           "type": "design",
@@ -2300,7 +2623,6 @@
             "8A7E82D22F0DF49599F56674103EC2ED",
             "314B268E642DBAE685F47391A9CCDDC4"
           ],
-          "demoCovered": true,
           "id": "math-chapter-2",
           "name": "第二章 数的运算",
           "type": "chapter",
@@ -2313,7 +2635,6 @@
             "8A7E82D22F0DF49599F56674103EC2ED",
             "314B268E642DBAE685F47391A9CCDDC4"
           ],
-          "demoCovered": true,
           "id": "math-chapter-2-objective",
           "name": "理解运算规律并准确计算",
           "type": "objective",
@@ -2326,7 +2647,6 @@
             "8A7E82D22F0DF49599F56674103EC2ED",
             "314B268E642DBAE685F47391A9CCDDC4"
           ],
-          "demoCovered": true,
           "id": "math-chapter-2-design",
           "name": "比较多种计算方法",
           "type": "design",
@@ -2336,7 +2656,6 @@
           "group": "function",
           "chapterId": "math-chapter-3",
           "resourceIds": [],
-          "demoCovered": true,
           "id": "math-chapter-3",
           "name": "第三章 函数及其图象",
           "type": "chapter",
@@ -2346,7 +2665,6 @@
           "group": "function",
           "chapterId": "math-chapter-3",
           "resourceIds": [],
-          "demoCovered": true,
           "id": "math-chapter-3-objective",
           "name": "用函数描述数量关系",
           "type": "objective",
@@ -2356,7 +2674,6 @@
           "group": "function",
           "chapterId": "math-chapter-3",
           "resourceIds": [],
-          "demoCovered": true,
           "id": "math-chapter-3-design",
           "name": "描点绘制函数图象",
           "type": "design",
@@ -2370,7 +2687,6 @@
             "314B268E642DBAE685F47391A9CCDDC4",
             "66FEA6B38E058EDAB62E4117D0F43DE7"
           ],
-          "demoCovered": true,
           "id": "math-chapter-4",
           "name": "第四章 数学应用与探究",
           "type": "chapter",
@@ -2384,7 +2700,6 @@
             "314B268E642DBAE685F47391A9CCDDC4",
             "66FEA6B38E058EDAB62E4117D0F43DE7"
           ],
-          "demoCovered": true,
           "id": "math-chapter-4-objective",
           "name": "建立数学模型解决问题",
           "type": "objective",
@@ -2398,7 +2713,6 @@
             "314B268E642DBAE685F47391A9CCDDC4",
             "66FEA6B38E058EDAB62E4117D0F43DE7"
           ],
-          "demoCovered": true,
           "id": "math-chapter-4-design",
           "name": "生活问题建模活动",
           "type": "design",
@@ -2937,6 +3251,283 @@
           "id": "math-chapter-4",
           "name": "第四章 数学应用与探究"
         }
+      ],
+      "curriculum": [
+        {
+          "id": "math-multiply",
+          "name": "第四单元 三位数乘两位数",
+          "edition": "人教版",
+          "grade": "四年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "math-multiplication",
+              "name": "三位数乘两位数",
+              "chapterId": "math-chapter-2",
+              "knowledgeIds": [
+                "multiplication",
+                "integers"
+              ]
+            },
+            {
+              "id": "math-travel",
+              "name": "速度、时间与路程",
+              "chapterId": "math-chapter-4",
+              "knowledgeIds": [
+                "travel",
+                "speed",
+                "time-unit"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-rational",
+          "name": "第一章 有理数",
+          "edition": "人教版",
+          "grade": "七年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "math-rational-numbers",
+              "name": "有理数与乘方",
+              "chapterId": "math-chapter-2",
+              "knowledgeIds": [
+                "integers",
+                "fractions",
+                "rational",
+                "power",
+                "square-number"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-equations",
+          "name": "第三章 一元一次方程",
+          "edition": "人教版",
+          "grade": "七年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "math-equation",
+              "name": "一元一次方程",
+              "chapterId": "math-chapter-2",
+              "knowledgeIds": [
+                "equation",
+                "algebra",
+                "ratio"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-real",
+          "name": "第六章 实数",
+          "edition": "人教版",
+          "grade": "七年级",
+          "term": "下册",
+          "topics": [
+            {
+              "id": "math-real-numbers",
+              "name": "平方根与实数",
+              "chapterId": "math-chapter-2",
+              "knowledgeIds": [
+                "square-root",
+                "real"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-coordinate",
+          "name": "第七章 平面直角坐标系",
+          "edition": "人教版",
+          "grade": "七年级",
+          "term": "下册",
+          "topics": [
+            {
+              "id": "math-coordinates",
+              "name": "平面直角坐标系",
+              "chapterId": "math-chapter-3",
+              "knowledgeIds": [
+                "coordinate",
+                "origin"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-triangles",
+          "name": "第十一章 三角形",
+          "edition": "人教版",
+          "grade": "八年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "math-triangle",
+              "name": "三角形",
+              "chapterId": "math-chapter-1",
+              "knowledgeIds": [
+                "triangle",
+                "angles",
+                "parallel"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-congruent",
+          "name": "第十二章 全等三角形",
+          "edition": "人教版",
+          "grade": "八年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "math-congruence",
+              "name": "全等三角形",
+              "chapterId": "math-chapter-1",
+              "knowledgeIds": [
+                "congruence",
+                "length"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-pythagorean",
+          "name": "第十七章 勾股定理",
+          "edition": "人教版",
+          "grade": "八年级",
+          "term": "下册",
+          "topics": [
+            {
+              "id": "math-pythagorean-theorem",
+              "name": "勾股定理",
+              "chapterId": "math-chapter-1",
+              "knowledgeIds": [
+                "pythagorean",
+                "right-triangle",
+                "square-area",
+                "square-number",
+                "square-root",
+                "area",
+                "area-proof",
+                "distance"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-linear",
+          "name": "第十九章 一次函数",
+          "edition": "人教版",
+          "grade": "八年级",
+          "term": "下册",
+          "topics": [
+            {
+              "id": "math-linear-function",
+              "name": "一次函数",
+              "chapterId": "math-chapter-3",
+              "knowledgeIds": [
+                "linear",
+                "variable",
+                "graph-function",
+                "coordinate"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-data",
+          "name": "第二十章 数据的分析",
+          "edition": "人教版",
+          "grade": "八年级",
+          "term": "下册",
+          "topics": [
+            {
+              "id": "math-statistics",
+              "name": "数据与图表",
+              "chapterId": "math-chapter-4",
+              "knowledgeIds": [
+                "statistics"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-quadratic",
+          "name": "第二十二章 二次函数",
+          "edition": "人教版",
+          "grade": "九年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "math-quadratic-function",
+              "name": "二次函数的图象和性质",
+              "chapterId": "math-chapter-3",
+              "knowledgeIds": [
+                "quadratic",
+                "vertex",
+                "symmetry",
+                "graph-function"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-circle",
+          "name": "第二十四章 圆",
+          "edition": "人教版",
+          "grade": "九年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "math-circles",
+              "name": "圆",
+              "chapterId": "math-chapter-1",
+              "knowledgeIds": [
+                "circle",
+                "circle-angle"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-probability-unit",
+          "name": "第二十五章 概率初步",
+          "edition": "人教版",
+          "grade": "九年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "math-probability",
+              "name": "随机事件",
+              "chapterId": "math-chapter-4",
+              "knowledgeIds": [
+                "probability"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "math-similar",
+          "name": "第二十七章 相似",
+          "edition": "人教版",
+          "grade": "九年级",
+          "term": "下册",
+          "topics": [
+            {
+              "id": "math-similarity",
+              "name": "相似三角形",
+              "chapterId": "math-chapter-1",
+              "knowledgeIds": [
+                "similarity",
+                "ratio"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -2975,9 +3566,15 @@
           "resourceIds": [
             "637002DEE96D4D5D827A22362815BC60"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-1"
+          "chapterId": "chinese-chapter-1",
+          "prerequisiteIds": [
+            "classical-words",
+            "author-tao"
+          ],
+          "nextIds": [
+            "writing-order"
+          ]
         },
         {
           "id": "classical-words",
@@ -2987,9 +3584,12 @@
           "resourceIds": [
             "637002DEE96D4D5D827A22362815BC60"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-1"
+          "chapterId": "chinese-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "taohua"
+          ]
         },
         {
           "id": "narrative",
@@ -2999,9 +3599,10 @@
           "resourceIds": [
             "637002DEE96D4D5D827A22362815BC60"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-1"
+          "chapterId": "chinese-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "waterfall",
@@ -3009,9 +3610,14 @@
           "group": "poetry",
           "description": "通过诗中的景物和想象理解李白诗歌的特点。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-2"
+          "chapterId": "chinese-chapter-2",
+          "prerequisiteIds": [
+            "poet-li"
+          ],
+          "nextIds": [
+            "imagery"
+          ]
         },
         {
           "id": "imagery",
@@ -3021,9 +3627,12 @@
           "resourceIds": [
             "EB5C20A95266A25203329ED8CCB90EEC"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-2"
+          "chapterId": "chinese-chapter-2",
+          "prerequisiteIds": [
+            "waterfall"
+          ],
+          "nextIds": []
         },
         {
           "id": "recitation",
@@ -3033,9 +3642,10 @@
           "resourceIds": [
             "EB5C20A95266A25203329ED8CCB90EEC"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-2"
+          "chapterId": "chinese-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "function-word",
@@ -3043,9 +3653,10 @@
           "group": "language",
           "description": "结合具体句子理解文言虚词的用法。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-3"
+          "chapterId": "chinese-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "metaphor",
@@ -3053,9 +3664,10 @@
           "group": "language",
           "description": "辨析修辞手法并理解表达效果。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-3"
+          "chapterId": "chinese-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "polysemy",
@@ -3063,9 +3675,10 @@
           "group": "language",
           "description": "根据上下文区分同一词语的不同含义。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-3"
+          "chapterId": "chinese-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "description",
@@ -3075,9 +3688,10 @@
           "resourceIds": [
             "637002DEE96D4D5D827A22362815BC60"
           ],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-4"
+          "chapterId": "chinese-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "argument",
@@ -3085,9 +3699,10 @@
           "group": "writing",
           "description": "区分观点与支撑观点的材料。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-4"
+          "chapterId": "chinese-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "writing-order",
@@ -3095,9 +3710,12 @@
           "group": "writing",
           "description": "按游踪组织内容，清晰呈现见闻。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-4"
+          "chapterId": "chinese-chapter-4",
+          "prerequisiteIds": [
+            "taohua"
+          ],
+          "nextIds": []
         },
         {
           "id": "taoyuan",
@@ -3105,9 +3723,10 @@
           "group": "classical",
           "description": "结合相关知识与具体例子，理解桃源社会。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-1"
+          "chapterId": "chinese-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "author-tao",
@@ -3115,9 +3734,12 @@
           "group": "classical",
           "description": "结合相关知识与具体例子，理解陶渊明。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-1"
+          "chapterId": "chinese-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "taohua"
+          ]
         },
         {
           "id": "translation",
@@ -3125,9 +3747,10 @@
           "group": "classical",
           "description": "结合相关知识与具体例子，理解文言翻译。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-1"
+          "chapterId": "chinese-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "ancient-modern",
@@ -3135,9 +3758,10 @@
           "group": "language",
           "description": "结合相关知识与具体例子，理解古今异义。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-3"
+          "chapterId": "chinese-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "borrowed",
@@ -3145,9 +3769,10 @@
           "group": "language",
           "description": "结合相关知识与具体例子，理解通假字。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-3"
+          "chapterId": "chinese-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "omission",
@@ -3155,9 +3780,10 @@
           "group": "classical",
           "description": "结合相关知识与具体例子，理解省略句。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-1"
+          "chapterId": "chinese-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "inversion",
@@ -3165,9 +3791,10 @@
           "group": "classical",
           "description": "结合相关知识与具体例子，理解倒装句。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-1"
+          "chapterId": "chinese-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "rhythm",
@@ -3175,9 +3802,10 @@
           "group": "language",
           "description": "结合相关知识与具体例子，理解朗读节奏。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-3"
+          "chapterId": "chinese-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "rhyme",
@@ -3185,9 +3813,10 @@
           "group": "poetry",
           "description": "结合相关知识与具体例子，理解押韵。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-2"
+          "chapterId": "chinese-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "poet-li",
@@ -3195,9 +3824,12 @@
           "group": "poetry",
           "description": "结合相关知识与具体例子，理解李白。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-2"
+          "chapterId": "chinese-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": [
+            "waterfall"
+          ]
         },
         {
           "id": "poetic-mood",
@@ -3205,9 +3837,10 @@
           "group": "poetry",
           "description": "结合相关知识与具体例子，理解诗歌意境。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-2"
+          "chapterId": "chinese-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "emotion",
@@ -3215,9 +3848,10 @@
           "group": "poetry",
           "description": "结合相关知识与具体例子，理解思想感情。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-2"
+          "chapterId": "chinese-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "homesick",
@@ -3225,9 +3859,10 @@
           "group": "poetry",
           "description": "结合相关知识与具体例子，理解思乡情感。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-2"
+          "chapterId": "chinese-chapter-2",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "metaphor-only",
@@ -3235,9 +3870,10 @@
           "group": "language",
           "description": "结合相关知识与具体例子，理解比喻。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-3"
+          "chapterId": "chinese-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "hyperbole",
@@ -3245,9 +3881,10 @@
           "group": "language",
           "description": "结合相关知识与具体例子，理解夸张。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-3"
+          "chapterId": "chinese-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "personification",
@@ -3255,9 +3892,10 @@
           "group": "language",
           "description": "结合相关知识与具体例子，理解拟人。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-3"
+          "chapterId": "chinese-chapter-3",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "argument-method",
@@ -3265,9 +3903,10 @@
           "group": "writing",
           "description": "结合相关知识与具体例子，理解论证方法。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-4"
+          "chapterId": "chinese-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "examples",
@@ -3275,9 +3914,10 @@
           "group": "writing",
           "description": "结合相关知识与具体例子，理解举例论证。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-4"
+          "chapterId": "chinese-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "comparison",
@@ -3285,9 +3925,10 @@
           "group": "writing",
           "description": "结合相关知识与具体例子，理解对比论证。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-4"
+          "chapterId": "chinese-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "structure",
@@ -3295,9 +3936,10 @@
           "group": "writing",
           "description": "结合相关知识与具体例子，理解文章结构。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-4"
+          "chapterId": "chinese-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "detail",
@@ -3305,9 +3947,10 @@
           "group": "writing",
           "description": "结合相关知识与具体例子，理解细节描写。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-4"
+          "chapterId": "chinese-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "perspective",
@@ -3315,9 +3958,10 @@
           "group": "writing",
           "description": "结合相关知识与具体例子，理解观察视角。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-4"
+          "chapterId": "chinese-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "reading",
@@ -3325,9 +3969,10 @@
           "group": "classical",
           "description": "结合相关知识与具体例子，理解阅读理解。",
           "resourceIds": [],
-          "demoCovered": false,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-1"
+          "chapterId": "chinese-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "evidence",
@@ -3335,9 +3980,10 @@
           "group": "classical",
           "description": "结合相关知识与具体例子，理解文本依据。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-1"
+          "chapterId": "chinese-chapter-1",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "id": "expression",
@@ -3345,9 +3991,10 @@
           "group": "writing",
           "description": "结合相关知识与具体例子，理解表达效果。",
           "resourceIds": [],
-          "demoCovered": true,
           "type": "knowledge",
-          "chapterId": "chinese-chapter-4"
+          "chapterId": "chinese-chapter-4",
+          "prerequisiteIds": [],
+          "nextIds": []
         },
         {
           "group": "classical",
@@ -3355,7 +4002,6 @@
           "resourceIds": [
             "637002DEE96D4D5D827A22362815BC60"
           ],
-          "demoCovered": true,
           "id": "chinese-chapter-1",
           "name": "第一章 文言文阅读",
           "type": "chapter",
@@ -3367,7 +4013,6 @@
           "resourceIds": [
             "637002DEE96D4D5D827A22362815BC60"
           ],
-          "demoCovered": true,
           "id": "chinese-chapter-1-objective",
           "name": "结合语境理解文言词句",
           "type": "objective",
@@ -3379,7 +4024,6 @@
           "resourceIds": [
             "637002DEE96D4D5D827A22362815BC60"
           ],
-          "demoCovered": true,
           "id": "chinese-chapter-1-design",
           "name": "文言词句小组研读",
           "type": "design",
@@ -3391,7 +4035,6 @@
           "resourceIds": [
             "EB5C20A95266A25203329ED8CCB90EEC"
           ],
-          "demoCovered": true,
           "id": "chinese-chapter-2",
           "name": "第二章 古诗词阅读",
           "type": "chapter",
@@ -3403,7 +4046,6 @@
           "resourceIds": [
             "EB5C20A95266A25203329ED8CCB90EEC"
           ],
-          "demoCovered": true,
           "id": "chinese-chapter-2-objective",
           "name": "从意象和语言体会诗情",
           "type": "objective",
@@ -3415,7 +4057,6 @@
           "resourceIds": [
             "EB5C20A95266A25203329ED8CCB90EEC"
           ],
-          "demoCovered": true,
           "id": "chinese-chapter-2-design",
           "name": "古诗意象对读",
           "type": "design",
@@ -3425,7 +4066,6 @@
           "group": "language",
           "chapterId": "chinese-chapter-3",
           "resourceIds": [],
-          "demoCovered": true,
           "id": "chinese-chapter-3",
           "name": "第三章 语言文字积累",
           "type": "chapter",
@@ -3435,7 +4075,6 @@
           "group": "language",
           "chapterId": "chinese-chapter-3",
           "resourceIds": [],
-          "demoCovered": true,
           "id": "chinese-chapter-3-objective",
           "name": "积累并运用语言知识",
           "type": "objective",
@@ -3445,7 +4084,6 @@
           "group": "language",
           "chapterId": "chinese-chapter-3",
           "resourceIds": [],
-          "demoCovered": true,
           "id": "chinese-chapter-3-design",
           "name": "词句积累与迁移练习",
           "type": "design",
@@ -3457,7 +4095,6 @@
           "resourceIds": [
             "637002DEE96D4D5D827A22362815BC60"
           ],
-          "demoCovered": true,
           "id": "chinese-chapter-4",
           "name": "第四章 写作与表达",
           "type": "chapter",
@@ -3469,7 +4106,6 @@
           "resourceIds": [
             "637002DEE96D4D5D827A22362815BC60"
           ],
-          "demoCovered": true,
           "id": "chinese-chapter-4-objective",
           "name": "围绕中心组织写作材料",
           "type": "objective",
@@ -3481,7 +4117,6 @@
           "resourceIds": [
             "637002DEE96D4D5D827A22362815BC60"
           ],
-          "demoCovered": true,
           "id": "chinese-chapter-4-design",
           "name": "写作互评与修改",
           "type": "design",
@@ -3999,6 +4634,109 @@
           "id": "chinese-chapter-4",
           "name": "第四章 写作与表达"
         }
+      ],
+      "curriculum": [
+        {
+          "id": "chinese-poetry",
+          "name": "第四单元",
+          "edition": "人教版",
+          "grade": "二年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "chinese-waterfall",
+              "name": "古诗二首·望庐山瀑布",
+              "chapterId": "chinese-chapter-2",
+              "knowledgeIds": [
+                "waterfall",
+                "imagery",
+                "recitation",
+                "rhyme",
+                "poet-li",
+                "poetic-mood",
+                "emotion",
+                "homesick",
+                "metaphor",
+                "hyperbole",
+                "metaphor-only",
+                "personification"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chinese-classical",
+          "name": "第三单元",
+          "edition": "人教版",
+          "grade": "八年级",
+          "term": "下册",
+          "topics": [
+            {
+              "id": "chinese-taohua",
+              "name": "桃花源记",
+              "chapterId": "chinese-chapter-1",
+              "knowledgeIds": [
+                "taohua",
+                "classical-words",
+                "narrative",
+                "taoyuan",
+                "author-tao",
+                "translation",
+                "omission",
+                "inversion",
+                "reading",
+                "evidence",
+                "function-word",
+                "polysemy",
+                "ancient-modern",
+                "borrowed",
+                "rhythm"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chinese-travel",
+          "name": "第五单元",
+          "edition": "人教版",
+          "grade": "八年级",
+          "term": "下册",
+          "topics": [
+            {
+              "id": "chinese-travel-writing",
+              "name": "学写游记",
+              "chapterId": "chinese-chapter-4",
+              "knowledgeIds": [
+                "description",
+                "writing-order",
+                "structure",
+                "detail",
+                "perspective",
+                "expression"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chinese-argument",
+          "name": "第二单元",
+          "edition": "人教版",
+          "grade": "九年级",
+          "term": "上册",
+          "topics": [
+            {
+              "id": "chinese-argument-writing",
+              "name": "观点要明确",
+              "chapterId": "chinese-chapter-4",
+              "knowledgeIds": [
+                "argument",
+                "argument-method",
+                "examples",
+                "comparison"
+              ]
+            }
+          ]
+        }
       ]
     }
   ],
@@ -4027,6 +4765,18 @@
       "id": "resource",
       "name": "资源",
       "color": "#EF4444"
+    }
+  ],
+  "curriculumSources": [
+    {
+      "title": "人民教育出版社·生物七年级上册目录",
+      "url": "https://www.pep.com.cn/products/jc/czjks/201510/t20151026_1250811.shtml",
+      "editionScope": "2012 课标版教学目录样例"
+    },
+    {
+      "title": "人民教育出版社·数学九年级上册目录",
+      "url": "https://www.pep.com.cn/products/jc/czjks/201602/t20160228_1258416.shtml",
+      "editionScope": "2011 课标版教学目录样例"
     }
   ]
 }

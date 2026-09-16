@@ -1,70 +1,81 @@
-/* User-requested subject and textbook filters; original runtime and application plaza remain intact. */
+/* Resource and application lists share the school catalog and profile defaults. */
 (() => {
   'use strict';
-  const subjects = ['推荐','语文','数学','英语','物理','化学','信息科技','其他'];
-  const editions = ['全部','人教版','北师大版','苏教版','未标注'];
-  // Retain the original subject classification. No textbook edition is inferred from a title.
-  const metadata = {
-    A45760493DA8ECA44A316EA2BB54A041:{subject:'其他',edition:null},
-    '314B268E642DBAE685F47391A9CCDDC4':{subject:'数学',edition:null},
-    '2D1E52CBB465EE8981405653A46D4C37':{subject:'其他',edition:null},
-    '66FEA6B38E058EDAB62E4117D0F43DE7':{subject:'数学',edition:null},
-    '8A7E82D22F0DF49599F56674103EC2ED':{subject:'数学',edition:null},
-    A99596AA4DC295A7B8EA5548673DFCEB:{subject:'数学',edition:null},
-  };
-  let mounted, pending=false;
-  const attached = node => Object.keys(node).some(key=>key.startsWith('__reactProps$'));
-  function group(label, values, kind, onChange) {
-    const row=document.createElement('div');row.className='rw-filter-row rw-filter-'+kind;
-    row.setAttribute('role','group');row.setAttribute('aria-label',label);
-    const caption=document.createElement('span');caption.className='rw-filter-label';caption.textContent=label;row.append(caption);
-    for(const value of values){const button=document.createElement('button');button.type='button';button.textContent=value;button.dataset.value=value;button.setAttribute('aria-pressed','false');button.addEventListener('click',()=>onChange(value));row.append(button);}
+  const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const isPlaza = () => ['/plaza/resource','/plaza/app'].includes(location.pathname);
+  const attached = node => node && Object.keys(node).some(key => key.startsWith('__reactProps$'));
+  let data, mounted, pending = false, revision = 0;
+  function group(label, values, kind, state) {
+    const row = document.createElement('div');
+    row.className = `rw-filter-row rw-filter-${kind}`;
+    row.setAttribute('role','group'); row.setAttribute('aria-label',label);
+    row.innerHTML = `<span class="rw-filter-label">${label}</span>`;
+    for (const value of [...new Set(['全部', ...values])]) {
+      const button = document.createElement('button'); button.type = 'button';
+      button.textContent = value; button.dataset.value = value;
+      button.addEventListener('click', () => { state[kind] = value; apply(state); });
+      row.append(button);
+    }
     return row;
   }
   function update() {
-    pending=false;
-    if(location.pathname!=='/plaza/resource'){mounted=null;return;}
-    const heading=[...document.querySelectorAll('h1')].find(n=>n.textContent==='教学资源');
-    const scroll=heading?.parentElement?.parentElement;
-    if(!scroll||!attached(heading))return;
-    if(!mounted||mounted.scroll!==scroll||!mounted.subjectRow.isConnected){
-      const children=[...scroll.children];
-      const nativeSubjects=children.find(n=>n.classList.contains('mt-7'));
-      const grades=children.find(n=>n.firstElementChild?.textContent==='年级');
-      const results=children.find(n=>n.classList.contains('mt-6'));
-      if(!nativeSubjects||!grades||!results)return;
-      nativeSubjects.dataset.rwNativeSubjects='';
-      const state={scroll,nativeSubjects,grades,results,subject:'推荐',edition:'全部'};
-      state.subjectRow=group('学科',subjects,'subjects',v=>{state.subject=v;apply(state);});
-      state.editionRow=group('教材版本',editions,'editions',v=>{state.edition=v;apply(state);});
-      state.empty=document.createElement('div');state.empty.className='rw-filter-empty';state.empty.setAttribute('role','status');
-      const message=document.createElement('p');message.textContent='暂无符合条件的资源';
-      const note=document.createElement('p');note.className='rw-filter-note';
-      const reset=document.createElement('button');reset.type='button';reset.textContent='清空筛选';
-      reset.addEventListener('click',()=>{state.subject='推荐';state.edition='全部';[...grades.querySelectorAll('button')].find(b=>b.textContent==='全部')?.click();apply(state);});
-      state.empty.append(message,note,reset);state.note=note;
-      nativeSubjects.before(state.subjectRow);grades.after(state.editionRow);results.after(state.empty);
-      mounted=state;
+    pending = false;
+    if (!data || !isPlaza()) { mounted = null; return; }
+    const heading = [...document.querySelectorAll('main h1')].find(n => /^(教学资源|教学应用)$/.test(n.textContent));
+    const scroll = heading?.parentElement?.parentElement;
+    if (!scroll || !attached(heading) || document.readyState !== 'complete') return;
+    if (!mounted || mounted.scroll !== scroll || mounted.route !== location.pathname || !mounted.shell.isConnected) {
+      const nativeSubjects = [...scroll.children].find(n => n.classList.contains('mt-7'));
+      const nativeGrades = [...scroll.children].find(n => n.firstElementChild?.textContent === '年级');
+      const nativeResults = [...scroll.children].find(n => n.classList.contains('mt-6'));
+      const nativeSearch = heading.parentElement.querySelector('input');
+      if (![nativeSubjects,nativeGrades,nativeResults].every(attached)) return;
+      for (const node of [nativeSubjects,nativeGrades,nativeResults,nativeSearch?.parentElement]) if (node) node.dataset.rwNativeList = '';
+      const profile = data.base.profile;
+      const state = {scroll,route:location.pathname,edition:profile.edition || '全部',subject:profile.subject || '全部',grade:profile.grade || '全部',query:'',signature:''};
+      const shell = document.createElement('section'); shell.className = 'rw-discovery'; shell.dataset.rwOwned = 'discovery'; state.shell = shell;
+      state.rows = [group('教材版本', [...data.base.editions,'未标注'], 'edition', state),group('学科',data.base.subjects.filter(s => s !== '推荐'),'subject',state),group('年级',data.base.grades,'grade',state)];
+      shell.append(...state.rows);
+      const toolbar = document.createElement('div'); toolbar.className = 'rw-discovery-toolbar';
+      const searchLabel = location.pathname === '/plaza/app' ? '搜索应用名称或教师姓名' : '搜索资源名称或教师姓名';
+      toolbar.innerHTML = `<span class="rw-discovery-count" role="status"></span><label class="rw-discovery-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" placeholder="${searchLabel}" aria-label="${searchLabel}"></label>`;
+      state.search = toolbar.querySelector('input'); state.count = toolbar.querySelector('[role="status"]');
+      state.search.addEventListener('input', () => { state.query = state.search.value; apply(state); });
+      shell.append(toolbar);
+      state.results = document.createElement('div'); state.results.className = 'rw-discovery-grid'; shell.append(state.results);
+      state.empty = document.createElement('div'); state.empty.className = 'rw-filter-empty';
+      state.empty.innerHTML = '<svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="11" y="8" width="34" height="40" rx="3"/><path d="M20 20h16M20 27h16M20 34h8"/></svg><p>暂无符合条件的资源</p><button type="button">清空筛选</button>';
+      state.empty.querySelector('button').addEventListener('click',() => {state.subject = state.grade = state.edition = '全部'; state.query = ''; state.search.value = ''; apply(state);});
+      shell.append(state.empty); nativeSubjects.before(shell);
+      shell.addEventListener('click', event => { const b = event.target.closest('[data-discovery-save]'); if (!b) return; event.preventDefault(); data.toggle('save', b.dataset.discoverySave); });
+      mounted = state;
     }
     apply(mounted);
   }
-  function apply(state){
-    if(!state.subjectRow.isConnected)return;
-    for(const [row,value] of [[state.subjectRow,state.subject],[state.editionRow,state.edition]])for(const b of row.querySelectorAll('button')){const next=String(b.dataset.value===value);if(b.getAttribute('aria-pressed')!==next)b.setAttribute('aria-pressed',next);}
-    let count=0;
-    for(const card of state.results.querySelectorAll('a[href*="/share/"]')){
-      const id=new URL(card.href,location.href).pathname.split('/').pop();const info=metadata[id]||{subject:'其他',edition:null};
-      const visible=(state.subject==='推荐'||state.subject===info.subject)&&(state.edition==='全部'||state.edition===(info.edition||'未标注'));
-      if(visible){card.removeAttribute('data-rw-filter-hidden');count++;}else card.setAttribute('data-rw-filter-hidden','');
+  function apply(state) {
+    for (const [index,kind] of ['edition','subject','grade'].entries()) for (const button of state.rows[index].querySelectorAll('button')) {
+      const value = String(button.dataset.value === state[kind]); if (button.getAttribute('aria-pressed') !== value) button.setAttribute('aria-pressed',value);
     }
-    state.results.toggleAttribute('data-rw-filter-no-results',count===0);
-    state.empty.hidden=count!==0;
-    const note=state.edition!=='全部'&&state.edition!=='未标注'?'当前资源尚未标注教材版本，可切换“全部”或“未标注”查看。':'试试其他学科、年级或教材版本。';
-    if(state.note.textContent!==note)state.note.textContent=note;
+    const query = state.query.trim().toLocaleLowerCase();
+    const seen = new Set();
+    const rows = data.resources().filter(r => {
+      if (r.legacy) return false;
+      const app = ['教学应用','教育应用','教学游戏'].includes(r.kind);
+      const matches = app === (state.route === '/plaza/app') && (state.edition === '全部' || state.edition === (r.edition || '未标注')) && (state.subject === '全部' || state.subject === r.subject) && (state.grade === '全部' || state.grade === r.grade) && (!query || `${r.title} ${r.author}`.toLocaleLowerCase().includes(query));
+      const key = JSON.stringify([r.title.trim(),r.artifact || r.id]);
+      if (!matches || seen.has(key)) return false;
+      seen.add(key); return true;
+    });
+    const signature = JSON.stringify([revision,state.edition,state.subject,state.grade,query,rows.map(r => [r.id,r.likes,r.saves,data.isSaved(r.id)])]);
+    if (signature === state.signature) return; state.signature = signature;
+    state.count.textContent = `${rows.length} 份${state.route === '/plaza/app' ? '教学应用' : '教学资源'}`;
+    state.empty.hidden = rows.length > 0; state.results.hidden = !rows.length;
+    state.results.innerHTML = rows.map(r => `<article class="rw-discovery-card"><a class="rw-discovery-link" ${r.mock ? 'aria-disabled="true"' : `href="${escape(r.href)}"`}><div class="rw-discovery-cover">${r.cover ? `<img src="${escape(r.cover)}" alt="" loading="lazy">` : '<span class="rw-discovery-placeholder">课件</span>'}</div><div class="rw-discovery-copy"><div class="rw-discovery-meta"><span>${escape(r.kind)}</span><span>浏览 ${Number(r.views || 0)}</span></div><h2>${escape(r.title)}</h2><div class="rw-discovery-author"><span class="rw-teacher-avatar">${escape((r.author || '教师').slice(0,1))}</span><span>${escape(r.author || '教师')}</span><span>${escape([r.grade,r.subject].filter(Boolean).join(' · '))}</span></div></div></a><div class="rw-discovery-footer"><span>点赞 ${Number(r.likes || 0)}</span><button type="button" data-discovery-save="${escape(r.id)}" aria-pressed="${data.isSaved(r.id)}" aria-label="${data.isSaved(r.id)?'取消收藏':'收藏'} ${escape(r.title)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>${data.isSaved(r.id)?'已收藏':'收藏'}</button></div></article>`).join('');
   }
-  function schedule(){if(!pending){pending=true;requestAnimationFrame(update);}}
-  new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['href']});
-  addEventListener('popstate',schedule);addEventListener('pageshow',schedule);
-  let url=location.href;setInterval(()=>{if(location.href!==url||(!mounted&&location.pathname==='/plaza/resource')){url=location.href;schedule();}},200);
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule);else schedule();
+  function schedule() { if (!pending) { pending = true; requestAnimationFrame(update); } }
+  new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
+  addEventListener('popstate',schedule); addEventListener('pageshow',schedule);
+  let url = location.href; setInterval(() => {if (location.href !== url || (!mounted && isPlaza())) {url = location.href;schedule();}},250);
+  async function init() {if (!window.WorkshopData) {setTimeout(init,50);return;} data = window.WorkshopData; await data.ready;data.subscribe(() => {revision++;schedule();});schedule();}
+  init();
 })();

@@ -420,3 +420,41 @@ body .rw-workbench .rw-title-row>div:first-child{min-width:0}
 @media(max-width:600px){body .rw-list-switch{gap:14px}body .rw-list-switch a{font-size:18px}body .rw-list-switch a[aria-current="page"]{font-size:26px}body .rw-workbench .rw-header-actions{margin-left:auto}}
 @media(prefers-reduced-motion:reduce){body .rw-list-switch a{transition:none}}
 @media(max-width:600px){body .rw-workbench .rw-title-row{gap:14px}body .rw-workbench .rw-title-row>div:first-child{display:contents}body .rw-workbench .rw-title-row .rw-list-switch{flex-basis:100%}body .rw-workbench .rw-title-row>div:first-child>p{flex:1;min-width:140px;margin:0}body .rw-workbench .rw-header-actions{margin-left:0}}
+
+/* Personal resources and uploaded files share a single, full-width workspace. */
+.rw-personal-library .rw-workspace{display:block;padding-top:0}
+.rw-personal-library .rw-resource-panel{padding-top:0;min-width:0}
+.rw-personal-library .rw-header{padding-bottom:24px}
+.rw-personal-library .rw-toolbar{padding:19px 0 16px}
+.rw-personal-library .rw-tabs{gap:30px}
+.rw-personal-library .rw-result-line{padding-bottom:16px}
+.rw-personal-library .rw-header-actions{flex-wrap:wrap}
+.rw-personal-library{max-width:none}
+.rw-personal-library .rw-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.rw-knowledge-labels{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px;font-size:12px;color:#63745e}
+.rw-knowledge-labels span{padding:3px 7px;background:#f0f3e9;border-radius:3px}
+.rw-personal-preview .rw-preview-grid{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;align-items:stretch;padding:6px 0 22px}
+.rw-personal-preview .rw-preview-grid>.rw-card{display:flex;flex-direction:column;align-self:stretch;border:1px solid #ddded6;border-radius:6px;padding:9px;background:#fffefa;container-type:normal;min-width:0}
+.rw-personal-preview .rw-preview-grid>.rw-card>.rw-card-link{display:flex;flex-direction:column;height:auto;gap:0;flex:1}
+.rw-personal-preview .rw-preview-grid>.rw-card>.rw-card-link::after{display:none}
+.rw-personal-preview .rw-preview-grid>.rw-card .rw-cover{order:0;flex:none;aspect-ratio:16/10;border:0;border-radius:4px;min-height:0;position:relative;overflow:hidden}
+.rw-personal-preview .rw-preview-grid>.rw-card .rw-cover>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rw-personal-preview .rw-preview-grid>.rw-card .rw-card-copy{display:block;order:1;padding:12px 3px;flex:1}
+.rw-personal-preview .rw-preview-grid>.rw-card .rw-card-copy h3{display:block!important;padding:0;background:none;color:var(--ink);font-family:var(--paper-sans);font-size:15px!important;font-weight:600;line-height:1.6!important;margin:0}
+.rw-personal-preview .rw-resource-caption{font-size:12px;gap:6px;margin-bottom:7px}
+.rw-personal-preview .rw-view-count{position:static;background:none;color:#62675d;padding:0;font-size:12px;backdrop-filter:none}
+.rw-personal-preview .rw-view-count .rw-icon{width:13px;height:13px}
+.rw-personal-preview .rw-card-actions{display:flex;height:auto;gap:4px;border-top:1px solid #ecece4;padding-top:9px;margin:0 3px}
+.rw-personal-preview .rw-card-actions button{min-width:26px;height:28px;background:none;border:0;color:#62675d;font-size:12px;display:inline-flex;align-items:center;justify-content:center;gap:4px}
+.rw-personal-preview .rw-card-actions button[aria-pressed="true"]{color:var(--red)}
+.rw-personal-preview .rw-card-actions .rw-icon{width:14px;height:14px}
+.rw-personal-preview .rw-author{font-size:12px}
+.rw-personal-preview .rw-knowledge-labels{display:none}
+@media(max-width:1100px){.rw-personal-library .rw-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rw-personal-preview .rw-preview-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.rw-personal-library .rw-grid{grid-template-columns:minmax(0,1fr)}.rw-personal-library .rw-header-actions{margin-left:0!important}.rw-personal-library .rw-tabs{gap:20px}.rw-personal-preview .rw-preview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rw-personal-library .rw-header-actions .rw-button{min-height:40px}}
+
+.rw-card-link[aria-disabled="true"]{cursor:default}
+@media(max-width:650px){
+  .rw-personal-preview .rw-card-actions{flex-wrap:wrap}
+  .rw-personal-preview .rw-author{flex-basis:100%;white-space:nowrap;margin-bottom:3px}
+}

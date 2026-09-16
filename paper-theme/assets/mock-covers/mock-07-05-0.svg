@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400"><defs>
+ <linearGradient id="leaf" x2="1" y2="1"><stop stop-color="#b9d395"/><stop offset="1" stop-color="#366f50"/></linearGradient>
+ <radialGradient id="cell"><stop stop-color="#d6e9de"/><stop offset="1" stop-color="#7cafb2"/></radialGradient>
+ <radialGradient id="nucleus"><stop stop-color="#bbb4de"/><stop offset="1" stop-color="#716b9e"/></radialGradient>
+ <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#254c3c" stroke-opacity=".04"/></pattern></defs>
+ <rect width="640" height="400" fill="#edf3e8"/><circle cx="484" cy="205" r="149" fill="#dce8d0"/><rect width="640" height="400" fill="url(#grid)"/>
+ <g font-family="PingFang SC,Microsoft YaHei,sans-serif" fill="#254c3c"><text x="32" y="35" font-size="15" letter-spacing="1">历史 / 七年级</text>
+ <text x="30" y="86" font-size="30" font-weight="600">三国鼎立</text><path d="M34 109H83" stroke="#254c3c" stroke-width="3"/>
+ <text x="34" y="147" font-size="17">分层巩固练习</text>
+ <g transform="translate(315 88) scale(.95)"><path d="M59 233H266V264H59Z M79 126H246V226H79Z" fill="#ad7854"/><path d="M42 127L159 56L284 127Z" fill="#6f826e"/><path d="M102 139V225" stroke="#e6cf9d" stroke-width="13"/><path d="M159 139V225" stroke="#e6cf9d" stroke-width="13"/><path d="M218 139V225" stroke="#e6cf9d" stroke-width="13"/><circle cx="248" cy="46" r="22" fill="#e1c187" /><text x="160" y="292" font-size="18" fill="#305361" text-anchor="middle">追寻文明的足迹</text></g>
+ <path d="M32 353H607" stroke="#254c3c" stroke-opacity=".18"/><text x="32" y="379" font-size="14">北师大版 · 试卷</text><text x="608" y="379" text-anchor="end" font-size="14">06 / 探究课堂</text></g></svg>
