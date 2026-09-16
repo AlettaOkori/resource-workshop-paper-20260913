@@ -218,9 +218,10 @@
   }
 
   function pointsMarkup(state) {
+    const scoped = !!(state.edition || state.subject || state.grade || state.unitId || state.topicId);
+    if (state.phase === 'editor' && !(state.subject && state.grade)) return '';
     const available = scopeNodes(state);
     const query = normalizeTerm(state.pointSearch);
-    const scoped = !!(state.edition || state.subject || state.grade || state.unitId || state.topicId);
     const candidates = query ? available.filter(item => [item.name, ...(item.aliases || []), ...(synonyms[item.name] || [])].some(name => normalizeTerm(name).includes(query))) : scoped ? available : [];
     const selected = nodes().filter(item => state.selected.has(item.id));
     const point = item => `<label class="wk-point"><input type="checkbox" value="${esc(item.id)}" ${state.selected.has(item.id) ? 'checked' : ''}><span>${esc(item.name)}</span><small>${esc(item.subjectName)}</small></label>`;
@@ -401,7 +402,7 @@
     dialog.className = 'wk-dialog'; dialog.dataset.rwOwned = 'knowledge-picker'; dialog.setAttribute('aria-label', batch ? '批量设置知识点' : '设置知识点');
     dialog.innerHTML = `<header><h2>${batch ? '批量设置知识点' : '设置知识点'}${batch ? ` · ${records.length} 份资源` : ''}</h2><button type="button" data-wk-close aria-label="关闭">×</button></header><div class="wk-editor-modal-body"></div><footer><span class="wk-notice" role="status"></span><button type="button" class="wk-primary" data-wk-save>保存</button></footer>`;
     const body = dialog.querySelector('.wk-editor-modal-body');
-    const renderEditor = () => { const scroll = body.querySelector('.wk-points')?.scrollTop || 0; body.innerHTML = basicMarkup(state) + pointsMarkup(state); body.querySelector('.wk-points').scrollTop = scroll; };
+    const renderEditor = () => { const scroll = body.querySelector('.wk-points')?.scrollTop || 0; body.innerHTML = basicMarkup(state) + pointsMarkup(state); const points = body.querySelector('.wk-points'); if (points) points.scrollTop = scroll; };
     const close = () => { dialog.close(); dialog.remove(); };
     const saveEditor = () => {
       const common = context(state);

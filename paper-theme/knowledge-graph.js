@@ -87,11 +87,17 @@
       s.root.querySelector('.kg-viewport').setAttribute('transform',`translate(${cx+s.tx},${cy+s.ty}) scale(${s.zoom}) translate(${-cx},${-cy})`);
       box=target.getBoundingClientRect();
     }
-    const x=Math.max(0,box.left-10),y=Math.max(0,box.top-10),w=box.width+20,h=box.height+20;
-    const signature=[innerWidth,innerHeight,drawer.left,drawer.top,drawer.width,drawer.height,x,y,w,h].map(value=>Math.round(value*100)/100).join('|');
+    const matrix=target.getScreenCTM();if(!matrix)return;
+    const signature=[innerWidth,innerHeight,drawer.left,drawer.top,drawer.width,drawer.height,matrix.a,matrix.b,matrix.c,matrix.d,matrix.e,matrix.f].join('|')+target.innerHTML;
     if(overlay.dataset.geometry===signature)return;
     overlay.dataset.geometry=signature;overlay.setAttribute('viewBox',`0 0 ${innerWidth} ${innerHeight}`);
-    overlay.innerHTML=`<defs><mask id="kg-focus-cutout" maskUnits="userSpaceOnUse" x="0" y="0" width="${innerWidth}" height="${innerHeight}"><rect width="${innerWidth}" height="${innerHeight}" fill="white"/><rect x="${drawer.left}" y="${drawer.top}" width="${drawer.width}" height="${drawer.height}" fill="black"/><rect class="kg-selection-window" x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="black"/></mask></defs><rect width="${innerWidth}" height="${innerHeight}" fill="#17251b55" mask="url(#kg-focus-cutout)"/><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="none" stroke="#bf3034" stroke-opacity=".55" stroke-width="2"/>`;
+    overlay.innerHTML=`<defs><mask id="kg-drawer-cutout" maskUnits="userSpaceOnUse" x="0" y="0" width="${innerWidth}" height="${innerHeight}"><rect width="${innerWidth}" height="${innerHeight}" fill="white"/><rect x="${drawer.left}" y="${drawer.top}" width="${drawer.width}" height="${drawer.height}" fill="black"/></mask></defs><rect width="${innerWidth}" height="${innerHeight}" fill="#17251b55" mask="url(#kg-drawer-cutout)"/>`;
+    // A visual copy in the dialog's top layer keeps the node and glyphs bright without a cutout box.
+    const focus=target.cloneNode(true);
+    focus.classList.add('kg-focus-node');focus.classList.remove('is-muted');
+    focus.removeAttribute('role');focus.removeAttribute('tabindex');focus.removeAttribute('aria-pressed');focus.setAttribute('aria-hidden','true');
+    focus.setAttribute('transform',`matrix(${matrix.a} ${matrix.b} ${matrix.c} ${matrix.d} ${matrix.e} ${matrix.f})`);
+    overlay.append(focus);
   }
   function showHover(s,target){
     if(s.detailOpen)return;

@@ -66,7 +66,12 @@
     else if(location.pathname==='/dashboard')host=content.querySelector('.wd-header>nav');
     else if(location.pathname.startsWith('/share/'))host=content.querySelector('main>header');
     else if(new URLSearchParams(location.search).get('page')==='my-resources')host=content.querySelector('.rw-breadcrumb');
-    else if(location.pathname==='/chat'){host=content.querySelector('button[aria-label="返回首页"]')?.parentElement?.parentElement;host?.classList.add('ws-chat-navigation');}
+    else if(location.pathname==='/chat'){
+      host=content.querySelector('button[aria-label="返回首页"]')?.parentElement?.parentElement;
+      host?.classList.add('ws-chat-navigation');
+      // Retire the bundled share control without removing React-owned nodes.
+      for(const button of host?.querySelectorAll(':scope > div > button')||[])if(button.textContent.trim()==='分享')button.dataset.wsChatShare='';
+    }
     else if(location.pathname.startsWith('/plaza/'))host=content.querySelector('button[aria-label="返回首页"]')?.parentElement;
     else if(location.pathname==='/'){
       host=content.querySelector('.ws-home-navigation');

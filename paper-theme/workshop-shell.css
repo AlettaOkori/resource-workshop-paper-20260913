@@ -29,6 +29,7 @@ body[data-paper-page="home"] [data-paper-composer]>.ws-history-side:focus-visibl
 .ws-chat-navigation>span:first-child{flex:1 1 0!important;min-width:0!important;overflow:hidden;flex-wrap:nowrap!important}
 .ws-chat-navigation>span:first-child>span:last-child{min-width:0;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
 .ws-chat-navigation>div{flex:none}
+.ws-chat-navigation [data-ws-chat-share]{display:none!important}
 .ws-chat-navigation .ws-shortcuts{gap:6px}
 .rw-breadcrumb.ws-navigation-row{width:100%;box-sizing:border-box}
 body[data-paper-page="share"] main>header.ws-navigation-row{height:56px!important;min-height:56px!important;padding:8px 30px 8px 60px!important}
