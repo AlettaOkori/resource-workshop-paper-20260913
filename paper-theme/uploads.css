@@ -47,3 +47,22 @@
 .wu-chat-files button>small{font-size:11px;color:#7b876d;white-space:nowrap}
 .wu-chat-files svg{width:14px;height:14px;flex:none}
 .wu-dialog{margin:auto;inset:0}
+/* Attachment sources are chosen next to the active composer. */
+.wu-source-menu{position:fixed;z-index:12000;width:194px;padding:6px;border:1px solid #d7d9ce;border-radius:7px;background:#fffef9;color:#293027;box-shadow:0 10px 32px #29302724;font:14px var(--paper-sans)}
+.wu-source-menu button{display:flex;align-items:center;gap:11px;width:100%;padding:12px 11px;border:0;background:transparent;border-radius:4px;color:inherit;text-align:left;font:inherit;cursor:pointer}
+.wu-source-menu button:hover,.wu-source-menu button:focus-visible{background:#f0f1e8;outline:none;color:var(--red)}
+.wu-source-menu svg,.wu-library svg{width:18px;height:18px;flex:none}
+.wu-library{padding-top:22px;min-width:0}
+.wu-library .wu-file-list{max-height:none;overflow:visible;min-height:260px}
+.wu-library .wu-file-toolbar{gap:20px}
+.wu-library .wu-search{max-width:440px}
+.wu-library .wu-file-toolbar select{border:0;background:transparent;color:#62675d;font:14px var(--paper-sans);padding:9px 7px;cursor:pointer}
+.wu-library .wu-file-row{padding:20px 12px}
+.wu-library .wu-file-copy h3{font-size:15px}
+.wu-library .wu-file-copy p,.wu-library .wu-count{font-size:13px}
+.wu-library .wu-row-actions{gap:10px}
+.wu-library .wu-file-symbol{width:44px;height:49px}
+.wu-library .wu-icon-button:focus-visible,.wu-library .wu-button:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+@media(max-width:600px){.wu-library .wu-file-toolbar{gap:8px}.wu-library .wu-file-row{padding:17px 3px}.wu-library .wu-row-actions{margin-left:53px;flex-basis:calc(100% - 53px)}.wu-library .wu-file-toolbar select{font-size:13px;max-width:100px}.wu-library .wu-search{padding:10px}.wu-library .wu-file-copy h3{font-size:14px}}
+.wu-library-tools{display:flex;align-items:center;gap:14px;flex:none}
+@media(max-width:600px){.wu-library .wu-file-toolbar{flex-wrap:wrap}.wu-library .wu-search{max-width:none;flex-basis:100%}.wu-library-tools{width:100%;justify-content:space-between;gap:8px}.wu-library .wu-file-toolbar select{padding-left:0}}

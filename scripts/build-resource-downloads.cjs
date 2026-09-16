@@ -84,11 +84,17 @@ async function exportHTML(artifact) {
 }
 (async () => {
   const catalog = JSON.parse(fs.readFileSync(path.join(root,'paper-theme/resources/catalog.json'),'utf8'));
-  const manifest = {},results = [];
-  for (const artifact of [...new Set(catalog.map(r => r.artifact).filter(Boolean))]) {
+  const selected = process.argv.slice(2);
+  const artifacts = [...new Set(catalog.map(r => r.artifact).filter(Boolean))];
+  if(selected.some(artifact=>!artifacts.includes(artifact)))throw new Error('导出资源不在目录中');
+  const manifestFile = path.join(output,'manifest.json');
+  const reportFile = path.join(root,'verification/meeting-20260914/download-build.json');
+  const manifest = selected.length&&fs.existsSync(manifestFile)?JSON.parse(fs.readFileSync(manifestFile)):{};
+  const results = selected.length&&fs.existsSync(reportFile)?JSON.parse(fs.readFileSync(reportFile)).filter(item=>!selected.includes(item.artifact)):[];
+  for (const artifact of artifacts.filter(artifact=>!selected.length||selected.includes(artifact))) {
     const item = await exportHTML(artifact);manifest[artifact] = item.href;results.push({artifact,...item});
     process.stdout.write(`${artifact}: ${item.bytes} bytes\n`);
   }
-  fs.writeFileSync(path.join(output,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');
-  fs.writeFileSync(path.join(root,'verification/meeting-20260914/download-build.json'),JSON.stringify(results,null,2)+'\n');
+  fs.writeFileSync(manifestFile,JSON.stringify(manifest,null,2)+'\n');
+  fs.writeFileSync(reportFile,JSON.stringify(results,null,2)+'\n');
 })().catch(error => {console.error(error);process.exitCode=1;});

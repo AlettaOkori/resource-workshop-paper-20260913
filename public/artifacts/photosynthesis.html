@@ -14,16 +14,16 @@
   <script defer="" src="/artifacts/vendor/metis-app.js"></script>
   <style>
     :root {
-      --bg: #F4FAF1;
-      --text: #173B2B;
-      --muted: #5E7667;
-      --primary: #2E8B57;
-      --primary-dark: #216845;
-      --accent: #F4B942;
-      --air: #55A9D6;
-      --surface: #FFFFFF;
-      --line: #D7E8D9;
-      --shadow: 0 18px 50px rgba(38, 92, 60, .12);
+      --bg: #BACBAF;
+      --text: #203E2E;
+      --muted: #304F39;
+      --primary: #315F40;
+      --primary-dark: #203F2E;
+      --accent: #AF8B3E;
+      --air: #629298;
+      --surface: #FAFCF6;
+      --line: #98AF90;
+      --shadow: 0 18px 50px rgba(29,61,39, .12);
       --radius: 22px;
     }
     * { box-sizing: border-box; }
@@ -32,8 +32,8 @@
       font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 8% 4%, rgba(244,185,66,.20), transparent 24%),
-        radial-gradient(circle at 94% 15%, rgba(85,169,214,.12), transparent 23%),
+        radial-gradient(circle at 8% 4%, rgba(175,139,62,.12), transparent 24%),
+        radial-gradient(circle at 94% 15%, rgba(98,146,152,.08), transparent 23%),
         var(--bg);
     }
     button { font: inherit; }
@@ -45,36 +45,36 @@
     .eyebrow { letter-spacing: .18em; text-transform: uppercase; font-size: 12px; font-weight: 800; color: var(--primary); }
     h1 { margin: 5px 0 0; font-size: clamp(28px, 4vw, 52px); line-height: 1.08; letter-spacing: -.04em; }
     .subtitle { margin: 9px 0 0; color: var(--muted); font-size: clamp(14px, 1.6vw, 18px); }
-    .status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.76); color: var(--muted); font-size: 13px; white-space: nowrap; }
-    .status-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(244,185,66,.18); }
+    .status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px; background: rgba(247,250,240,.94); color: var(--muted); font-size: 13px; white-space: nowrap; }
+    .status-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(175,139,62,.18); }
     .layout { max-width: 1480px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(330px, .82fr); gap: 22px; align-items: start; }
     .layout > *, .side { min-width: 0; }
-    .panel { background: rgba(255,255,255,.88); border: 1px solid rgba(215,232,217,.9); border-radius: var(--radius); box-shadow: var(--shadow); }
-    .stage-panel { padding: clamp(18px, 3vw, 30px); overflow: hidden; }
+    .panel { background: #F0F5E9; border: 1px solid rgba(152,175,144,.9); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .stage-panel { background:#E6EEDC; padding: clamp(18px, 3vw, 30px); overflow: hidden; }
     .stage-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
     .stage-kicker { color: var(--primary); font-weight: 800; font-size: 14px; }
     .stage-title { margin: 4px 0 0; font-size: clamp(20px, 2.4vw, 30px); letter-spacing: -.02em; }
     .stage-caption { color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 620px; }
-    .mode-toggle { display: flex; background: #EDF7EE; padding: 4px; border-radius: 13px; gap: 3px; flex-shrink: 0; }
+    .mode-toggle { display: flex; background: #B8CBAB; padding: 4px; border-radius: 13px; gap: 3px; flex-shrink: 0; }
     .mode-toggle button, .step-btn, .concept-btn, .control-btn {
       border: 0; cursor: pointer; transition: .2s ease; color: var(--text);
     }
     .mode-toggle button { padding: 9px 12px; border-radius: 10px; background: transparent; font-weight: 800; font-size: 13px; }
-    .mode-toggle button.active { background: var(--surface); color: var(--primary-dark); box-shadow: 0 4px 12px rgba(46,139,87,.14); }
-    .scene-wrap { position: relative; border-radius: 20px; overflow: hidden; background: linear-gradient(180deg, #F8FFF6 0%, #EEF8F0 100%); border: 1px solid var(--line); }
-    .scene-wrap::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255,255,255,.56), transparent 34%); z-index: 1; }
+    .mode-toggle button.active { background: var(--surface); color: var(--primary-dark); box-shadow: 0 4px 12px rgba(49,95,64,.14); }
+    .scene-wrap { position: relative; border-radius: 20px; overflow: hidden; background: linear-gradient(180deg, #EFF5E5 0%, #D5E3C6 100%); border: 1px solid var(--line); }
+    .scene-wrap::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(250,252,241,.56), transparent 34%); z-index: 1; }
     svg { display: block; width: 100%; height: auto; min-height: 420px; }
     .scene-label { font-size: 13px; font-weight: 800; fill: var(--text); }
     .scene-small { font-size: 11px; font-weight: 700; fill: var(--muted); }
     .molecule { transition: opacity .25s ease; }
-    .molecule.water { fill: #55A9D6; }
-    .molecule.co2 { fill: #7C6AC8; }
-    .molecule.o2 { fill: #F4B942; }
-    .molecule.sugar { fill: #E77D58; }
+    .molecule.water { fill: #57777A; }
+    .molecule.co2 { fill: #726C62; }
+    .molecule.o2 { fill: #946C30; }
+    .molecule.sugar { fill: #965F4B; }
     .molecule text { fill: white; font-size: 11px; font-weight: 900; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
     .flow-path { fill: none; stroke-linecap: round; stroke-width: 3; stroke-dasharray: 8 10; opacity: .85; }
     .flow-water { stroke: var(--air); }
-    .flow-co2 { stroke: #7C6AC8; }
+    .flow-co2 { stroke: #858075; }
     .flow-light { stroke: var(--accent); stroke-width: 5; stroke-dasharray: 0; }
     .flow-output { stroke: var(--accent); }
     .flow-muted { opacity: .12; }
@@ -87,24 +87,24 @@
     @keyframes travel { 0% { opacity: 0; transform: translateX(0); } 12% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; transform: translateX(48px); } }
     @keyframes rayPulse { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
     .scene-overlay { position: absolute; left: 18px; right: 18px; bottom: 16px; z-index: 2; display: flex; justify-content: space-between; gap: 14px; align-items: end; pointer-events: none; }
-    .stage-message { max-width: 68%; padding: 12px 15px; border-radius: 14px; background: rgba(255,255,255,.88); border: 1px solid rgba(215,232,217,.95); box-shadow: 0 10px 25px rgba(40,90,55,.10); font-size: 14px; line-height: 1.55; }
+    .stage-message { max-width: 68%; padding: 12px 15px; border-radius: 14px; background: rgba(250,252,244,.96); border: 1px solid rgba(152,175,144,.95); box-shadow: 0 10px 25px rgba(29,61,39,.10); font-size: 14px; line-height: 1.55; }
     .stage-count { padding: 9px 12px; border-radius: 999px; background: var(--text); color: #fff; font-size: 12px; font-weight: 800; }
     .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; align-items: center; }
     .control-btn { padding: 11px 15px; border-radius: 12px; background: var(--text); color: #fff; font-weight: 800; }
     .control-btn.primary { background: var(--primary); }
-    .control-btn.secondary { background: #EEF7EF; color: var(--primary-dark); }
+    .control-btn.secondary { background: #FAFCF6; color: var(--primary-dark); }
     .control-btn:hover, .step-btn:hover, .concept-btn:hover { transform: translateY(-1px); }
-    .progress { flex: 1; min-width: 140px; height: 10px; border-radius: 999px; background: #E5F0E7; overflow: hidden; }
+    .progress { flex: 1; min-width: 140px; height: 10px; border-radius: 999px; background: #AABF9B; overflow: hidden; }
     .progress > span { display: block; height: 100%; width: 25%; border-radius: inherit; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width .35s ease; }
     .side { display: grid; gap: 18px; }
     .card { padding: 20px; }
     .card h2 { margin: 0 0 12px; font-size: 18px; }
-    .formula-box { padding: 17px; background: #F8FCF7; border: 1px solid var(--line); border-radius: 16px; overflow-x: auto; }
+    .formula-box { padding: 17px; background: #FCFDF8; border: 1px solid var(--line); border-radius: 16px; overflow-x: auto; }
     .formula-note { margin-top: 10px; font-size: 13px; color: var(--muted); line-height: 1.6; }
     .steps { display: grid; gap: 9px; }
-    .step-btn { text-align: left; display: grid; grid-template-columns: 32px 1fr; gap: 11px; align-items: center; padding: 11px 12px; background: #FAFDF9; border: 1px solid var(--line); border-radius: 14px; }
-    .step-btn.active { border-color: rgba(46,139,87,.65); background: #EFF8EF; box-shadow: inset 4px 0 0 var(--primary); }
-    .step-num { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #E8F4E9; color: var(--primary-dark); font-weight: 900; font-size: 13px; }
+    .step-btn { text-align: left; display: grid; grid-template-columns: 32px 1fr; gap: 11px; align-items: center; padding: 11px 12px; background: #FBFCF7; border: 1px solid var(--line); border-radius: 14px; }
+    .step-btn.active { border-color: rgba(49,95,64,.65); background: #D5E5C6; box-shadow: inset 4px 0 0 var(--primary); }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #C0D2AC; color: var(--primary-dark); font-weight: 900; font-size: 13px; }
     .step-btn.active .step-num { background: var(--primary); color: #fff; }
     .step-name { font-weight: 900; font-size: 14px; }
     .step-desc { color: var(--muted); font-size: 12px; margin-top: 3px; line-height: 1.4; }
@@ -113,15 +113,15 @@
     .concept-btn strong { display: block; font-size: 14px; }
     .concept-btn span { display: block; margin-top: 6px; font-size: 12px; color: var(--muted); line-height: 1.35; }
     .concept-btn::after { content: "查看"; position: absolute; right: 10px; top: 10px; font-size: 10px; color: var(--primary); font-weight: 900; }
-    .concept-detail { margin-top: 12px; padding: 12px 14px; border-radius: 13px; background: #F7FBF7; color: var(--muted); font-size: 13px; line-height: 1.65; min-height: 58px; }
-    .teacher-tip { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 15px; background: linear-gradient(135deg, #FFF8DF, #FFFDF5); border: 1px solid #F4E7BB; }
-    .tip-mark { width: 10px; height: 10px; margin-top: 5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(244,185,66,.18); flex: 0 0 auto; }
+    .concept-detail { margin-top: 12px; padding: 12px 14px; border-radius: 13px; background: #E8F0DD; color: var(--muted); font-size: 13px; line-height: 1.65; min-height: 58px; }
+    .teacher-tip { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 15px; background: linear-gradient(135deg, #FFF2CE, #FFFAE9); border: 1px solid #C6B47D; }
+    .tip-mark { width: 10px; height: 10px; margin-top: 5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px rgba(175,139,62,.18); flex: 0 0 auto; }
     .teacher-tip strong { font-size: 13px; }
-    .teacher-tip p { margin: 5px 0 0; color: #776438; font-size: 13px; line-height: 1.55; }
+    .teacher-tip p { margin: 5px 0 0; color: #75603F; font-size: 13px; line-height: 1.55; }
     .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 13px; color: var(--muted); font-size: 12px; }
     .legend-item { display: inline-flex; align-items: center; gap: 6px; }
     .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .legend-dot.water { background: var(--air); } .legend-dot.co2 { background: #7C6AC8; } .legend-dot.light { background: var(--accent); } .legend-dot.product { background: #E77D58; }
+    .legend-dot.water { background: var(--air); } .legend-dot.co2 { background: #858075; } .legend-dot.light { background: var(--accent); } .legend-dot.product { background: #B67B61; }
     .no-light .light-ray, .no-light .flow-light { opacity: .08; }
     .no-light .particle { animation-play-state: paused; opacity: .18; }
     .no-light .molecule.sugar, .no-light .molecule.o2 { opacity: .18; }
@@ -166,7 +166,7 @@
 .CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
 .CtxtMenu_MenuSlider {  left: .1em;}
 .CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
-.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_SliderBar {  outline: none; background: #D3D3D3}
 .CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
 .CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
 .CtxtMenu_MenuDisabled {  color:GrayText}
@@ -178,7 +178,7 @@
 .CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
 .CtxtMenu_SelectionItem {  padding-right: 1em;}
 .CtxtMenu_Selection {  right: 40%; width:50%; }
-.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#E9EFDF;}
 .CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
 .CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
 </style><style id="MJX-CHTML-styles">
@@ -799,42 +799,42 @@ mjx-c.mjx-c31::before {
           <svg viewBox="0 0 900 500" role="img" aria-label="光合作用过程示意图">
             <defs>
               <linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#A8D98D"></stop><stop offset="1" stop-color="#4F9B62"></stop>
+                <stop offset="0" stop-color="#A2C385"></stop><stop offset="1" stop-color="#2F6242"></stop>
               </linearGradient>
               <linearGradient id="soilGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#D9B27B"></stop><stop offset="1" stop-color="#B78152"></stop>
+                <stop offset="0" stop-color="#B4AE87"></stop><stop offset="1" stop-color="#7B8766"></stop>
               </linearGradient>
-              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#326044" flood-opacity=".15"></feDropShadow></filter>
-              <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2E8B57"></path></marker>
-              <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#55A9D6"></path></marker>
-              <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7C6AC8"></path></marker>
-              <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#F4B942"></path></marker>
+              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#21452F" flood-opacity=".15"></feDropShadow></filter>
+              <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#315F40"></path></marker>
+              <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#629298"></path></marker>
+              <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#858075"></path></marker>
+              <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#AF8B3E"></path></marker>
             </defs>
-            <rect x="0" y="0" width="900" height="500" fill="#F7FFF4"></rect>
-            <circle cx="760" cy="76" r="42" fill="#FFF3BD" opacity=".8"></circle>
+            <rect x="0" y="0" width="900" height="500" fill="#DEEAD3"></rect>
+            <circle cx="760" cy="76" r="42" fill="#FFF3B6" opacity="1"></circle>
             <g class="light-ray paused" id="lightRays">
               <path d="M730 108 L620 236" class="flow-path flow-light" marker-end="url(#arrowGold)"></path>
               <path d="M760 115 L650 240" class="flow-path flow-light" marker-end="url(#arrowGold)"></path>
               <path d="M790 108 L680 235" class="flow-path flow-light" marker-end="url(#arrowGold)"></path>
-              <text x="760" y="55" class="scene-label" text-anchor="middle" fill="#A16A00">光能</text>
+              <text x="760" y="55" class="scene-label" text-anchor="middle" fill="#8A6A35">光能</text>
             </g>
             <rect x="0" y="377" width="900" height="123" fill="url(#soilGrad)" opacity=".88"></rect>
-            <path d="M0 377 Q160 356 300 378 T600 376 T900 377" fill="none" stroke="#9D6A45" stroke-width="4" opacity=".7"></path>
+            <path d="M0 377 Q160 356 300 378 T600 376 T900 377" fill="none" stroke="#687454" stroke-width="4" opacity=".7"></path>
             <g filter="url(#softShadow)">
-              <path d="M360 382 C380 325 385 246 385 183" fill="none" stroke="#3A7A47" stroke-width="18" stroke-linecap="round"></path>
-              <path d="M389 206 C330 160 235 167 203 227 C278 257 347 245 389 206 Z" fill="url(#leafGrad)" stroke="#2E8B57" stroke-width="4"></path>
-              <path d="M394 203 C458 141 560 146 612 210 C550 261 463 254 394 203 Z" fill="url(#leafGrad)" stroke="#2E8B57" stroke-width="4"></path>
-              <path d="M389 206 C330 190 270 205 221 227 M395 205 C462 186 528 191 596 210" fill="none" stroke="#E6F6D9" stroke-width="3" opacity=".9"></path>
-              <path d="M388 204 C395 229 405 258 427 281" fill="none" stroke="#286A3D" stroke-width="4" opacity=".85"></path>
-              <path d="M360 378 C329 421 293 444 246 456 M365 378 C370 425 370 455 357 478 M373 378 C414 423 456 445 504 457" fill="none" stroke="#F3E0C5" stroke-width="7" stroke-linecap="round"></path>
+              <path d="M360 382 C380 325 385 246 385 183" fill="none" stroke="#325A3C" stroke-width="18" stroke-linecap="round"></path>
+              <path d="M389 206 C330 160 235 167 203 227 C278 257 347 245 389 206 Z" fill="url(#leafGrad)" stroke="#315F40" stroke-width="4"></path>
+              <path d="M394 203 C458 141 560 146 612 210 C550 261 463 254 394 203 Z" fill="url(#leafGrad)" stroke="#315F40" stroke-width="4"></path>
+              <path d="M389 206 C330 190 270 205 221 227 M395 205 C462 186 528 191 596 210" fill="none" stroke="#DFEFC9" stroke-width="3" opacity=".9"></path>
+              <path d="M388 204 C395 229 405 258 427 281" fill="none" stroke="#224C31" stroke-width="4" opacity=".85"></path>
+              <path d="M360 378 C329 421 293 444 246 456 M365 378 C370 425 370 455 357 478 M373 378 C414 423 456 445 504 457" fill="none" stroke="#F6ECCC" stroke-width="7" stroke-linecap="round"></path>
             </g>
             <text x="395" y="145" class="scene-label" text-anchor="middle">叶片</text>
-            <text x="380" y="471" class="scene-label" text-anchor="middle" fill="#FFF8E9">根部吸水</text>
+            <text x="380" y="471" class="scene-label" text-anchor="middle" style="fill:#F4F1DF">根部吸水</text>
             <g>
-              <rect x="640" y="252" width="190" height="105" rx="18" fill="#FFFFFF" stroke="#BFDDBF" stroke-width="2"></rect>
+              <rect x="640" y="252" width="190" height="105" rx="18" fill="#FAFCF6" stroke="#9DB58E" stroke-width="2"></rect>
               <text x="735" y="275" class="scene-label" text-anchor="middle">叶肉细胞放大</text>
-              <ellipse cx="734" cy="316" rx="64" ry="26" fill="#DDF2D4" stroke="#6BAF72" stroke-width="3"></ellipse>
-              <ellipse cx="700" cy="316" rx="12" ry="7" fill="#2E8B57"></ellipse><ellipse cx="733" cy="310" rx="12" ry="7" fill="#2E8B57"></ellipse><ellipse cx="764" cy="320" rx="12" ry="7" fill="#2E8B57"></ellipse>
+              <ellipse cx="734" cy="316" rx="64" ry="26" fill="#C6D9B4" stroke="#6C935F" stroke-width="3"></ellipse>
+              <ellipse cx="700" cy="316" rx="12" ry="7" fill="#315F40"></ellipse><ellipse cx="733" cy="310" rx="12" ry="7" fill="#315F40"></ellipse><ellipse cx="764" cy="320" rx="12" ry="7" fill="#315F40"></ellipse>
               <text x="735" y="347" class="scene-small" text-anchor="middle">叶绿体：光合作用的场所</text>
             </g>
             <path d="M390 370 C400 335 414 292 438 236" class="flow-path flow-water" marker-end="url(#arrowBlue)"></path>
@@ -848,7 +848,7 @@ mjx-c.mjx-c31::before {
             <g class="molecule o2 particle paused" id="o2Particles"><circle cx="542" cy="173" r="14" class="o2"></circle><text x="542" y="173">O₂</text></g>
             <g class="molecule o2 particle delay-1 paused"><circle cx="575" cy="153" r="14" class="o2"></circle><text x="575" y="153">O₂</text></g>
             <g class="molecule sugar" id="sugarMolecule"><circle cx="548" cy="244" r="17" class="sugar"></circle><text x="548" y="244">有机物</text></g>
-            <text x="82" y="204" class="scene-label" fill="#5F4C9D">空气中的二氧化碳</text>
+            <text x="82" y="204" class="scene-label" fill="#3D543C">空气中的二氧化碳</text>
             <text x="515" y="277" class="scene-small">有机物形成</text>
             <text x="630" y="105" class="scene-small">氧气释放到空气</text>
           </svg>
@@ -954,7 +954,7 @@ mjx-c.mjx-c31::before {
       $('#progressBar').style.width = `${((state.step + 1) / steps.length) * 100}%`;
       $('#playBtn').textContent = state.playing ? '播放中…' : '播放动画';
       $('#statusText').textContent = state.playing ? `正在演示：${item.title.replace(/^第[一二三四]步：/, '')}` : (state.light ? '准备开始：先观察原料如何进入叶片' : '当前为无光条件：观察产物变化');
-      $('#statusDot').style.background = state.playing ? 'var(--primary)' : (state.light ? 'var(--accent)' : '#8A9B91');
+      $('#statusDot').style.background = state.playing ? 'var(--primary)' : (state.light ? 'var(--accent)' : '#8B9683');
       $$('.step-btn').forEach(btn => btn.classList.toggle('active', Number(btn.dataset.step) === state.step));
       $('.scene-wrap').classList.toggle('no-light', !state.light);
       $$('.mode-toggle button').forEach(btn => btn.classList.toggle('active', (btn.dataset.light === 'on') === state.light));

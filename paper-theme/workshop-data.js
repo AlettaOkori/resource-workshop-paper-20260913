@@ -17,8 +17,8 @@
       const patch=meta.resources[r.id]||{}, baseIds=nodes.filter(n=>(n.resourceIds||[]).includes(r.id)).map(n=>n.id);
       const item={subject:'',grade:'',edition:'',chapterId:'',origin:'original',saves:0,downloads:0,views:0,likes:0,...r,...patch};
       item.knowledgeIds=patch.knowledgeIds??r.knowledgeIds??baseIds;
-      if(!item.chapterId&&item.knowledgeIds.length)item.chapterId=nodes.find(n=>n.id===item.knowledgeIds[0])?.chapterId||'';
-      if(!item.subject&&item.knowledgeIds.length)item.subject=nodes.find(n=>n.id===item.knowledgeIds[0])?.subjectName||'';
+      if(!Object.prototype.hasOwnProperty.call(patch,'chapterId')&&!item.chapterId&&item.knowledgeIds.length)item.chapterId=nodes.find(n=>n.id===item.knowledgeIds[0])?.chapterId||'';
+      if(!Object.prototype.hasOwnProperty.call(patch,'subject')&&!item.subject&&item.knowledgeIds.length)item.subject=nodes.find(n=>n.id===item.knowledgeIds[0])?.subjectName||'';
       if(!r.seed){item.created=item.authorId===api.base.profile.id||r.created===true;item.author=item.author==='我'?api.base.profile.name:item.author;}
       const teacher=api.base.teachers?.find(t=>t.id===item.authorId);
       item.authorSubject=teacher?.subject||item.authorSubject||item.subject;
@@ -26,6 +26,7 @@
       item.likes=Number(item.likes||0)+(lib.liked[r.id]?1:0);
       item.saves=Number(item.saves||0)+(lib.saved[r.id]?1:0);
       item.downloads=Number(item.downloads||0);
+      if(window.WorkshopPreviews)item.cover=window.WorkshopPreviews.url(item);
       return item;
     });
   }

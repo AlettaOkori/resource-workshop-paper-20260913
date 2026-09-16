@@ -15,20 +15,20 @@
   <script src="/artifacts/vendor/metis-app.js"></script>
   <style>
     :root {
-      --bg: #F5F7FA;
-      --ink: #16243A;
-      --muted: #66758A;
-      --blue: #1769AA;
-      --blue-2: #DCEEFF;
-      --orange: #F08A24;
-      --orange-2: #FFF0DE;
-      --green: #2F8F63;
-      --green-2: #E4F5EC;
-      --red: #D95C43;
-      --red-2: #FCE9E4;
-      --line: #D7E0EA;
-      --surface: #FFFFFF;
-      --shadow: 0 16px 36px rgba(22, 36, 58, 0.10);
+      --bg: #D1CCC2;
+      --ink: #303A36;
+      --muted: #53594F;
+      --blue: #B43E39;
+      --blue-2: #E9D1C7;
+      --orange: #B96543;
+      --orange-2: #F0DCCB;
+      --green: #54745E;
+      --green-2: #DDE7DA;
+      --red: #C13C3E;
+      --red-2: #F0D8D0;
+      --line: #BCB9AE;
+      --surface: #E9E5DB;
+      --shadow: 0 16px 36px rgba(51,50,43, 0.10);
       --radius: 18px;
     }
     * { box-sizing: border-box; }
@@ -48,40 +48,40 @@
     .eyebrow { color: var(--orange); font-weight: 800; letter-spacing: .12em; font-size: 12px; }
     h1 { margin: 6px 0 0; font-size: clamp(28px, 3vw, 46px); line-height: 1.1; letter-spacing: -.03em; }
     .subtitle { margin: 9px 0 0; color: var(--muted); font-size: 15px; }
-    .status-chip { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 10px 16px; color: var(--blue); font-weight: 700; box-shadow: 0 8px 20px rgba(22,36,58,.05); white-space: nowrap; }
+    .status-chip { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 10px 16px; color: var(--blue); font-weight: 700; box-shadow: 0 8px 20px rgba(51,50,43,.05); white-space: nowrap; }
     .stage-nav { max-width: 1500px; margin: 0 auto 18px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 9px; }
-    .stage-btn { border: 1px solid var(--line); background: rgba(255,255,255,.72); color: var(--muted); border-radius: 13px; padding: 11px 10px; font-weight: 700; transition: .2s ease; }
-    .stage-btn.active { color: var(--blue); background: var(--blue-2); border-color: #9DC8EE; }
-    .stage-btn.done { color: var(--green); border-color: #A8D8BF; background: var(--green-2); }
+    .stage-btn { border: 1px solid var(--line); background: rgba(233,229,219,.72); color: var(--muted); border-radius: 13px; padding: 11px 10px; font-weight: 700; transition: .2s ease; }
+    .stage-btn.active { color: var(--blue); background: var(--blue-2); border-color: #CD9D91; }
+    .stage-btn.done { color: var(--green); border-color: #A4BAA1; background: var(--green-2); }
     .workspace { max-width: 1500px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(340px, .65fr); gap: 18px; align-items: stretch; }
     .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
     .explore-panel { min-height: 650px; padding: 22px; display: flex; flex-direction: column; }
     .prompt { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
     .prompt h2 { margin: 0; font-size: 22px; }
     .prompt p { margin: 7px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
-    .stage-badge { flex: 0 0 auto; color: var(--blue); background: var(--blue-2); border: 1px solid #A8CDEE; border-radius: 999px; padding: 7px 11px; font-size: 12px; font-weight: 800; }
-    .geometry-wrap { position: relative; min-height: 390px; margin-top: 16px; border: 1px solid #E4EAF0; border-radius: 16px; background: linear-gradient(145deg, #FBFDFF 0%, #F2F7FC 100%); overflow: hidden; }
-    .geometry-wrap::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(#E8EEF5 1px, transparent 1px), linear-gradient(90deg, #E8EEF5 1px, transparent 1px); background-size: 32px 32px; opacity: .62; }
+    .stage-badge { flex: 0 0 auto; color: var(--blue); background: var(--blue-2); border: 1px solid #CEA296; border-radius: 999px; padding: 7px 11px; font-size: 12px; font-weight: 800; }
+    .geometry-wrap { position: relative; min-height: 390px; margin-top: 16px; border: 1px solid #B5B3A9; border-radius: 16px; background: linear-gradient(145deg, #DCD8CD 0%, #C1C0B4 100%); overflow: hidden; }
+    .geometry-wrap::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(#B9B9AC 1px, transparent 1px), linear-gradient(90deg, #B9B9AC 1px, transparent 1px); background-size: 32px 32px; opacity: .62; }
     #geometrySvg { position: absolute; inset: 0; width: 100%; height: 100%; }
     .geom-label { font-size: 15px; font-weight: 800; fill: var(--ink); }
     .edge-label { font-size: 14px; font-weight: 800; }
-    .side-card { position: absolute; min-width: 90px; padding: 9px 12px; border-radius: 13px; border: 2px solid; background: rgba(255,255,255,.95); box-shadow: 0 8px 18px rgba(22,36,58,.10); text-align: center; cursor: grab; touch-action: none; }
+    .side-card { position: absolute; min-width: 90px; padding: 9px 12px; border-radius: 13px; border: 2px solid; background: rgba(233,229,219,.95); box-shadow: 0 8px 18px rgba(51,50,43,.10); text-align: center; cursor: grab; touch-action: none; }
     .side-card:active { cursor: grabbing; }
     .side-card small { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
-    .side-card.orange { border-color: var(--orange); color: #A8540D; right: 29%; bottom: 7%; }
-    .side-card.green { border-color: var(--green); color: #216644; right: 15%; bottom: 7%; }
-    .side-card.red { border-color: var(--red); color: #9B3C2D; right: 1.5%; bottom: 7%; }
-    .drop-zone { position: absolute; width: 114px; height: 48px; border: 2px dashed rgba(23,105,170,.55); border-radius: 12px; display: flex; justify-content: center; align-items: center; color: var(--blue); font-size: 12px; font-weight: 800; background: rgba(220,238,255,.6); z-index: 3; }
-    .drop-zone.matched { border-style: solid; border-color: var(--green); background: rgba(228,245,236,.9); color: var(--green); }
+    .side-card.orange { border-color: var(--orange); color: #854326; right: 29%; bottom: 7%; }
+    .side-card.green { border-color: var(--green); color: #3C5E46; right: 15%; bottom: 7%; }
+    .side-card.red { border-color: var(--red); color: #972C31; right: 1.5%; bottom: 7%; }
+    .drop-zone { position: absolute; width: 114px; height: 48px; border: 2px dashed rgba(180,62,57,.55); border-radius: 12px; display: flex; justify-content: center; align-items: center; color: var(--blue); font-size: 12px; font-weight: 800; background: rgba(233,209,199,.6); z-index: 3; }
+    .drop-zone.matched { border-style: solid; border-color: var(--green); background: rgba(221,231,218,.9); color: var(--green); }
     .drop-zone[data-target="a"] { left: 17%; bottom: 10%; }
     .drop-zone[data-target="b"] { left: 5%; top: 17%; transform: rotate(-90deg); }
     .drop-zone[data-target="c"] { right: 10%; top: 25%; transform: rotate(-34deg); }
-    .drag-bank { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; padding: 13px; background: #F8FAFC; border: 1px solid #E3EAF1; border-radius: 14px; }
+    .drag-bank { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; padding: 13px; background: #D9D6CA; border: 1px solid #C1BFB2; border-radius: 14px; }
     .drag-bank .bank-title { color: var(--muted); font-size: 12px; font-weight: 800; margin-right: 4px; }
-    .measure-tip { min-height: 48px; margin-top: 13px; padding: 12px 14px; border-radius: 12px; background: #F8FAFC; color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .measure-tip { min-height: 48px; margin-top: 13px; padding: 12px 14px; border-radius: 12px; background: #D9D6CA; color: var(--muted); font-size: 14px; line-height: 1.55; }
     .controls { display: flex; flex-wrap: wrap; gap: 9px; margin-top: auto; padding-top: 17px; }
     .btn { border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 11px; padding: 10px 14px; font-weight: 800; transition: .18s ease; }
-    .btn:hover { transform: translateY(-1px); border-color: #9AB7D1; }
+    .btn:hover { transform: translateY(-1px); border-color: #B7887D; }
     .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
     .btn.accent { background: var(--orange); border-color: var(--orange); color: #fff; }
     .btn.success { background: var(--green); border-color: var(--green); color: #fff; }
@@ -90,16 +90,16 @@
     .side-panel { padding: 20px; display: flex; flex-direction: column; min-height: 650px; }
     .side-panel h3 { margin: 0; font-size: 18px; }
     .side-panel .hint { margin: 7px 0 14px; color: var(--muted); font-size: 13px; line-height: 1.5; }
-    .record-card, .task-card, .proof-card, .practice-card { border: 1px solid var(--line); border-radius: 14px; padding: 14px; background: #FCFDFE; margin-bottom: 12px; }
+    .record-card, .task-card, .proof-card, .practice-card { border: 1px solid var(--line); border-radius: 14px; padding: 14px; background: #E2DFD5; margin-bottom: 12px; }
     .record-head { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
     .record-head strong { font-size: 14px; }
     .case-pills { display: flex; gap: 6px; flex-wrap: wrap; }
     .case-pill { border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--muted); padding: 6px 9px; font-size: 12px; font-weight: 800; }
-    .case-pill.active { color: var(--blue); border-color: #9DC8EE; background: var(--blue-2); }
+    .case-pill.active { color: var(--blue); border-color: #CD9D91; background: var(--blue-2); }
     .table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
-    .table th, .table td { padding: 7px 5px; border-bottom: 1px solid #E7EDF3; text-align: center; }
+    .table th, .table td { padding: 7px 5px; border-bottom: 1px solid #C8C6BA; text-align: center; }
     .table th { color: var(--muted); font-weight: 700; }
-    .formula-box { min-height: 45px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid #B8D3E9; border-left: 5px solid var(--blue); border-radius: 12px; margin-top: 10px; padding: 8px 10px; color: var(--blue); font-size: 22px; overflow: auto; }
+    .formula-box { min-height: 45px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid #CAAAA0; border-left: 5px solid var(--blue); border-radius: 12px; margin-top: 10px; padding: 8px 10px; color: var(--blue); font-size: 22px; overflow: auto; }
     .task-card h4, .proof-card h4, .practice-card h4 { margin: 0 0 8px; font-size: 14px; }
     .task-card p, .proof-card p, .practice-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
     .choice-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
@@ -110,11 +110,11 @@
     .feedback { margin-top: 10px; padding: 10px; border-radius: 10px; font-size: 12px; line-height: 1.5; display: none; }
     .feedback.show { display: block; }
     .feedback.good { color: var(--green); background: var(--green-2); }
-    .feedback.warn { color: #A8540D; background: var(--orange-2); }
+    .feedback.warn { color: #854326; background: var(--orange-2); }
     .feedback.bad { color: var(--red); background: var(--red-2); }
     .proof-card { display: none; }
     .proof-card.show { display: block; }
-    .proof-step { min-height: 54px; background: #fff; border-radius: 10px; padding: 10px; border: 1px solid #E2EAF1; color: var(--ink); font-size: 13px; line-height: 1.5; }
+    .proof-step { min-height: 54px; background: #fff; border-radius: 10px; padding: 10px; border: 1px solid #C4C1B5; color: var(--ink); font-size: 13px; line-height: 1.5; }
     .proof-step .formula-line { color: var(--blue); font-size: 18px; margin-top: 6px; }
     .practice-card { display: none; }
     .practice-card.show { display: block; }
@@ -126,7 +126,7 @@
     @keyframes wrong-shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
     .wrong-shake { animation: wrong-shake .4s ease-in-out; }
     .flash { animation: flash .7s ease; }
-    @keyframes flash { 0%,100% { filter: none; } 50% { filter: drop-shadow(0 0 10px rgba(47,143,99,.75)); } }
+    @keyframes flash { 0%,100% { filter: none; } 50% { filter: drop-shadow(0 0 10px rgba(84,116,94,.75)); } }
     .hidden { display: none !important; }
     @media (max-width: 1040px) {
       .app { padding: 20px 16px 24px; }
@@ -174,20 +174,20 @@
 
         <div class="geometry-wrap" id="geometryWrap">
           <svg id="geometrySvg" viewBox="0 0 720 420" role="img" aria-label="直角三角形与三块正方形">
-            <polygon id="squareA" points="190,320 390,320 390,120 190,120" fill="#F08A24" fill-opacity=".18" stroke="#F08A24" stroke-width="3"/>
-            <polygon id="squareB" points="190,320 190,80 430,80 430,320" fill="#2F8F63" fill-opacity=".15" stroke="#2F8F63" stroke-width="3"/>
-            <polygon id="triangle" points="190,320 390,320 190,80" fill="#DCEEFF" stroke="#1769AA" stroke-width="4"/>
-            <polygon id="squareC" points="390,320 190,80 430, -160 630,80" fill="#D95C43" fill-opacity=".16" stroke="#D95C43" stroke-width="3"/>
-            <path d="M190 320 L215 320 L215 295 L190 295" fill="none" stroke="#1769AA" stroke-width="3"/>
+            <polygon id="squareA" points="190,320 390,320 390,120 190,120" fill="#B96543" fill-opacity=".18" stroke="#B96543" stroke-width="3"/>
+            <polygon id="squareB" points="190,320 190,80 430,80 430,320" fill="#54745E" fill-opacity=".15" stroke="#54745E" stroke-width="3"/>
+            <polygon id="triangle" points="190,320 390,320 190,80" fill="#354646" stroke="#263937" stroke-width="4"/>
+            <polygon id="squareC" points="390,320 190,80 430, -160 630,80" fill="#C13C3E" fill-opacity=".26" stroke="#C13C3E" stroke-width="3"/>
+            <path d="M190 320 L215 320 L215 295 L190 295" fill="none" stroke="#ECE8DB" stroke-width="3"/>
             <text x="177" y="339" class="geom-label">A</text>
             <text x="395" y="339" class="geom-label">B</text>
             <text x="175" y="73" class="geom-label">C</text>
-            <text x="282" y="344" class="edge-label" fill="#A8540D">a</text>
-            <text x="163" y="204" class="edge-label" fill="#216644">b</text>
-            <text x="298" y="185" class="edge-label" fill="#9B3C2D">c</text>
+            <text x="282" y="344" class="edge-label" fill="#854326">a</text>
+            <text x="163" y="204" class="edge-label" fill="#3C5E46">b</text>
+            <text x="298" y="185" class="edge-label" fill="#972C31">c</text>
             <text x="218" y="302" id="auxD" class="geom-label hidden">D</text>
-            <line id="altitude" x1="190" y1="320" x2="190" y2="320" stroke="#216644" stroke-width="4" stroke-dasharray="8 6" class="hidden"/>
-            <line id="proofSplit" x1="0" y1="0" x2="0" y2="0" stroke="#F08A24" stroke-width="4" class="hidden"/>
+            <line id="altitude" x1="190" y1="320" x2="190" y2="320" stroke="#3C5E46" stroke-width="4" stroke-dasharray="8 6" class="hidden"/>
+            <line id="proofSplit" x1="0" y1="0" x2="0" y2="0" stroke="#B96543" stroke-width="4" class="hidden"/>
           </svg>
           <div class="drop-zone" data-target="a">放到 a 边</div>
           <div class="drop-zone" data-target="b">放到 b 边</div>

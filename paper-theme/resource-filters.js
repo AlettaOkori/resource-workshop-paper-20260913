@@ -59,7 +59,7 @@
     const query = state.query.trim().toLocaleLowerCase();
     const seen = new Set();
     const rows = data.resources().filter(r => {
-      if (r.legacy) return false;
+      if (!(window.WorkshopPreviews?.isBrowsable(r) ?? (!r.legacy && !!(r.mock || r.artifact || r.href)))) return false;
       const app = ['教学应用','教育应用','教学游戏'].includes(r.kind);
       const matches = app === (state.route === '/plaza/app') && (state.edition === '全部' || state.edition === (r.edition || '未标注')) && (state.subject === '全部' || state.subject === r.subject) && (state.grade === '全部' || state.grade === r.grade) && (!query || `${r.title} ${r.author}`.toLocaleLowerCase().includes(query));
       const key = JSON.stringify([r.title.trim(),r.artifact || r.id]);
@@ -70,10 +70,11 @@
     if (signature === state.signature) return; state.signature = signature;
     state.count.textContent = `${rows.length} 份${state.route === '/plaza/app' ? '教学应用' : '教学资源'}`;
     state.empty.hidden = rows.length > 0; state.results.hidden = !rows.length;
-    state.results.innerHTML = rows.map(r => `<article class="rw-discovery-card"><a class="rw-discovery-link" ${r.mock ? 'aria-disabled="true"' : `href="${escape(r.href)}"`}><div class="rw-discovery-cover">${r.cover ? `<img src="${escape(r.cover)}" alt="" loading="lazy">` : '<span class="rw-discovery-placeholder">课件</span>'}</div><div class="rw-discovery-copy"><div class="rw-discovery-meta"><span>${escape(r.kind)}</span><span>浏览 ${Number(r.views || 0)}</span></div><h2>${escape(r.title)}</h2><div class="rw-discovery-author"><span class="rw-teacher-avatar">${escape((r.author || '教师').slice(0,1))}</span><span>${escape(r.author || '教师')}</span><span>${escape([r.grade,r.subject].filter(Boolean).join(' · '))}</span></div></div></a><div class="rw-discovery-footer"><span>点赞 ${Number(r.likes || 0)}</span><button type="button" data-discovery-save="${escape(r.id)}" aria-pressed="${data.isSaved(r.id)}" aria-label="${data.isSaved(r.id)?'取消收藏':'收藏'} ${escape(r.title)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>${data.isSaved(r.id)?'已收藏':'收藏'}</button></div></article>`).join('');
+    state.results.innerHTML = rows.map(r => `<article class="rw-discovery-card"><a class="rw-discovery-link" ${r.mock ? 'aria-disabled="true"' : `href="${escape(r.href)}"`}><div class="rw-discovery-cover">${window.WorkshopPreviews?.markup(r) || (r.cover ? `<img src="${escape(r.cover)}" alt="" loading="lazy">` : '<span class="ws-preview-empty">暂无预览</span>')}</div><div class="rw-discovery-copy"><div class="rw-discovery-meta"><span>${escape(r.kind)}</span><span>浏览 ${Number(r.views || 0)}</span></div><h2>${escape(r.title)}</h2><div class="rw-discovery-author"><span class="rw-teacher-avatar">${escape((r.author || '教师').slice(0,1))}</span><span>${escape(r.author || '教师')}</span><span>${escape([r.grade,r.subject].filter(Boolean).join(' · '))}</span></div></div></a><div class="rw-discovery-footer"><span>点赞 ${Number(r.likes || 0)}</span><button type="button" data-discovery-save="${escape(r.id)}" aria-pressed="${data.isSaved(r.id)}" aria-label="${data.isSaved(r.id)?'取消收藏':'收藏'} ${escape(r.title)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>${data.isSaved(r.id)?'已收藏':'收藏'}</button></div></article>`).join('');
   }
   function schedule() { if (!pending) { pending = true; requestAnimationFrame(update); } }
   new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
+  document.addEventListener('workshop-previews-ready',()=>{revision++;schedule();});
   addEventListener('popstate',schedule); addEventListener('pageshow',schedule);
   let url = location.href; setInterval(() => {if (location.href !== url || (!mounted && isPlaza())) {url = location.href;schedule();}},250);
   async function init() {if (!window.WorkshopData) {setTimeout(init,50);return;} data = window.WorkshopData; await data.ready;data.subscribe(() => {revision++;schedule();});schedule();}

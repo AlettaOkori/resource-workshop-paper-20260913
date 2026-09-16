@@ -9,7 +9,7 @@
 #workshop-dashboard .wd-header nav a{text-decoration:none}
 #workshop-dashboard .wd-header h1{margin:0;font:400 28px/38px "Songti SC","STSong",Georgia,serif;letter-spacing:.02em}
 #workshop-dashboard .wd-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:24px}
-#workshop-dashboard .wd-metric{height:138px;padding:18px 20px;border:1px solid var(--wd-rule)!important;border-radius:6px;background:#fff!important;box-shadow:0 2px 3px #303a2e03}
+#workshop-dashboard .wd-metric{height:110px;padding:18px 20px;border:1px solid var(--wd-rule)!important;border-radius:6px;background:#fff!important;box-shadow:0 2px 3px #303a2e03}
 #workshop-dashboard .wd-metric:first-child{background:#f7f1e9!important;border-color:#cdd6cc!important}
 #workshop-dashboard .wd-metric-top{display:flex;justify-content:space-between;align-items:center;color:var(--wd-muted);font-size:13px}
 #workshop-dashboard .wd-metric-icon{display:grid;place-items:center;width:25px;height:25px;border-radius:3px}
@@ -55,7 +55,7 @@
 #workshop-dashboard .wd-trend{display:block;width:100%;height:190px}
 #workshop-dashboard .wd-trend line{stroke:#e6eae2}
 #workshop-dashboard .wd-trend text{font:12px Arial,"PingFang SC",sans-serif;fill:#6f796f}
-#workshop-dashboard .wd-trend-bar{fill:#8ba6bb}
+#workshop-dashboard .wd-trend-bar{fill:#bd8167}
 #workshop-dashboard .wd-trend-line{fill:none;stroke:var(--wd-teal);stroke-width:2.2}
 #workshop-dashboard .wd-trend-point{fill:#fff;stroke:var(--wd-teal);stroke-width:1.5}
 #workshop-dashboard .wd-trend-legend{display:flex;justify-content:flex-end;gap:20px;margin-top:0;color:var(--wd-muted);font-size:12px}
@@ -66,10 +66,10 @@
 #workshop-dashboard .wd-feature-bars i{display:block;height:7px;background:#f0f2ed}
 #workshop-dashboard .wd-feature-bars em{display:block;height:100%}
 #workshop-dashboard .wd-feature-bars strong{font-size:13px;font-weight:400;text-align:right;color:var(--wd-muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-#workshop-dashboard .wd-themes{height:368px;margin-top:16px}
+#workshop-dashboard .wd-themes{min-height:440px;margin-top:16px}
 #workshop-dashboard .wd-theme-body{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
 #workshop-dashboard .wd-cloud-wrap{min-width:0}
-#workshop-dashboard .wd-cloud{position:relative;height:244px;overflow:hidden}
+#workshop-dashboard .wd-cloud{position:relative;height:310px;overflow:hidden}
 #workshop-dashboard .wd-cloud button{position:absolute;transform:translate(-50%,-50%);border:0;border-radius:3px;background:transparent;padding:3px 5px;color:var(--word-color);font:400 18px/1.3 "Songti SC","STSong",Georgia,serif;white-space:nowrap;cursor:pointer}
 #workshop-dashboard .wd-cloud button:hover,#workshop-dashboard .wd-cloud button[aria-pressed=true]{background:#f3f5ef;box-shadow:inset 0 -2px currentColor}
 #workshop-dashboard .wd-cloud-legend{display:flex;justify-content:center;gap:18px;color:var(--wd-muted);font-size:12px}
@@ -78,14 +78,14 @@
 #workshop-dashboard .wd-question-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
 #workshop-dashboard .wd-question-heading h3{margin:0;font-size:14px;font-weight:500}
 #workshop-dashboard .wd-questions{list-style:none;margin:0;padding:0}
-#workshop-dashboard .wd-questions li{height:56px;padding:7px 0;border-bottom:1px solid #eceee7}
+#workshop-dashboard .wd-questions li{min-height:68px;padding:7px 0;border-bottom:1px solid #eceee7}
 #workshop-dashboard .wd-questions li>div{display:flex;justify-content:space-between;gap:12px}
 #workshop-dashboard .wd-questions strong{font-size:14px;font-weight:400}
 #workshop-dashboard .wd-questions span{color:var(--wd-muted);font-size:13px;white-space:nowrap}
 #workshop-dashboard .wd-questions p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden;margin:2px 0 0;color:var(--wd-muted);font-size:11px;line-height:16px}
 #workshop-dashboard .wd-empty{padding:14px 0!important;color:var(--wd-muted);font-size:12px;text-align:center}
 #workshop-dashboard .wd-teacher-ranks{grid-template-columns:repeat(2,minmax(0,1fr))}
-#workshop-dashboard .wd-teacher-panel{height:336px}
+#workshop-dashboard .wd-teacher-panel{height:auto}
 #workshop-dashboard .wd-teacher-panel .wd-section-head{margin-bottom:8px}
 #workshop-dashboard .wd-teacher-panel.wd-original{--rank-color:var(--wd-teal)}
 #workshop-dashboard .wd-teacher-panel.wd-adapted{--rank-color:var(--wd-gold)}
@@ -99,7 +99,7 @@
 #workshop-dashboard .wd-rank-link small{display:block;overflow:hidden;margin-top:1px;color:var(--wd-muted);font-size:12px;line-height:18px;text-overflow:ellipsis;white-space:nowrap}
 #workshop-dashboard .wd-ranking b{min-width:34px;color:var(--wd-ink);font-size:16px;font-weight:400;text-align:right;font-variant-numeric:tabular-nums}
 #workshop-dashboard .wd-resource-ranks{grid-template-columns:repeat(3,minmax(0,1fr))}
-#workshop-dashboard .wd-resource-panel{height:432px}
+#workshop-dashboard .wd-resource-panel{height:auto}
 #workshop-dashboard .wd-resource-panel .wd-section-head{padding-bottom:14px;margin-bottom:0;border-bottom:2px solid var(--rank-tint,#ead5d1)}
 #workshop-dashboard .wd-resource-panel.wd-likes{--rank-color:#b66a66;--rank-tint:#ead5d1}
 #workshop-dashboard .wd-resource-panel.wd-saves{--rank-color:var(--wd-gold);--rank-tint:#e8dfca}
@@ -165,3 +165,85 @@
 #workshop-dashboard .wd-teacher-panel .wd-rank-link small{display:inline;overflow:hidden;margin:0;white-space:nowrap;text-overflow:ellipsis}
 #workshop-dashboard .wd-heat-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
 #workshop-dashboard .wd-heat-footer .wd-heat-key{margin-top:0}
+
+/* Sortable combined rankings and linked generated outcomes. */
+#workshop-dashboard .wd-metric-top{align-items:flex-start;min-height:22px}
+#workshop-dashboard .wd-metric-number{margin-top:4px}
+#workshop-dashboard .wd-metric-number strong{font-size:32px;line-height:40px}
+#workshop-dashboard .wd-metric-top>span:first-child{line-height:20px}
+#workshop-dashboard .wd-combined-ranks{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+#workshop-dashboard .wd-combined-ranks .wd-section-head{padding:0;margin-bottom:12px;border:0}
+.wd-rank-scroll{max-width:100%;overflow-x:auto}
+.wd-rank-table{width:100%;border-collapse:collapse;table-layout:fixed;text-align:left;font-size:13px}
+.wd-rank-table th{height:36px;color:#747b73;font-weight:400;border-bottom:1px solid #dddfd7;white-space:nowrap}
+.wd-rank-table th:first-child,.wd-rank-table td:first-child{width:40px;color:#747b73;font-variant-numeric:tabular-nums}
+.wd-rank-table th:nth-child(n+3),.wd-rank-table td:nth-child(n+3){width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.wd-rank-table th button{display:inline-flex;align-items:center;gap:3px;padding:5px 0;border:0;background:none;color:inherit;cursor:pointer;font:inherit}
+.wd-rank-table th[aria-sort=ascending],.wd-rank-table th[aria-sort=descending],.wd-rank-table .wd-sorted{color:#536448;font-weight:500}
+.wd-rank-table th button:hover{color:#b83238}
+.wd-rank-table th button span{font-size:11px}
+.wd-rank-table td{height:61px;border-bottom:1px solid #ebeee7;vertical-align:middle}
+.wd-rank-table td:nth-child(2){padding-right:12px}
+.wd-rank-table tr:last-child td{border-bottom:0}
+.wd-rank-table .wd-rank-link{display:block;width:100%;min-width:0;border:0;background:none;padding:0;text-align:left;text-decoration:none;color:inherit}
+.wd-rank-table button.wd-rank-link{cursor:pointer}
+.wd-rank-table .wd-rank-link strong{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:13px;font-weight:400;line-height:19px;white-space:normal}
+.wd-rank-table .wd-rank-link small{display:block;overflow:hidden;margin-top:2px;color:#747b73;font-size:12px;line-height:18px;text-overflow:ellipsis;white-space:nowrap}
+#workshop-dashboard .wd-teacher-table .wd-rank-link{display:block;white-space:normal}
+#workshop-dashboard .wd-teacher-table .wd-rank-link strong{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#workshop-dashboard .wd-teacher-table .wd-rank-link small{display:block;white-space:nowrap}
+#workshop-dashboard .wd-question-heading{gap:12px;margin-bottom:8px}
+#workshop-dashboard .wd-question-heading h3{white-space:nowrap}
+#workshop-dashboard .wd-question-heading select{width:160px;max-width:65%;height:29px;border:1px solid var(--wd-rule);border-radius:3px;background:#fff;color:var(--wd-muted);font:12px inherit;padding:0 6px;text-overflow:ellipsis}
+#workshop-dashboard .wd-questions li>div{align-items:baseline}
+#workshop-dashboard .wd-questions strong{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#workshop-dashboard .wd-outcome-button{margin-top:2px;padding:0;border:0;background:none;color:#536448;font-size:12px;line-height:18px;cursor:pointer}
+#workshop-dashboard .wd-outcome-button:not(:disabled){text-decoration:underline;text-underline-offset:3px}
+#workshop-dashboard .wd-outcome-button:disabled{color:var(--wd-muted);cursor:default}
+#workshop-dashboard .wd-cloud-legend{flex-wrap:wrap;gap:7px 14px}
+#workshop-dashboard .wd-cloud.wd-cloud-flow{display:flex;align-content:center;justify-content:center;flex-wrap:wrap;gap:10px;min-height:290px;height:auto;padding:20px 0}
+#workshop-dashboard .wd-cloud.wd-cloud-flow button{position:static;transform:none;max-width:100%;white-space:normal}
+.wd-resource-dialog{width:min(780px,calc(100vw - 32px))}
+.wd-resource-dialog.wd-ranking-dialog{width:min(940px,calc(100vw - 32px))}
+.wd-resource-dialog .wd-result-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.wd-resource-dialog .wd-result-card{min-width:0;border:1px solid #dddfd7;border-radius:4px;overflow:hidden}
+.wd-resource-dialog .wd-result-card a,.wd-resource-dialog .wd-result-card>div{display:block;padding:0;border:0}
+.wd-resource-dialog .wd-result-card strong{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;margin:12px 12px 0;font-size:14px;font-weight:500;line-height:22px}
+.wd-resource-dialog .wd-result-card small{display:block;margin:6px 12px 12px;color:#747b73;font-size:12px}
+.wd-result-preview{aspect-ratio:16/10;overflow:hidden;background:#f2f0eb;display:grid;place-items:center;color:#747b73;font-size:13px}
+.wd-result-preview img{width:100%;height:100%;object-fit:cover;object-position:top}
+.wd-result-preview iframe{width:100%;height:100%;pointer-events:none;border:0}
+.wd-resource-dialog .wd-pagination{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px;color:#747b73;font-size:13px}
+.wd-pagination>div{display:flex;align-items:center;gap:12px}
+.wd-pagination button{height:30px;padding:0 10px;border:1px solid #dddfd7;background:#fff;color:#292b27;cursor:pointer}
+.wd-pagination button:disabled{color:#aaa;cursor:default}
+@media(max-width:900px){#workshop-dashboard .wd-combined-ranks{grid-template-columns:minmax(0,1fr)}#workshop-dashboard .wd-metric{height:110px;min-height:110px}}
+@media(max-width:700px){#workshop-dashboard .wd-themes{min-height:0}#workshop-dashboard .wd-cloud{height:290px}#workshop-dashboard .wd-question-heading select{width:65%}.wd-rank-table{min-width:440px}.wd-teacher-table{min-width:350px}.wd-resource-dialog .wd-result-cards{grid-template-columns:minmax(0,1fr)}.wd-resource-dialog{padding:16px}.wd-resource-dialog .wd-pagination{flex-wrap:wrap}}
+
+/* Four separate cumulative cards and compact period selection. */
+#workshop-dashboard .wd-kpis{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:0;border:0;border-radius:0;background:transparent;margin-bottom:28px}
+#workshop-dashboard .wd-metric{height:auto!important;min-height:0!important;padding:20px 22px;border:1px solid var(--wd-rule)!important;border-radius:5px;background:#fff!important;box-shadow:0 2px 5px #303a2e03}
+#workshop-dashboard .wd-metric:first-child{background:#fff!important;border-color:var(--wd-rule)!important}
+#workshop-dashboard .wd-metric:last-child{border-right:1px solid var(--wd-rule)!important}
+#workshop-dashboard .wd-metric-top{min-height:0;font-size:13px;line-height:20px;color:#74796e}
+#workshop-dashboard .wd-metric-top>span:first-child{line-height:20px;white-space:nowrap}
+#workshop-dashboard .wd-metric-number{gap:8px;margin-top:9px}
+#workshop-dashboard .wd-metric-number strong{font-size:38px;line-height:42px;font-weight:500;letter-spacing:-.035em}
+#workshop-dashboard .wd-total .wd-metric-number strong{color:#a94b3e}
+#workshop-dashboard .wd-metric-number small{font-size:12px;line-height:18px;color:#74796e}
+#workshop-dashboard .wd-recent-controls{gap:24px}
+#workshop-dashboard .wd-active-teachers{white-space:nowrap}
+#workshop-dashboard .wd-active-teachers strong{font-size:16px}
+#workshop-dashboard .wd-period-controls{display:flex;align-items:center;gap:8px;white-space:nowrap}
+#workshop-dashboard .wd-period-controls select{height:36px;width:204px;max-width:100%;padding:0 30px 0 12px;border:1px solid var(--wd-rule);border-radius:4px;background:#fff;color:var(--wd-ink);font-size:13px;cursor:pointer}
+#workshop-dashboard .wd-period-controls select:hover{border-color:#9b715d}
+#workshop-dashboard .wd-period-controls select:focus-visible{outline:2px solid #a96a52;outline-offset:2px}
+#workshop-dashboard .wd-questions li{min-height:59px;padding:9px 0}
+#workshop-dashboard .wd-questions .wd-question-row{display:grid;grid-template-columns:minmax(0,1fr) max-content;column-gap:16px;align-items:start}
+#workshop-dashboard .wd-questions .wd-question-title{min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:0}
+#workshop-dashboard .wd-question-title>strong{min-width:0;flex:1}
+#workshop-dashboard .wd-question-stats{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex:none;margin-left:auto}
+#workshop-dashboard .wd-question-stats>span,#workshop-dashboard .wd-question-stats>.wd-outcome-button{margin:0;font-size:12px;line-height:20px;font-weight:400;white-space:nowrap}
+#workshop-dashboard .wd-questions p{margin-top:4px}
+@media(max-width:900px){#workshop-dashboard .wd-metric{padding-inline:18px}#workshop-dashboard .wd-recent-controls{gap:12px;flex-wrap:wrap}#workshop-dashboard .wd-period-controls{gap:8px}}
+@media(max-width:700px){#workshop-dashboard .wd-kpis{padding:0;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}#workshop-dashboard .wd-metric{padding:14px 7px}#workshop-dashboard .wd-metric-top{font-size:12px;min-height:36px;align-items:flex-start}#workshop-dashboard .wd-metric-top>span:first-child{line-height:18px;white-space:normal}#workshop-dashboard .wd-metric-number{flex-direction:column;align-items:flex-start;gap:0;margin-top:7px}#workshop-dashboard .wd-metric-number strong{font-size:27px;line-height:32px}#workshop-dashboard .wd-recent-controls{width:100%;justify-content:space-between;row-gap:12px}#workshop-dashboard .wd-period-controls{gap:6px}#workshop-dashboard .wd-period-controls select{width:190px;font-size:12px}#workshop-dashboard .wd-question-stats{gap:2px}}

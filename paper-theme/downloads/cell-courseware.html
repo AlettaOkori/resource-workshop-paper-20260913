@@ -7,19 +7,19 @@
   <title>细胞结构与功能｜动物细胞与植物细胞</title>
   <style>
     :root{
-      --canvas:#DBEFED;
-      --surface:#EDF7F8;
-      --surface-alt:#E9F8F5;
-      --ink:#3C5B5D;
-      --ink-muted:#587476;
-      --primary:#71D4D1;
-      --primary-deep:#62B2B1;
-      --highlight:#BFE8E5;
-      --attention:#D66A58;
-      --positive:#2C6751;
-      --border:#C3D2D3;
-      --white:#FFFFFF;
-      --shadow:0 10px 24px rgba(60,91,93,.08);
+      --canvas:#132734;
+      --surface:#1B3543;
+      --surface-alt:#224653;
+      --ink:#E4F1EF;
+      --ink-muted:#B4CCCE;
+      --primary:#87CBCD;
+      --primary-deep:#589CA5;
+      --highlight:#2D5C67;
+      --attention:#E4AD98;
+      --positive:#B9D79D;
+      --border:#38606B;
+      --white:#D8EBE7;
+      --shadow:0 10px 24px rgba(6,17,26,.08);
     }
     *{box-sizing:border-box}
     html,body{margin:0;min-height:100%;background:var(--canvas);color:var(--ink);font-family:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif}
@@ -35,7 +35,7 @@
     .btn.primary{background:var(--primary);border-color:var(--primary-deep);color:#000;font-weight:700}
     .stage{max-width:1600px;width:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(310px,.75fr);gap:14px;min-height:500px;flex:1}
     .panel{background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow)}
-    .visual-panel{display:flex;flex-direction:column;min-width:0}
+    .visual-panel{--surface:#7D9FA1;--surface-alt:#9BBAB9;--ink:#142F39;--ink-muted:#203E48;--highlight:#ACCBC5;--primary:#B5D7D3;--primary-deep:#3D6E78;--border:#60888E;color:var(--ink);display:flex;flex-direction:column;min-width:0}
     .panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border)}
     .panel-title{font-weight:800;font-size:16px}
     .hint{font-size:12px;color:var(--ink-muted)}
@@ -43,30 +43,30 @@
     .step{border:1px solid var(--border);background:var(--surface-alt);padding:8px 11px;white-space:nowrap;cursor:pointer;font-size:13px;min-height:36px;transition:.2s ease}
     .step.active{background:var(--primary);border-color:var(--primary-deep);color:#000;font-weight:700}
     .step:hover,.step:focus-visible{background:var(--highlight);outline:none}
-    .svg-wrap{padding:4px 14px 10px;flex:1;min-height:365px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .svg-wrap{background:radial-gradient(ellipse at 40% 38%,#93B5B1 0%,#71969E 72%);padding:4px 14px 10px;flex:1;min-height:365px;display:flex;align-items:center;justify-content:center;overflow:hidden}
     svg{width:100%;height:auto;max-height:520px;display:block}
     .cell-title{font-size:16px;font-weight:800;fill:var(--ink)}
     .cell-subtitle{font-size:12px;fill:var(--ink-muted)}
     .structure{cursor:pointer;transition:opacity .35s ease,filter .25s ease,transform .25s ease;transform-box:fill-box;transform-origin:center}
-    .structure:hover,.structure:focus-visible{filter:drop-shadow(0 0 7px rgba(113,212,209,.75));outline:none}
+    .structure:hover,.structure:focus-visible{filter:drop-shadow(0 0 7px rgba(135,203,205,.75));outline:none}
     .structure.hidden{opacity:.08;pointer-events:none}
     .structure.dim{opacity:.28}
-    .structure.selected{filter:drop-shadow(0 0 10px rgba(98,178,177,.9));transform:scale(1.035)}
-    .membrane-line{fill:none;stroke:#4A9997;stroke-width:4}
-    .cell-wall{fill:#CFEDE8;stroke:#5FAEAA;stroke-width:3}
-    .cell-fill-animal{fill:#DDF4F0;stroke:#71D4D1;stroke-width:3}
-    .cell-fill-plant{fill:#D9F1DF;stroke:#71B99A;stroke-width:3}
-    .cytoplasm{fill:#BFE8E5;opacity:.75;stroke:#71D4D1;stroke-width:2}
-    .nucleus{fill:#F1C5A2;stroke:#C97E58;stroke-width:2.5}
-    .nucleolus{fill:#D66A58}
-    .chloroplast{fill:#9DCFAE;stroke:#2C6751;stroke-width:2}
-    .vacuole{fill:#FFFFFF;opacity:.7;stroke:#7AB8B2;stroke-width:2}
-    .mito{fill:#E8C08A;stroke:#B66E43;stroke-width:2}
-    .label-line{stroke:#587476;stroke-width:1.4;fill:none;stroke-dasharray:4 3}
-    .svg-label{font-size:12px;fill:var(--ink);font-weight:700}
+    .structure.selected{filter:drop-shadow(0 0 10px rgba(88,156,165,.9));transform:scale(1.035)}
+    .membrane-line{fill:none;stroke:#97D1CE;stroke-width:4}
+    .cell-wall{fill:#4B8588;stroke:#8ABAB0;stroke-width:3}
+    .cell-fill-animal{fill:url(#animalGrad);stroke:#87CBCD;stroke-width:3}
+    .cell-fill-plant{fill:url(#plantGrad);stroke:#91C9BC;stroke-width:3}
+    .cytoplasm{fill:#83BEC0;opacity:.38;stroke:#87CBCD;stroke-width:2}
+    .nucleus{fill:url(#nucleusGrad);stroke:#AEABD7;stroke-width:2.5}
+    .nucleolus{fill:#EEE9FF}
+    .chloroplast{fill:#A7C987;stroke:#B9D79D;stroke-width:2}
+    .vacuole{fill:#F0FFF7;opacity:.9;stroke:#A7D5CD;stroke-width:2}
+    .mito{fill:#F6E5A2;stroke:#AA974E;stroke-width:2}
+    .label-line{stroke:#64818A;stroke-width:1.4;fill:none;stroke-dasharray:4 3}
+    .svg-label{font-size:12px;fill:var(--ink);font-weight:700;paint-order:stroke;stroke:#91B2B1;stroke-width:2px;stroke-linejoin:round}
     .legend{display:flex;gap:12px;flex-wrap:wrap;padding:0 16px 14px;font-size:12px;color:var(--ink-muted)}
-    .dot{width:10px;height:10px;display:inline-block;margin-right:5px;border:1px solid rgba(60,91,93,.25);vertical-align:-1px}
-    .dot.core{background:#F1C5A2}.dot.boundary{background:#71D4D1}.dot.special{background:#9DCFAE}
+    .dot{width:10px;height:10px;display:inline-block;margin-right:5px;border:1px solid rgba(6,17,26,.25);vertical-align:-1px}
+    .dot.core{background:#7D7DB6}.dot.boundary{background:#87CBCD}.dot.special{background:#A7C987}
     .info-panel{display:flex;flex-direction:column;min-width:0}
     .info-body{padding:18px 18px 14px;display:flex;flex-direction:column;gap:14px;flex:1}
     .kicker{font-size:12px;color:var(--ink-muted);letter-spacing:.08em}
@@ -76,7 +76,7 @@
     .function-box{background:var(--surface-alt);border-left:4px solid var(--primary-deep);padding:12px 13px}
     .function-box strong{display:block;font-size:13px;margin-bottom:5px}
     .function-box span{font-size:14px;line-height:1.6}
-    .callout{border:1px solid var(--border);padding:12px 13px;background:#F5FBFB;font-size:13px;line-height:1.6}
+    .callout{border:1px solid var(--border);padding:12px 13px;background:#244552;font-size:13px;line-height:1.6}
     .callout b{color:var(--positive)}
     .info-footer{display:flex;gap:8px;padding-top:4px}
     .info-footer .btn{flex:1}
@@ -94,8 +94,8 @@
     .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
     .option{background:var(--surface-alt);border:1px solid var(--border);padding:10px 11px;text-align:left;cursor:pointer;min-height:44px;font-size:13px;transition:.2s ease}
     .option:hover,.option:focus-visible{background:var(--highlight);outline:none}
-    .option.correct{background:#D8F0DF;border-color:var(--positive);color:var(--positive);font-weight:700}
-    .option.wrong{background:#F8DDD7;border-color:var(--attention);color:#8D3B2D}
+    .option.correct{background:#284D43;border-color:var(--positive);color:var(--positive);font-weight:700}
+    .option.wrong{background:#513B44;border-color:var(--attention);color:#F1C4B6}
     .quiz-feedback{margin-top:10px;min-height:22px;font-size:13px;font-weight:700}
     .quiz-feedback.good{color:var(--positive)}.quiz-feedback.bad{color:var(--attention)}
     .quiz-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px}
@@ -141,8 +141,9 @@
             <title id="cellSvgTitle">动物细胞与植物细胞结构示意图</title>
             <desc id="cellSvgDesc">两种细胞并列显示，包含细胞膜、细胞质、细胞核，以及植物细胞的细胞壁、液泡和叶绿体。</desc>
             <defs>
-               <lineargradient id="animalGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDF7F8"></stop><stop offset="1" stop-color="#CBECEA"></stop></lineargradient>
-               <lineargradient id="plantGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0FAF1"></stop><stop offset="1" stop-color="#CAE8D2"></stop></lineargradient>
+              <radialGradient id="animalGrad" cx="36%" cy="28%" r="80%"><stop offset="0" stop-color="#C2EAE1"/><stop offset=".58" stop-color="#5C9FA4"/><stop offset="1" stop-color="#365E73"/></radialGradient>
+              <radialGradient id="plantGrad" cx="36%" cy="28%" r="85%"><stop offset="0" stop-color="#D1ECDC"/><stop offset=".6" stop-color="#6CAAA4"/><stop offset="1" stop-color="#447B84"/></radialGradient>
+              <radialGradient id="nucleusGrad" cx="38%" cy="30%" r="76%"><stop offset="0" stop-color="#DBD4F6"/><stop offset=".48" stop-color="#7D7EBB"/><stop offset="1" stop-color="#484F80"/></radialGradient>
             </defs>
             <text x="220" y="28" text-anchor="middle" class="cell-title">动物细胞</text>
             <text x="220" y="48" text-anchor="middle" class="cell-subtitle">形态较灵活，没有细胞壁和叶绿体</text>
@@ -158,10 +159,10 @@
                 <circle class="nucleolus" cx="239" cy="211" r="12"/>
               </g>
               <g class="structure" data-part="mitochondria" tabindex="0" aria-label="动物细胞线粒体">
-                <ellipse class="mito" cx="161" cy="173" rx="24" ry="13" transform="rotate(-24 161 173)"/><path d="M146 176q12-15 26 0q-12 10-22 1" fill="none" stroke="#B66E43" stroke-width="2"/>
+                <ellipse class="mito" cx="161" cy="173" rx="24" ry="13" transform="rotate(-24 161 173)"/><path d="M146 176q12-15 26 0q-12 10-22 1" fill="none" stroke="#AA974E" stroke-width="2"/>
               </g>
               <g class="structure" data-part="mitochondria" tabindex="0" aria-label="动物细胞线粒体">
-                <ellipse class="mito" cx="286" cy="275" rx="24" ry="13" transform="rotate(25 286 275)"/><path d="M272 271q12 15 26 0q-12-10-22-1" fill="none" stroke="#B66E43" stroke-width="2"/>
+                <ellipse class="mito" cx="286" cy="275" rx="24" ry="13" transform="rotate(25 286 275)"/><path d="M272 271q12 15 26 0q-12-10-22-1" fill="none" stroke="#AA974E" stroke-width="2"/>
               </g>
               <path class="label-line" d="M122 149L50 110"/><text x="12" y="105" class="svg-label">细胞膜</text>
               <path class="label-line" d="M181 318L56 344"/><text x="10" y="361" class="svg-label">细胞质</text>
@@ -177,10 +178,10 @@
                 <ellipse class="nucleus" cx="675" cy="230" rx="56" ry="50"/><circle class="nucleolus" cx="690" cy="219" r="12"/>
               </g>
               <g class="structure" data-part="chloroplast" tabindex="0" aria-label="植物细胞叶绿体">
-                <ellipse class="chloroplast" cx="585" cy="168" rx="30" ry="15" transform="rotate(-18 585 168)"/><path d="M562 168h45M568 161h32M569 175h30" stroke="#2C6751" stroke-width="2"/>
+                <ellipse class="chloroplast" cx="585" cy="168" rx="30" ry="15" transform="rotate(-18 585 168)"/><path d="M562 168h45M568 161h32M569 175h30" stroke="#B9D79D" stroke-width="2"/>
               </g>
               <g class="structure" data-part="chloroplast" tabindex="0" aria-label="植物细胞叶绿体">
-                <ellipse class="chloroplast" cx="767" cy="298" rx="30" ry="15" transform="rotate(18 767 298)"/><path d="M744 298h45M750 291h32M751 305h30" stroke="#2C6751" stroke-width="2"/>
+                <ellipse class="chloroplast" cx="767" cy="298" rx="30" ry="15" transform="rotate(18 767 298)"/><path d="M744 298h45M750 291h32M751 305h30" stroke="#B9D79D" stroke-width="2"/>
               </g>
               <g class="structure" data-part="vacuole" tabindex="0" aria-label="植物细胞液泡">
                 <ellipse class="vacuole" cx="753" cy="190" rx="35" ry="24"/>

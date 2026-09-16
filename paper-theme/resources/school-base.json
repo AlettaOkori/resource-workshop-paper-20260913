@@ -121,5 +121,11 @@
       "grade": "七年级",
       "edition": "人教版"
     }
-  ]
+  ],
+  "currentTerm": {
+    "id": "2026-autumn",
+    "name": "2026—2027学年第一学期",
+    "startDate": "2026-09-01",
+    "endDate": "2027-01-31"
+  }
 }

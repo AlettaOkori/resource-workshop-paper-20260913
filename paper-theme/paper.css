@@ -9,6 +9,7 @@
 @import url('/paper-theme/motion.css');
 @import url('/paper-theme/confirmation.css');
 @import url('/paper-theme/secondary.css');
+@import url('/paper-theme/resource-previews.css');
 :root{--paper:#f7f6f2;--sheet:#f9f8f3;--ink:#252722;--muted:#62675d;--rule:#d3d2c8;--red:#bf3034;--paper-serif:'Songti SC','STSong','SimSun',serif;--paper-sans:'PingFang SC','Microsoft YaHei',Arial,sans-serif}
 html,body{background:var(--paper)}
 body:not([data-paper-page="artifact"]){color:var(--ink);font-family:var(--paper-sans);-webkit-font-smoothing:antialiased}
@@ -254,7 +255,7 @@ body[data-paper-page="home"] button[aria-label="打开任务记录"]>svg{width:1
 /* The homepage preview links to a dedicated My Resources page. */
 body[data-paper-page="home"] [data-paper-my-resources="collapsed"]>[data-paper-card]:nth-child(n+6){display:none!important}
 body[data-paper-page="home"] [data-paper-resource-more]{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;min-height:30px}
-body[data-paper-page="home"] [data-paper-resource-more]::after{content:"›";font-size:16px;line-height:1}
+body[data-paper-page="home"] [data-paper-resource-more]:not(:has(svg))::after{content:"›";font-size:16px;line-height:1}
 body[data-paper-page="home"] [data-paper-resource-more]{
   background:#f4f5f1!important;
   border-color:transparent!important;
@@ -416,18 +417,8 @@ body[data-paper-page="home"] .paper-exam-stack{position:absolute;z-index:2;inset
 body[data-paper-page="home"] .paper-exam-sheet{position:absolute;inset:0;border:1px solid #d2cbbb;box-shadow:1px 2px 4px #6d5b301c;background:#ebe5d6}
 body[data-paper-page="home"] .paper-exam-sheet-back{transform:rotate(1.4deg);inset:3px -4px -3px 4px}
 body[data-paper-page="home"] .paper-exam-sheet-mid{transform:rotate(-.9deg);inset:2px 2px -1px -2px;background:#f3eee2}
-body[data-paper-page="home"] .paper-exam-sheet-front{z-index:1;inset:0;background:#faf6ec;border-color:#d0c8b7;box-shadow:0 3px 9px #6d5b3026;padding:8px 9px 7px;color:#252922;overflow:hidden}
-body[data-paper-page="home"] .paper-exam-sheet-front::after{content:"";position:absolute;right:-1px;top:25px;bottom:8px;width:2px;background:repeating-linear-gradient(to bottom,#d5d7cf 0 1px,transparent 1px 4px);opacity:.8}
-body[data-paper-page="home"] .paper-exam-kicker{text-align:center;color:#858b82;font-size:7px;line-height:1.2;margin-bottom:3px}
-body[data-paper-page="home"] .paper-exam-heading{text-align:center;font-size:11px;line-height:1.25;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-body[data-paper-page="home"] .paper-exam-rule{border-top:1px solid #454840;margin:5px 0 4px}
-body[data-paper-page="home"] .paper-exam-fields{display:flex;gap:4px;font-size:6px;line-height:1.3;color:#51574f;white-space:nowrap}
-body[data-paper-page="home"] .paper-exam-fields i{display:inline-block;width:18px;border-bottom:1px solid #a6aaa1;height:6px;vertical-align:bottom}
-body[data-paper-page="home"] .paper-exam-section{font-size:7px;font-weight:700;margin-top:6px;border-bottom:1px solid #d7d9d2;padding-bottom:2px}
-body[data-paper-page="home"] .paper-exam-question{font-family:var(--paper-serif);font-size:6.5px;line-height:1.5;margin-top:3px;white-space:nowrap}
-body[data-paper-page="home"] .paper-exam-line{height:8px;border-bottom:1px solid #d5d7d0;margin-bottom:1px}
-body[data-paper-page="home"] .paper-exam-foot{position:absolute;left:9px;right:9px;bottom:6px;display:flex;justify-content:space-between;border-top:1px solid #d7d9d2;padding-top:3px;color:#858b82;font-size:6px}
-body[data-paper-page="home"] .paper-exam-foot b{font-weight:400;color:#a88642}
+body[data-paper-page="home"] .paper-exam-sheet-front{z-index:1;inset:0;background:#faf7ee;border-color:#d0c8b7;box-shadow:0 3px 9px #6d5b3026;overflow:hidden}
+body[data-paper-page="home"] .paper-exam-content{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
 body[data-paper-page="home"] [data-paper-home-gallery] [data-paper-card][data-paper-cover="exam"] [data-paper-card-image]>img{display:none!important}
 @media(max-width:760px){
   body[data-paper-page="home"] [data-paper-home-gallery] [data-paper-card-grid]{min-height:325px!important;padding-top:8px!important;padding-bottom:20px!important}

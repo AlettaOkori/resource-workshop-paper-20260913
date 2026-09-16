@@ -85,6 +85,7 @@
   let spriteAsset, companion, pointerFrame = 0, pointer = null;
   function setupCompanion(node) {
     if (!node || installedCompanions.has(node)) return;
+    if (document.readyState !== 'complete' || !Object.keys(node).some(key => key.startsWith('__reactProps$'))) { setTimeout(schedule, 50); return; }
     installedCompanions.add(node);
     spriteAsset ||= fetch('/paper-theme/assets/paper-sprite.svg').then(response => {
       if (!response.ok) throw new Error('Companion asset unavailable');
@@ -138,19 +139,29 @@
   function updateMyResources(home) { window.PaperResources?.sync(home); }
   function setupExamCard(card) {
     if (!card || card.querySelector('.paper-exam-stack')) return;
+    if (document.readyState !== 'complete' || !Object.keys(card).some(key => key.startsWith('__reactProps$'))) { setTimeout(schedule, 50); return; }
     const image = card.querySelector('[data-paper-card-image]');
     if (!image) return;
-    const title = card.querySelector('[data-paper-card-title]')?.textContent?.trim() || '阶段检测卷';
-    const shortTitle = title.split('｜')[0].split(':')[0].split('：')[0].trim() || '阶段检测卷';
+    const resource = window.WorkshopData?.resource(new URL(card.href, location.origin).pathname.split('/').pop());
+    const preview = window.WorkshopPreviews?.sheetUrl(resource);
+    if (!preview) return;
     const stack = document.createElement('div');
     stack.className = 'paper-exam-stack';
     stack.setAttribute('aria-hidden', 'true');
-    stack.innerHTML = `<div class="paper-exam-sheet paper-exam-sheet-back"></div><div class="paper-exam-sheet paper-exam-sheet-mid"></div><div class="paper-exam-sheet paper-exam-sheet-front"><div class="paper-exam-kicker">${shortTitle}</div><div class="paper-exam-heading">${title}</div><div class="paper-exam-rule"></div><div class="paper-exam-fields"><span>姓名 <i></i></span><span>班级 <i></i></span><span>得分 <i></i></span></div><div class="paper-exam-section">一、选择题</div><div class="paper-exam-question">1. 下列说法正确的是（　　）</div><div class="paper-exam-line"></div><div class="paper-exam-question">2. 请根据材料完成作答。</div><div class="paper-exam-line"></div><div class="paper-exam-foot"><span>共 6 题</span><b>第 1 页</b></div></div>`;
+    stack.innerHTML = '<div class="paper-exam-sheet paper-exam-sheet-back"></div><div class="paper-exam-sheet paper-exam-sheet-mid"></div><div class="paper-exam-sheet paper-exam-sheet-front"></div>';
+    const content = document.createElement('img');
+    content.className = 'paper-exam-content';
+    content.src = preview;
+    content.alt = '';
+    content.decoding = 'async';
+    stack.lastElementChild.appendChild(content);
+    card.setAttribute('aria-label', resource.title);
     image.appendChild(stack);
   }
   const loadModule=name=>new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/paper-theme/'+name+'.js';script.onload=resolve;script.onerror=()=>reject(new Error('无法加载 '+script.src));document.head.append(script);});
   (async()=>{
     await loadModule('workshop-data');await window.WorkshopData.ready;
+    await loadModule('resource-previews');await window.WorkshopPreviews.ready;
     for(const name of ['uploads','my-resources','knowledge-picker','knowledge-graph','resource-filters','resource-details','workshop-shell','workshop-dashboard']){
       // A page module must not prevent unrelated current pages from loading.
       try{await loadModule(name);}catch(error){console.error('工坊模块加载失败：'+name,error);}
@@ -202,8 +213,13 @@
       const src = img.getAttribute('src') || '';
       for (const [match, theme] of Object.entries(coverNames)) if (src.includes(match)) {
         mark(card, 'cover', theme);
-        if (route === '/' && !document.body.hasAttribute('data-paper-library-page') && theme === 'exam') setupExamCard(card);
+        // Keep the card composition; exam previews are framed by setupExamCard.
         break;
+      }
+      if (route === '/' && !document.body.hasAttribute('data-paper-library-page')) {
+        const resource = window.WorkshopData?.resource(new URL(card.href, location.origin).pathname.split('/').pop());
+        if (resource?.kind === '试卷') mark(card, 'cover', 'exam');
+        if (card.dataset.paperCover === 'exam') setupExamCard(card);
       }
       if (card.parentElement.classList.contains('grid')) mark(card.parentElement, 'card-grid');
     });

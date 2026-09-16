@@ -1,0 +1,7 @@
+/* Replace content images without changing the existing card composition. */
+.ws-preview-empty{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:72px;color:var(--muted,#687066);background:#eeeee8;font-size:13px}
+body [data-ws-content-preview] [data-paper-card-image]>img{content:normal!important}
+/* Preserve every card's existing height and paper treatment; frame the actual content. */
+body[data-paper-page="home"] [data-paper-home-gallery] [data-ws-content-preview] [data-paper-card-image]>img{object-position:var(--ws-preview-focus,50% 50%)!important}
+/* A light edge keeps the screenshot clear against the shared paper palette. */
+body[data-paper-page="home"] [data-paper-home-gallery] [data-ws-content-preview]:is([data-paper-cover="photosynthesis"],[data-paper-cover="geometry"],[data-paper-cover="cell"],[data-paper-cover="lifetime"]) [data-paper-card-image]::after{height:18%;background:linear-gradient(transparent,#3447350d)}
